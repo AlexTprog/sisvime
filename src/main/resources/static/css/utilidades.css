@@ -1,0 +1,25 @@
+.inputCita {
+	width: 50%;
+}
+
+.inputCita.paciente {
+	width: 70%;
+}
+
+.titulo {
+	justify-content: center;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem!important;
+}
+
+.titulo2 {
+	justify-content: center;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.space-titulo {
+	width: 100%;
+}

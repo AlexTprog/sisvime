@@ -12,14 +12,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((authz) -> authz
-                .anyRequest().authenticated()
-        ).httpBasic(withDefaults());
+        http.authorizeRequests()
+                .anyRequest().permitAll(); // Permite acceso sin autenticación a todas las rutas
     }
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/");
+        web.ignoring().antMatchers("/**");
     }
 
 }

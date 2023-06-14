@@ -1,5 +1,6 @@
-package com.sisvime.app.entity;
+package com.sisvime.app.entity.roles;
 
+import com.sisvime.app.entity.users.User;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;

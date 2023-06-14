@@ -1,6 +1,7 @@
 package com.sisvime.app.entity;
 
 import com.sisvime.app.share.VehicleStatus;
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -28,10 +29,13 @@ public class Vehicle {
 
     private String TypeFuel;
 
+    private String Photo;
+
     private Integer Axes;
 
     private Date DateOfManufacture;
 
+    @NotNull
     private VehicleStatus Status;
 
     @OneToMany(mappedBy = "Vehicle", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

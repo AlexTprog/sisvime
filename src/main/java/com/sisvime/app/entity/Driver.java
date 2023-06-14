@@ -1,5 +1,6 @@
 package com.sisvime.app.entity;
 
+import com.sisvime.app.entity.users.User;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,0 +1,21 @@
+div#accordionExample {
+    margin-bottom: 2.5rem;
+}
+
+button.btn.btn-link {
+    padding-left: 0;
+    color: #0061f2;
+    font-weight: 500!important;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#accordionExample {
+	height: auto!important;
+}
+
+.collapsing,
+.card { 
+	overflow: visible!important;
+}

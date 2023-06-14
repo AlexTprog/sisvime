@@ -1,6 +1,8 @@
 package com.sisvime.app.entity;
 
 
+import com.sisvime.app.entity.users.User;
+
 import javax.persistence.*;
 import java.util.List;
 

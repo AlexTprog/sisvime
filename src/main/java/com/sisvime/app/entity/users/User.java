@@ -1,14 +1,16 @@
-package com.sisvime.app.entity;
+package com.sisvime.app.entity.users;
 
+import com.sisvime.app.entity.roles.Rol;
 import com.sisvime.app.share.CivilState;
 import com.sisvime.app.share.Gender;
+import com.sisvime.app.share.UserStatus;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -33,13 +35,15 @@ public class User {
     @NonNull
     private String MotherLastName;
 
-    private Date Birthday;
+    private LocalDateTime Birthday;
 
     private String PhoneNumber;
 
     private String Direction;
 
     private Gender Gender;
+
+    private UserStatus Status;
 
     private CivilState CivilState;
 

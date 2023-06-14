@@ -1,5 +1,6 @@
 package com.sisvime.app.entity;
 
+import com.sisvime.app.entity.users.User;
 import com.sisvime.app.share.BloodType;
 import com.sisvime.app.share.RHType;
 import lombok.Getter;
