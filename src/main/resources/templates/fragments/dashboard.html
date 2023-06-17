@@ -1,0 +1,447 @@
+<nav th:fragment="dashboard-principal"
+     class="sidenav shadow-right sidenav-light">
+    <div class="sidenav-menu">
+        <div class="nav accordion" id="accordionSidenav">
+            <div class="sidenav-menu-heading">Inicio</div>
+
+            <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
+               data-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">
+                <div class="nav-link-icon"><i data-feather="activity"></i></div>
+                Mantenimiento
+                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+
+            <div class="collapse" id="collapseDashboards" data-parent="#accordionSidenav">
+                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
+
+                    <a id="perfilmedico" class="nav-link" th:href="@{/views/personal/listarper}">
+                        <i class="fas fa-user"></i> &nbsp; Personal Medico
+                    </a>
+
+                    <a id="perfilhora" class="nav-link" th:href="@{/views/horatrabajo/listwork}">
+                        <i class="fas fa-user"></i> &nbsp; Gestionar Hora Trabajo
+                    </a>
+
+                    <a id="perfilpaciente" class="nav-link" th:href="@{/views/paciente/listarpac}">
+                        <i class="fas fa-user"></i> &nbsp; Paciente
+                    </a>
+
+                    <a id="perfilvehiculos" class="nav-link" th:href="@{/views/vehiculo/listarveh}">
+                        <i class="fas fa-car-side"></i> &nbsp; Vehiculos
+                    </a>
+
+                    <a id="perfilenfermedades" class="nav-link" th:href="@{/listarenf}">
+                        <i class="fas fa-syringe"></i>&nbsp; Enfermedades
+                    </a>
+
+                    <a id="perfilmedicamentos" class="nav-link" th:href="@{/listarmed }">
+                        <i class="fas fa-prescription-bottle-alt"></i>&nbsp; Medicamentos
+                    </a>
+
+                    <a id="perfilespecialidad" class="nav-link" th:href="@{/listaresp}">
+                        <i class="fas fa-user-tag"></i> &nbsp; Especialidad
+                    </a>
+
+                    <a id="perfilubigeo" class="nav-link" th:href="@{/ubigeo/verubigeo}">
+                        <i class="fas fa-bars"></i> &nbsp; Ubigeo
+                    </a>
+
+                    <!--
+                    <a class="nav-link" th:href="@{/listardep}">
+                        <i class="fas fa-bars"></i> &nbsp; Departamento
+                    </a>
+                    <a class="nav-link" href="dashboard-3.html">
+                        <i class="fas fa-bars"></i> &nbsp; Provincia
+                    </a>
+                    <a class="nav-link" href="dashboard-3.html">
+                        <i class="fas fa-bars"></i> &nbsp; Distrito
+                    </a>
+                    -->
+                </nav>
+            </div>
+
+            <div id="perfilprogramaciones" class="sidenav-menu-heading">
+                Programaciones
+            </div>
+            <a id="perfilprogramacion" class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
+               data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                <div class="nav-link-icon"><i data-feather="grid"></i></div>
+                Programaci&oacute;n
+                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+
+            <div class="collapse" id="collapsePages" data-parent="#accordionSidenav">
+                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
+                    <a id="calendariosmedicos" class="nav-link collapsed" href="javascript:void(0);"
+                       data-toggle="collapse" data-target="#pagesCollapseAccount" aria-expanded="false"
+                       aria-controls="pagesCollapseAccount">
+                        Calendario Medico
+                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="pagesCollapseAccount" data-parent="#accordionSidenavPagesMenu">
+                        <nav id="calendariosmedico" class="sidenav-menu-nested nav">
+                            <a class="nav-link" th:href="@{/calendarbrigada}">
+                                Calendario de Brigada
+                                <span class="badge badge-primary-soft text-primary ml-auto"></span>
+                            </a>
+                            <a class="nav-link" th:href="@{/calendarvisitamedica}">
+                                Calendario de Visitas Medicas
+                                <span class="badge badge-primary-soft text-primary ml-auto"></span>
+                            </a>
+                            <a class="nav-link" th:href="@{/graficosmedicos}">
+                                Graficos
+                                <span class="badge badge-primary-soft text-primary ml-auto"></span>
+                            </a>
+                            <!-- TODO Buscar notificacion                            -->
+                            <a class="nav-link" th:href="@{/account-notifications.html}">
+                                Notificaciones
+                                <span class="badge badge-primary-soft text-primary ml-auto"></span>
+                            </a>
+                        </nav>
+                    </div>
+
+                    <a id="calendariosvisitasmedicas" class="nav-link collapsed" href="javascript:void(0);"
+                       data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false"
+                       aria-controls="pagesCollapseError">
+                        Programacion Visita Medica
+                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="pagesCollapseError" data-parent="#accordionSidenavPagesMenu">
+                        <nav id="calendariosvisitasmedica" class="sidenav-menu-nested nav">
+                            <a class="nav-link" href="/views/brigada/createbrigada">
+                                Programar Visita Medica
+                                <span class="badge badge-primary-soft text-primary ml-auto"></span>
+                            </a>
+                            <a class="nav-link" href="/views/brigada/listbrigadamedica">
+                                Visita Medica
+                                <span class="badge badge-primary-soft text-primary ml-auto"></span>
+                            </a>
+                            <a class="nav-link" href="/calendarbrigada">
+                                Calendario
+                                <span class="badge badge-primary-soft text-primary ml-auto"></span>
+                            </a>
+
+                        </nav>
+                    </div>
+                    <a id="calendariosbrigadasmedicas" class="nav-link collapsed" href="javascript:void(0);"
+                       data-toggle="collapse" data-target="#pagesCollapseKnowledgeBase" aria-expanded="false"
+                       aria-controls="pagesCollapseKnowledgeBase">
+                        Programacion Brigada
+                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="pagesCollapseKnowledgeBase" data-parent="#accordionSidenavPagesMenu">
+                        <nav id="calendariosbrigadasmedica" class="sidenav-menu-nested nav">
+                            <a class="nav-link" href="/views/visitamed/createvisita">
+                                Programar Brigada
+                                <span class="badge badge-primary-soft text-primary ml-auto"></span>
+                            </a>
+                            <a class="nav-link" href="/views/visitamed/listvisitamedica">
+                                Brigada
+                                <span class="badge badge-primary-soft text-primary ml-auto"></span>
+                            </a>
+                            <a class="nav-link" href="/calendarvisitamedica">
+                                Calendario
+                                <span class="badge badge-primary-soft text-primary ml-auto"></span>
+                            </a>
+
+                        </nav>
+                    </div>
+
+                    <a id="citamedica" class="nav-link collapsed" th:href="@{/views/citas/reservacitas}">
+                        Cita Medica
+
+                    </a>
+
+
+                    <a style="display: none;" class="nav-link" href="pricing.html">
+                        Recetas
+
+                    </a>
+
+                    <a style="display: none;" class="nav-link" href="pricing.html">
+                        Atender Cita
+
+                    </a>
+
+                    <a style="display: none;" class="nav-link" href="pricing.html">
+                        Historia Clinica
+
+                    </a>
+                </nav>
+            </div>
+
+            <a id="perfilreporte" class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
+               data-target="#collapseFlows" aria-expanded="false" aria-controls="collapseFlows">
+                <div class="nav-link-icon"><i data-feather="repeat"></i></div>
+                Reportes
+                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="collapseFlows" data-parent="#accordionSidenav">
+                <nav class="sidenav-menu-nested nav">
+                    <a class="nav-link" href="/graficosbrigada">
+                        Graficos Brigadas
+
+                    </a>
+                    <a class="nav-link" href="/graficosvisita">
+                        Graficos Visitas Domiciliaria
+
+                    </a>
+                </nav>
+            </div>
+
+            <div id="perfilherramientas" class="sidenav-menu-heading">Herramientas</div>
+            <a class="nav-link collapsed" style="display: none;" href="javascript:void(0);" data-toggle="collapse"
+               data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                <div class="nav-link-icon"><i data-feather="layout"></i></div>
+                Layout
+                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="collapseLayouts" data-parent="#accordionSidenav">
+                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavLayout">
+                    <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
+                       data-target="#collapseLayoutSidenavVariations" aria-expanded="false"
+                       aria-controls="collapseLayoutSidenavVariations">
+                        Sidenav Variations
+                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayoutSidenavVariations" data-parent="#accordionSidenavLayout">
+                        <nav class="sidenav-menu-nested nav">
+                            <a class="nav-link" href="layout-static.html">Static Navigation</a>
+                            <a class="nav-link" href="layout-dark.html">Dark Sidenav</a>
+                            <a class="nav-link" href="layout-rtl.html">RTL Layout</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
+                       data-target="#collapseLayoutContainers" aria-expanded="false"
+                       aria-controls="collapseLayoutContainers">
+                        Container Options
+                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayoutContainers" data-parent="#accordionSidenavLayout">
+                        <nav class="sidenav-menu-nested nav">
+                            <a class="nav-link" href="layout-boxed.html">
+                                Boxed Layout
+                                <span class="badge badge-primary-soft text-primary ml-auto">New</span>
+                            </a>
+                            <a class="nav-link" href="layout-fluid.html">Fluid Layout</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
+                       data-target="#collapseLayoutsPageHeaders" aria-expanded="false"
+                       aria-controls="collapseLayoutsPageHeaders">
+                        Page Headers
+                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayoutsPageHeaders" data-parent="#accordionSidenavLayout">
+                        <nav class="sidenav-menu-nested nav">
+                            <a class="nav-link" href="header-simplified.html">Simplified</a>
+                            <a class="nav-link" href="header-compact.html">
+                                Compact
+                                <span class="badge badge-primary-soft text-primary ml-auto">New</span>
+                            </a>
+                            <a class="nav-link" href="header-overlap.html">Content Overlap</a>
+                            <a class="nav-link" href="header-breadcrumbs.html">Breadcrumbs</a>
+                            <a class="nav-link" href="header-light.html">Light</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
+                       data-target="#collapseLayoutsStarterTemplates" aria-expanded="false"
+                       aria-controls="collapseLayoutsStarterTemplates">
+                        Starter Layouts
+                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayoutsStarterTemplates" data-parent="#accordionSidenavLayout">
+                        <nav class="sidenav-menu-nested nav">
+                            <a class="nav-link" href="starter-default.html">Default</a>
+                            <a class="nav-link" href="starter-minimal.html">
+                                Minimal
+                                <span class="badge badge-primary-soft text-primary ml-auto">New</span>
+                            </a>
+                        </nav>
+                    </div>
+                </nav>
+            </div>
+            <a style="display: none;" class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
+               data-target="#collapseComponents" aria-expanded="false" aria-controls="collapseComponents">
+                <div class="nav-link-icon"><i data-feather="package"></i></div>
+                Components
+                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="collapseComponents" data-parent="#accordionSidenav">
+                <nav class="sidenav-menu-nested nav">
+                    <a class="nav-link" href="alerts.html">Alerts</a>
+                    <a class="nav-link" href="avatars.html">Avatars</a>
+                    <a class="nav-link" href="badges.html">Badges</a>
+                    <a class="nav-link" href="buttons.html">Buttons</a>
+                    <a class="nav-link" href="cards.html">
+                        Cards
+                        <span class="badge badge-primary-soft text-primary ml-auto">Updated</span>
+                    </a>
+                    <a class="nav-link" href="dropdowns.html">Dropdowns</a>
+                    <a class="nav-link" href="forms.html">
+                        Forms
+                        <span class="badge badge-primary-soft text-primary ml-auto">Updated</span>
+                    </a>
+                    <a class="nav-link" href="modals.html">Modals</a>
+                    <a class="nav-link" href="navigation.html">
+                        Navigation
+                        <span class="badge badge-primary-soft text-primary ml-auto">Updated</span>
+                    </a>
+                    <a class="nav-link" href="progress.html">Progress</a>
+                    <a class="nav-link" href="step.html">
+                        Step
+                        <span class="badge badge-primary-soft text-primary ml-auto">New</span>
+                    </a>
+                    <a class="nav-link" href="timeline.html">
+                        Timeline
+                        <span class="badge badge-primary-soft text-primary ml-auto">New</span>
+                    </a>
+                    <a class="nav-link" href="toasts.html">Toasts</a>
+                    <a class="nav-link" href="tooltips.html">Tooltips</a>
+                </nav>
+            </div>
+
+            <a id="perfilseguridad" class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
+               data-target="#collapseUtilities" aria-expanded="false" aria-controls="collapseUtilities">
+                <div class="nav-link-icon"><i data-feather="tool"></i></div>
+                Seguridad
+                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+
+            <div class="collapse" id="collapseUtilities" data-parent="#accordionSidenav">
+                <nav class="sidenav-menu-nested nav">
+                    <a class="nav-link" href="/views/usuario/index">Usuarios</a>
+                    <a class="nav-link" href="background.html">Permisos</a>
+                </nav>
+            </div>
+
+            <div style="display: none;" class="sidenav-menu-heading">Complementos</div>
+            <a style="display: none;" class="nav-link" href="charts.html">
+                <div class="nav-link-icon"><i data-feather="bar-chart"></i></div>
+                Charts
+            </a>
+
+            <a style="display: none;" class="nav-link" href="tables.html">
+                <div class="nav-link-icon"><i data-feather="filter"></i></div>
+                Tables
+            </a>
+        </div>
+    </div>
+    <!-- ACA PODEMOS VER QUIEN SE A LOGUEADO LA FINALIDAD ES VER SU NOMBRE Y APELLIDO -->
+    <div class="sidenav-footer">
+        <div class="sidenav-footer-content">
+            <div class="sidenav-footer-subtitle">Logged in as:</div>
+            <div sec:authorize="isAuthenticated()">
+                <!--  <span class="text-light">Bienvenido</span>&nbsp;<span class="text-light" sec:authentication="name"></span>&nbsp;-->
+                <span th:if="${session.usuario != null}" class="text-dark"
+                      th:text="'Bienvenido ' + ${session.usuario.nombre}">
+                </span>&nbsp;
+
+            </div>
+        </div>
+    </div>
+    <script>
+                       	perfil();
+                     	function perfil() {
+								const id = document.getElementById("dropdownMenuLink").children[1].innerText
+								console.log(id)
+								const perfilvehiculos = document.getElementById("perfilvehiculos")
+								const perfilmedico = document.getElementById("perfilmedico")
+								const perfilpaciente = document.getElementById("perfilpaciente")
+								const perfilhora = document.getElementById("perfilhora")
+								const perfilenfermedades = document.getElementById("perfilenfermedades")
+								const perfilmedicamentos = document.getElementById("perfilmedicamentos")
+								const perfilespecialidad = document.getElementById("perfilespecialidad")
+								const perfilubigeo = document.getElementById("perfilubigeo")
+								const perfilprogramaciones = document.getElementById("perfilprogramaciones")
+								const perfilprogramacion = document.getElementById("perfilprogramacion")
+								const perfilreporte = document.getElementById("perfilreporte")
+								const perfilherramientas= document.getElementById("perfilherramientas")
+								const perfilseguridad = document.getElementById("perfilseguridad")
+								const calendariosmedicos= document.getElementById("calendariosmedicos")
+								const calendariosmedico = document.getElementById("calendariosmedico")
+								const calendariosvisitasmedicas = document.getElementById("calendariosvisitasmedicas")
+								const calendariosvisitasmedica = document.getElementById("calendariosvisitasmedica")
+								const calendariosbrigadasmedicas = document.getElementById("calendariosbrigadasmedicas")
+								const calendariosbrigadasmedica = document.getElementById("calendariosbrigadasmedica")
+								const citamedica = document.getElementById("citamedica")
+								
+								
+								if(id=="anderson11" || id=="GLaura"){
+									perfilvehiculos.style.display = "none"
+									perfilenfermedades.style.display = "none"
+									perfilmedicamentos.style.display = "none"
+									perfilespecialidad.style.display = "none"
+									perfilubigeo.style.display = "none"
+									perfilprogramaciones.style.display = "none"
+									perfilprogramacion.style.display = "none"
+									perfilreporte.style.display = "none"
+									perfilherramientas.style.display = "none"
+									perfilseguridad.style.display = "none"
+									
+								}
+								
+								if(id=="anderson" || id=="VMariana"){
+									perfilvehiculos.style.display = "none"
+									perfilenfermedades.style.display = "none"
+									perfilmedicamentos.style.display = "none"
+									perfilespecialidad.style.display = "none"
+									perfilubigeo.style.display = "none"
+									perfilprogramaciones.style.display = "none"
+									perfilreporte.style.display = "none"
+									perfilherramientas.style.display = "none"
+									perfilseguridad.style.display = "none"
+									calendariosmedicos.style.display = "none"
+									calendariosmedico.style.display = "none"
+									calendariosvisitasmedicas.style.display = "none"
+									calendariosvisitasmedica.style.display = "none"
+									calendariosbrigadasmedicas.style.display = "none"
+									calendariosbrigadasmedica.style.display = "none"
+									perfilhora.style.display = "none"
+								
+									
+								}
+								if(id=="anderson11" || id=="Csanchez"){
+									
+									perfilpaciente.style.display = "none"
+									perfilenfermedades.style.display = "none"
+									perfilmedicamentos.style.display = "none"
+									perfilespecialidad.style.display = "none"
+									perfilubigeo.style.display = "none"
+									perfilprogramaciones.style.display = "none"
+									/**perfilreporte.style.display = "none"*/
+									perfilherramientas.style.display = "none"
+									perfilseguridad.style.display = "none"
+									calendariosmedicos.style.display = "none"
+									calendariosmedico.style.display = "none"
+									calendariosvisitasmedicas.style.display = "none"
+									calendariosvisitasmedica.style.display = "none"
+									citamedica.style.display = "none"
+									
+									perfilhora.style.display = "none"
+								
+									
+								}
+								if(id=="anderson1" || id=="Aclaudio"){
+									perfilmedico.style.display = "none"
+									perfilvehiculos.style.display = "none"
+									perfilenfermedades.style.display = "none"
+									perfilmedicamentos.style.display = "none"
+									perfilespecialidad.style.display = "none"
+									perfilubigeo.style.display = "none"
+									perfilprogramaciones.style.display = "none"
+									perfilreporte.style.display = "none"
+									perfilherramientas.style.display = "none"
+									perfilseguridad.style.display = "none"
+									calendariosmedicos.style.display = "none"
+									calendariosmedico.style.display = "none"
+								
+								
+									
+									perfilhora.style.display = "none"
+							
+									
+								}
+							}
+    </script>
+</nav>

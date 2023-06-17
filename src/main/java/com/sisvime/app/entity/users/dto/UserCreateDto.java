@@ -2,6 +2,7 @@ package com.sisvime.app.entity.users.dto;
 
 import com.sisvime.app.share.CivilState;
 import com.sisvime.app.share.Gender;
+import com.sisvime.app.share.UserStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,4 +23,5 @@ public class UserCreateDto {
     private String Direction;
     private Gender Gender;
     private CivilState CivilState;
+    private UserStatus Status;
 }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<table th:fragment="itemsPaciente" class="d-none">
+
+	<tbody id="plantillaItemsPaciente">
+		<tr id="row_{ID}">
+		
+		<td><input value="{ID}" name="item_id[]" /></td>
+		<td>{NOMBRE}</td>
+		<td>{APELLIDO}</td>
+		
+		
+		</tr>
+		
+	</tbody>
+
+
+	</table>
+
+</body>
+</html>
