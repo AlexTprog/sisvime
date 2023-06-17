@@ -5,17 +5,12 @@
  */
 
 $(document).ready(function () {
-
-
     var Aceptar = function () {
         var contraseña = $('#password').val();
         localStorage.clear();
         localStorage.setItem('contrasena', contraseña);
     };
-    
     $("#RegistrarId").click(Aceptar);
-    
-    
 });
 
 

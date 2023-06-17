@@ -8,7 +8,7 @@
           crossorigin="anonymous"/>
     <link href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" rel="stylesheet"
           crossorigin="anonymous"/>
-    <link rel="icon" type="image/x-icon" href="imagen/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="imagen/favicon.png"/>
     <script data-search-pseudo-elements defer
             src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
             crossorigin="anonymous"></script>
@@ -43,15 +43,15 @@
                                     continuaci&oacute;n.
                                 </div>
                                 <!-- Login form-->
-                                <form th:action="@{/signup}"  method="post">
+                                <form th:action="@{/signup}" th:object="${usuario}" method="post">
                                     <!-- Form Row-->
                                     <div class="form-row">
                                         <div class="col-md-6">
                                             <!-- Form Group (first name)-->
                                             <div class="form-group">
-                                                <label class="text-gray-600 small" th:for="firstNameExample">Nombre</label>
+                                                <label class="text-gray-600 small" for="firstNameExample">Nombre</label>
                                                 <input class="form-control form-control-solid py-4" type="text"
-                                                       placeholder="" id="nombre" name="nombre"
+                                                       placeholder="" th:field="*{nombre}" id="nombre" name="nombre"
                                                        aria-label="First Name" aria-describedby="firstNameExample"/>
                                             </div>
                                         </div>
@@ -61,9 +61,9 @@
 
                                             <div class="form-group">
                                                 <label class="text-gray-600 small"
-                                                       th:for="lastNameExample">Apellido</label>
+                                                       for="lastNameExample">Apellido</label>
                                                 <input class="form-control form-control-solid py-4" type="text"
-                                                       placeholder="" id="apellido"
+                                                       placeholder="" th:field="*{apellido}" id="apellido"
                                                        name="apellido" aria-label="Last Name"
                                                        aria-describedby="lastNameExample"/>
                                             </div>
@@ -73,9 +73,9 @@
                                     </div>
                                     <!-- Form Group (email address)-->
                                     <div class="form-group">
-                                        <label class="text-gray-600 small" th:for="emailExample">Correo Electronico</label>
+                                        <label class="text-gray-600 small" for="emailExample">Correo Electronico</label>
                                         <input class="form-control form-control-solid py-4" type="text" placeholder=""
-                                                id="email" name="email" aria-label="Email Address"
+                                               th:field="*{email}" id="email" name="email" aria-label="Email Address"
                                                aria-describedby="emailExample"/>
                                     </div>
                                     <!-- Form Row-->
@@ -85,7 +85,7 @@
                                             <div class="form-group">
                                                 <label class="text-gray-600 small">Usuario</label>
                                                 <input class="form-control form-control-solid py-4" type="text"
-                                                       placeholder=""  id="username"
+                                                       placeholder="" th:field="*{username}" id="username"
                                                        name="username" aria-label="Password"
                                                        aria-describedby="passwordExample"/>
                                             </div>
@@ -93,10 +93,10 @@
                                         <div class="col-md-6">
                                             <!-- Form Group (confirm password)-->
                                             <div class="form-group">
-                                                <label class="text-gray-600 small" th:for="confirmPasswordExample">Contrase&ntilde;a</label>
+                                                <label class="text-gray-600 small" for="confirmPasswordExample">Contrase&ntilde;a</label>
                                                 <input class="form-control form-control-solid py-4" type="password"
                                                        placeholder="" aria-label="Confirm Password"
-                                                        id="password" name="password"
+                                                       th:field="*{password}" id="password" name="password"
                                                        aria-describedby="confirmPasswordExample"/>
                                             </div>
                                         </div>
