@@ -19,8 +19,8 @@ public class UserViewController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/index")
-    public String mostrarIndex(Model model) {
+    @GetMapping("/")
+    public String index(Model model) {
         List<User> lista = userService.getAll();
         model.addAttribute("titulo", "Lista de Usuario");
         model.addAttribute("usuarios", lista);
@@ -34,7 +34,7 @@ public class UserViewController {
         userService.deleteById(idUser);
 
         attributes.addFlashAttribute("msg", "El usuario fue eliminado!.");
-        return "redirect:/views/usuario/index";
+        return "redirect:/views/usuario/";
     }
 
     /**
@@ -48,7 +48,7 @@ public class UserViewController {
     public String activar(@PathVariable("id") Long idUser, RedirectAttributes attributes) {
         userService.activeUser(idUser);
         attributes.addFlashAttribute("msg", "El usuario fue activado y ahora tiene acceso al sistema.");
-        return "redirect:/views/usuario/index";
+        return "redirect:/views/usuario/";
     }
 
     /**
@@ -62,7 +62,7 @@ public class UserViewController {
     public String bloquear(@PathVariable("id") Long idUsuario, RedirectAttributes attributes) {
         userService.blockUser(idUsuario);
         attributes.addFlashAttribute("msg", "El usuario fue bloqueado y no tendra acceso al sistema.");
-        return "redirect:/views/usuario/index";
+        return "redirect:/views/usuario/";
     }
 
 
@@ -75,6 +75,5 @@ public class UserViewController {
 
         return "/views/usuario/verusuario";
     }
-
 
 }

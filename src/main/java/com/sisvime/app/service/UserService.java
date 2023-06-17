@@ -30,6 +30,11 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public User update(User user) {
+
+        return userRepository.saveAndFlush(user);
+    }
+
     public void activeUser(Long id) {
         var dbUser = (User) userRepository.findById(id).orElse(null);
         if (dbUser != null) {
@@ -42,5 +47,9 @@ public class UserService {
         if (dbUser != null) {
             dbUser.setStatus(UserStatus.Blocked);
         }
+    }
+
+    public User getByUsername(String username) {
+        return userRepository.findByEmail(username).orElse(null);
     }
 }

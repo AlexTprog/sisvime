@@ -16,13 +16,16 @@ import javax.persistence.Table;
 public class Medicament {
     @Id
     @GeneratedValue
-    private Long Id;
+    private Long id;
 
     @NotNull
-    private String Name;
+    private String name;
 
-    private String Description;
+    @NotNull
+    private String code;
 
-    private Integer Quantity;
+    private String description;
+
+    private Integer quantity;
 
 }

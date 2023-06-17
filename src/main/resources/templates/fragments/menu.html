@@ -1,0 +1,40 @@
+<nav th:fragment="menu-principal"
+     class="topnav navbar navbar-expand shadow navbar-light bg-white"
+     id="sidenavAccordion">
+    <a class="navbar-brand" th:href="@{/}">SISVIME</a>
+
+    <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 mr-lg-2" id="sidebarToggle" href="#">
+        <i data-feather="menu"></i>
+    </button>
+
+    <form class="form-inline mr-auto d-none d-md-block">
+        <div class="input-group input-group-joined input-group-solid">
+            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search"/>
+            <div class="input-group-append">
+                <div class="input-group-text"><i data-feather="search"></i></div>
+            </div>
+        </div>
+    </form>
+
+    <ul class="navbar-nav nav-bar-left">
+        <li sec:authorize="!isAuthenticated()">
+            <a class="btn btn-outline-warning" th:href="@{/index}">Iniciar Sesion</a>
+        </li>
+
+        <li class="dropdown" sec:authorize="isAuthenticated()">
+            <a class="btn btn-outline-warning dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span>Bienvenido</span>&nbsp;
+                <span sec:authentication="name"></span>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" th:href="@{/views/usuario/veruser/14}">Perfil</a>
+                <a class="dropdown-item" href="#">Cambiar Contrase&ntilde;a</a>
+                <form th:action="@{/logout}" method="post">
+                    <button class="dropdown-item" type="submit">Cerrar Sesion</button>
+                </form>
+            </div>
+        </li>
+    </ul>
+</nav>

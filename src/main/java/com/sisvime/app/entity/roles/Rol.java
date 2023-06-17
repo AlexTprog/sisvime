@@ -16,12 +16,12 @@ import java.util.List;
 public class Rol {
     @Id
     @GeneratedValue
-    private Long Id;
+    private Long id;
     @NonNull
-    private String Name;
+    private String name;
 
-    @ManyToMany(mappedBy = "Roles")
-    private List<User> Users = new ArrayList<>();
+    @ManyToMany(mappedBy = "roles")
+    private List<User> users = new ArrayList<>();
 
 
 }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Service
 public class BridageService {
@@ -22,7 +21,11 @@ public class BridageService {
         return brigadeRepository.save(brigade);
     }
 
-    public Optional<Brigade> getById(Long id) {
-        return brigadeRepository.findById(id);
+    public Brigade getById(Long id) {
+        return brigadeRepository.findById(id).orElse(null);
+    }
+
+    public void delete(Long id) {
+        brigadeRepository.deleteById(id);
     }
 }

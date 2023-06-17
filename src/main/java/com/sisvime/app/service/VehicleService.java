@@ -5,9 +5,9 @@ import com.sisvime.app.repository.IVehicleRepository;
 import com.sisvime.app.share.VehicleStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -19,6 +19,10 @@ public class VehicleService {
 
     public ArrayList<Vehicle> getAll() {
         return (ArrayList<Vehicle>) vehicleRepository.findAll();
+    }
+
+    public Page<Vehicle> getAll(Pageable pageable) {
+        return vehicleRepository.findAll(pageable);
     }
 
     public Optional<Vehicle> getById(Long id) {
@@ -33,6 +37,7 @@ public class VehicleService {
         vehicleRepository.deleteById(id);
     }
 
+
     public void active(Long id) {
         var dbVehicle = getById(id).orElse(null);
         dbVehicle.setStatus(VehicleStatus.Enable);
@@ -41,13 +46,6 @@ public class VehicleService {
     public void block(Long id) {
         var dbVehicle = getById(id).orElse(null);
         dbVehicle.setStatus(VehicleStatus.Disable);
-    }
-
-    public Page<Vehicle> getAll(Pageable pageable) {
-
-//        return vehicleRepository.findAll(pageable);
-        // TODO Resolver
-        return null;
     }
 
 }

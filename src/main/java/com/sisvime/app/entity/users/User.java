@@ -21,31 +21,33 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+    private Long id;
     @NonNull
-    private String Document;
+    private String document;
     @NonNull
-    private String Email;
+    private String email;
     @NonNull
     private String Password;
     @NonNull
-    private String Name;
+    private String name;
     @NonNull
-    private String FatherLastName;
+    private String fatherLastName;
     @NonNull
-    private String MotherLastName;
+    private String motherLastName;
+    @NonNull
+    private LocalDateTime birthday;
 
-    private LocalDateTime Birthday;
+    private String phoneNumber;
 
-    private String PhoneNumber;
+    private String direction;
 
-    private String Direction;
+    private Gender gender;
 
-    private Gender Gender;
+    private UserStatus status;
 
-    private UserStatus Status;
+    private CivilState civilState;
 
-    private CivilState CivilState;
+    private String photo;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -53,5 +55,5 @@ public class User {
             joinColumns = @JoinColumn(name = "User_Id"),
             inverseJoinColumns = @JoinColumn(name = "Rol_Id")
     )
-    private List<Rol> Roles = new ArrayList<>();
+    private List<Rol> roles = new ArrayList<>();
 }
