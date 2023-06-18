@@ -1,7 +1,12 @@
 package com.sisvime.app.controller;
 
-import com.sisvime.app.models.Service.*;
-import com.sisvime.app.models.entity.*;
+import com.sisvime.app.models.Service.ICitaService;
+import com.sisvime.app.models.Service.IEspecialidadService;
+import com.sisvime.app.models.Service.IHoraService;
+import com.sisvime.app.models.Service.IPersonaService;
+import com.sisvime.app.models.entity.Especialidad;
+import com.sisvime.app.models.entity.Hora;
+import com.sisvime.app.models.entity.Personal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +26,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
+// /views/personal/createper
 @RequestMapping("/views/personal")
 public class PersonaController {
 
@@ -48,9 +54,7 @@ public class PersonaController {
 
     @GetMapping("/listarper")
     public String listarPersonal(Model model) {
-
         List<Personal> listadopersonal = personaservice.listartodos();
-
         model.addAttribute("titulo", "Listado del Personal");
         model.addAttribute("personales", listadopersonal);
         return "/views/personal/listarper";
@@ -64,33 +68,25 @@ public class PersonaController {
         return personaservice.listartodos();
     }
 
-    @GetMapping("/createper")
+    @GetMapping("/create")
     public String crear(Model model) {
-
         Personal personal = new Personal();
-
         List<Especialidad> listespecialidades = especialidadservice.findAll();
-
         //List<Genero> listgeneros=generoservice.findAll();
         //List<Civil> listciviles=civilservice.findAll();
-
         model.addAttribute("titulo", "Formulario: Nuevo Personal Medico");
         model.addAttribute("personal", personal);
         model.addAttribute("especialidades", listespecialidades);
         //model.addAttribute("generos", listgeneros);
         //model.addAttribute("civiles", listciviles);
-
-
         return "/views/personal/createper";
-
     }
+
 
     @PostMapping("/saveper")
     public String guardar(@Valid @ModelAttribute Personal personal, BindingResult result, Model model, @RequestParam("file") MultipartFile foto,
                           RedirectAttributes attribute) {
-
         List<Especialidad> listespecialidades = especialidadservice.findAll();
-
         if (result.hasErrors()) {
             model.addAttribute("titulo", "Formulario: Nuevo Personal Medico");
             model.addAttribute("personal", personal);
@@ -98,24 +94,17 @@ public class PersonaController {
             return "views/personal/createper";
         }
 
-
         if (!foto.isEmpty()) {
             //Path directorioImagenes = Paths.get("src//main//resources//static/img");
-            String rutaAbosluta = "D://Users//RICHARD//Documents//workspace-spring-tool-suite-4-4.8.0.RELEASE//spring-boot-data-jpa//imagen//personal";
-
-
+            String rutaAbosluta = "/imagen/personal";
             try {
                 byte[] bytesImg = foto.getBytes();
-                Path rutacompleta = Paths.get(rutaAbosluta + "//" + foto.getOriginalFilename());
+                Path rutacompleta = Paths.get(rutaAbosluta + "/" + foto.getOriginalFilename());
                 Files.write(rutacompleta, bytesImg);
-
                 personal.setFoto(foto.getOriginalFilename());
-
             } catch (IOException e) {
-
                 e.printStackTrace();
             }
-
         }
         personaservice.guardar(personal);
         attribute.addFlashAttribute("success", "Personal guardado con exito!");
@@ -126,33 +115,22 @@ public class PersonaController {
 
     @GetMapping(value = "/editper/{id}")
     public String editar(@PathVariable(value = "id") Long idpersonal, Model model) {
-
         Personal personal = personaservice.buscarporId(idpersonal);
-
         List<Especialidad> listespecialidades = especialidadservice.findAll();
-
         //List<Genero> listgeneros=generoservice.findAll();
-
         //List<Civil> listciviles=civilservice.findAll();
-
         model.addAttribute("titulo", "Formulario: Editar Personal Medico");
         model.addAttribute("personal", personal);
         model.addAttribute("especialidades", listespecialidades);
         //model.addAttribute("generos", listgeneros);
         //model.addAttribute("civiles", listciviles);
-
-
         return "/views/personal/createper";
-
     }
 
     @GetMapping("/deleteper/{id}")
     public String eliminar(@PathVariable("id") Long idpersonal) {
-
         personaservice.eliminar(idpersonal);
-
         return "redirect:/views/personal/listarper";
-
     }
 
     //    List horarios ocupados personal

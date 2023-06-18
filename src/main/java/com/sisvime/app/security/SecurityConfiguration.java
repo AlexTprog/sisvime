@@ -42,10 +42,10 @@ public class SecurityConfiguration {
                 // Las vistas públicas no requieren autenticación
                 .antMatchers("/", "/login", "/signup", "/bcrypt/**").permitAll()
                 // Asignar permisos a URLs por ROLES
-                .antMatchers("/views/personal/createper/**").hasAnyAuthority("ADMINISTRADOR")
-                .antMatchers("/views/personal/saveper/**").hasAnyAuthority("ADMINISTRADOR")
-                .antMatchers("/views/personal/editper/**").hasAnyAuthority("ADMINISTRADOR")
-                .antMatchers("/views/personal/deleteper/**").hasAnyAuthority("ADMINISTRADOR")
+                .antMatchers("/views/personal/createper/**").hasAnyAuthority("ADMIN")
+                .antMatchers("/views/personal/saveper/**").hasAnyAuthority("ADMIN")
+                .antMatchers("/views/personal/editper/**").hasAnyAuthority("ADMIN")
+                .antMatchers("/views/personal/deleteper/**").hasAnyAuthority("ADMIN")
                 // Todas las demás URLs de la Aplicación requieren autenticación
                 .anyRequest().authenticated()
                 // El formulario de Login no requiere autenticacion
@@ -54,23 +54,6 @@ public class SecurityConfiguration {
         return http.build();
     }
 
-//    @Bean
-//    UserDetailsManager users(DataSource dataSource) {
-//        UserDetails user = User.builder()
-//                .username("user")
-//                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
-//                .roles("USER")
-//                .build();
-//        UserDetails admin = User.builder()
-//                .username("admin")
-//                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
-//                .roles("USER", "ADMIN")
-//                .build();
-//        JdbcUserDetailsManager users = new JdbcUserDetailsManager(dataSource);
-//        users.createUser(user);
-//        users.createUser(admin);
-//        return users;
-//    }
 
     @Autowired
     public void configure(AuthenticationManagerBuilder auth) throws Exception {

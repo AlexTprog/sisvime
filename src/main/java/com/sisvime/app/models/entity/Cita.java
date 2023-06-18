@@ -1,5 +1,7 @@
 package com.sisvime.app.models.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -8,6 +10,8 @@ import java.util.Date;
 
 @Entity
 @Table(name = "citas")
+@Getter
+@Setter
 public class Cita implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,97 +57,6 @@ public class Cita implements Serializable {
     @Column(name = "cit_receta")
     private String receta;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Paciente getPac() {
-        return pac;
-    }
-
-    public void setPac(Paciente pac) {
-        this.pac = pac;
-    }
-
-    public String getEsp() {
-        return esp;
-    }
-
-    public void setEsp(String esp) {
-        this.esp = esp;
-    }
-
-    public String getMed() {
-        return med;
-    }
-
-    public void setMed(String med) {
-        this.med = med;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public Hora getIdhora() {
-        return idhora;
-    }
-
-    public void setIdhora(Hora idhora) {
-        this.idhora = idhora;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public Enfermedad getIdenfermedad() {
-        return idenfermedad;
-    }
-
-    public void setIdenfermedad(Enfermedad idenfermedad) {
-        this.idenfermedad = idenfermedad;
-    }
-
-    public Medicamento getIdmedicamento() {
-        return idmedicamento;
-    }
-
-    public void setIdmedicamento(Medicamento idmedicamento) {
-        this.idmedicamento = idmedicamento;
-    }
-
-    public String getDiag() {
-        return diag;
-    }
-
-    public void setDiag(String diag) {
-        this.diag = diag;
-    }
-
-    public String getReceta() {
-        return receta;
-    }
-
-    public void setReceta(String receta) {
-        this.receta = receta;
-    }
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
 
     @Override
     public String toString() {

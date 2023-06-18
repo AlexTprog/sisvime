@@ -1,21 +1,22 @@
 package com.sisvime.app.models.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "medicamentos")
+@Getter
+@Setter
 public class Medicamento implements Serializable {
-
 
     private static final long serialVersionUID = 1L;
 
-
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "med_id")
     private int id;
 
@@ -27,34 +28,6 @@ public class Medicamento implements Serializable {
     @Column(name = "med_descripcion")
     private String descripcion;
 
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
 
 
 }

@@ -8,19 +8,14 @@
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.27.0/feather.min.js" crossorigin="anonymous"></script>
     </head>
-    
     <body class="nav-fixed">
-    
         <!-- AQUI ESTA EL NAVBAR -AUTOMATIZADO -->
         <header th:insert="fragments/menu :: menu-principal">
-        
         </header>
-        
         <!-- AQUI ESTA EL DASBHBOARD PARTE IZQUIERDA -AUTOMATIZADO -->
         <div id="layoutSidenav">
             <div th:insert="fragments/dashboard :: dashboard-principal" id="layoutSidenav_nav">
             </div>
-            
             <!-- AQUI SE ENCUENTRA LA PARTE FRONTAL -->
             <div id="layoutSidenav_content">
                 <main>
@@ -215,6 +210,6 @@
         <script src="/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js" crossorigin="anonymous"></script>
-        <script src="js/date-range-picker-demo-single.js"></script>
+        <script src="/js/date-range-picker-demo-single.js"></script>
     </body>
 </html>

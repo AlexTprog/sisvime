@@ -1,43 +1,36 @@
 package com.sisvime.app.models.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalTime;
 
 @Entity
 @Table(name = "hora")
+@Getter
+@Setter
 public class Hora implements Serializable {
-
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idhora")
     private int id;
 
     @Column(name = "hora")
     private LocalTime hora;
 
-    public int getId() {
-        return id;
+    public Hora() {
     }
 
-    public void setId(int id) {
+    public Hora(int id, LocalTime hora) {
         this.id = id;
-    }
-
-    public LocalTime getHora() {
-        return hora;
-    }
-
-    public void setHora(LocalTime hora) {
         this.hora = hora;
     }
 
-
+    public Hora(LocalTime hora) {
+        this.hora = hora;
+    }
 }

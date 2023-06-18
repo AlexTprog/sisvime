@@ -1,27 +1,32 @@
 package com.sisvime.app.models.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "pacientes")
+@Getter
+@Setter
 public class Paciente implements Serializable {
-
-    @NotNull
-    @Id
-    @Column(name = "pac_nsa")
-    private Long id;
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @Column(name = "pac_nsa")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotNull
     @Column(name = "pac_dni")
-    private Long dni;
+    private String dni;
 
     @NotEmpty
     @Column(name = "pac_nombre")
@@ -55,17 +60,12 @@ public class Paciente implements Serializable {
     private String correo;
 
     @NotNull
-    @Min(100000000)
-    @Max(999999999)
     @Column(name = "pac_celular")
-    private Long celular;
+    private String celular;
 
     @NotNull
-    @Min(1000000)
-    @Max(9999999)
     @Column(name = "pac_telefonofijo")
-    private Long telefonofijo;
-
+    private String telefonofijo;
 
     @Column(name = "pac_foto")
     private String foto = "iconouser.png";
@@ -106,201 +106,6 @@ public class Paciente implements Serializable {
     @Column(name = "pac_enfermedad")
     private String enfermedad;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getDni() {
-        return dni;
-    }
-
-    public void setDni(Long dni) {
-        this.dni = dni;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido_pa() {
-        return apellido_pa;
-    }
-
-    public void setApellido_pa(String apellido_pa) {
-        this.apellido_pa = apellido_pa;
-    }
-
-    public String getApellidoma() {
-        return apellidoma;
-    }
-
-    public void setApellidoma(String apellidoma) {
-        this.apellidoma = apellidoma;
-    }
-
-    public String getParentesco() {
-        return parentesco;
-    }
-
-    public void setParentesco(String parentesco) {
-        this.parentesco = parentesco;
-    }
-
-    public Date getFecha_nacimiento() {
-        return fecha_nacimiento;
-    }
-
-    public void setFecha_nacimiento(Date fecha_nacimiento) {
-        this.fecha_nacimiento = fecha_nacimiento;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public Long getCelular() {
-        return celular;
-    }
-
-    public void setCelular(Long celular) {
-        this.celular = celular;
-    }
-
-    public Long getTelefonofijo() {
-        return telefonofijo;
-    }
-
-    public void setTelefonofijo(Long telefonofijo) {
-        this.telefonofijo = telefonofijo;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-
-    public String getEstadocivil() {
-        return estadocivil;
-    }
-
-    public void setEstadocivil(String estadocivil) {
-        this.estadocivil = estadocivil;
-    }
-
-    public String getDistrito() {
-        return distrito;
-    }
-
-    public void setDistrito(String distrito) {
-        this.distrito = distrito;
-    }
-
-    public String getTitular() {
-        return titular;
-    }
-
-    public void setTitular(String titular) {
-        this.titular = titular;
-    }
-
-    public String getPeso() {
-        return peso;
-    }
-
-    public void setPeso(String peso) {
-        this.peso = peso;
-    }
-
-    public String getMasa() {
-        return masa;
-    }
-
-    public void setMasa(String masa) {
-        this.masa = masa;
-    }
-
-    public String getAltura() {
-        return altura;
-    }
-
-    public void setAltura(String altura) {
-        this.altura = altura;
-    }
-
-    public String getSangre() {
-        return sangre;
-    }
-
-    public void setSangre(String sangre) {
-        this.sangre = sangre;
-    }
-
-    public String getAlergia() {
-        return alergia;
-    }
-
-    public void setAlergia(String alergia) {
-        this.alergia = alergia;
-    }
-
-    public String getTipalergia() {
-        return tipalergia;
-    }
-
-    public void setTipalergia(String tipalergia) {
-        this.tipalergia = tipalergia;
-    }
-
-    public String getDescalergia() {
-        return descalergia;
-    }
-
-    public void setDescalergia(String descalergia) {
-        this.descalergia = descalergia;
-    }
-
-    public String getEnfermedad() {
-        return enfermedad;
-    }
-
-    public void setEnfermedad(String enfermedad) {
-        this.enfermedad = enfermedad;
-    }
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
 
     @Override
     public String toString() {

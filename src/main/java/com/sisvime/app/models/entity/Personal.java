@@ -1,28 +1,31 @@
 package com.sisvime.app.models.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "personales")
+@Getter
+@Setter
 public class Personal implements Serializable {
-
-    @NotNull
     @Id
     @Column(name = "per_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private static final long serialVersionUID = 1L;
 
     @NotNull
-    @Min(10000000)
-    @Max(99999999)
     @Column(name = "per_dni")
-    private Long dni;
+    private String dni;
 
     @NotEmpty
     @Column(name = "per_nombre")
@@ -56,16 +59,12 @@ public class Personal implements Serializable {
     private String correo;
 
     @NotNull
-    @Min(100000000)
-    @Max(999999999)
     @Column(name = "per_celular")
-    private Long celular;
+    private String celular;
 
     @NotNull
-    @Min(1000000)
-    @Max(9999999)
     @Column(name = "per_telefonofijo")
-    private Long telefonofijo;
+    private String telefonofijo;
 
     @NotEmpty
     @Column(name = "per_direccion")
@@ -78,126 +77,20 @@ public class Personal implements Serializable {
     @Column(name = "per_foto")
     private String foto = "iconouser.png";
 
-
-    public Long getId() {
-        return id;
+    public Personal() {
     }
 
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getDni() {
-        return dni;
-    }
-
-
-    public void setDni(Long dni) {
+    public Personal(String dni, String nombre, String apellidopat, String apellidomat, String sexo, Date fechanacimiento, String correo, String celular, Especialidad espec) {
         this.dni = dni;
-    }
-
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getApellidopat() {
-        return apellidopat;
-    }
-
-    public void setApellidopat(String apellidopat) {
         this.apellidopat = apellidopat;
-    }
-
-    public String getApellidomat() {
-        return apellidomat;
-    }
-
-    public void setApellidomat(String apellidomat) {
         this.apellidomat = apellidomat;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
         this.sexo = sexo;
-    }
-
-    public Date getFechanacimiento() {
-        return fechanacimiento;
-    }
-
-    public void setFechanacimiento(Date fechanacimiento) {
         this.fechanacimiento = fechanacimiento;
-    }
-
-    public String getEstadocivil() {
-        return estadocivil;
-    }
-
-    public void setEstadocivil(String estadocivil) {
-        this.estadocivil = estadocivil;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
         this.correo = correo;
-    }
-
-    public Long getCelular() {
-        return celular;
-    }
-
-    public void setCelular(Long celular) {
         this.celular = celular;
-    }
-
-    public Long getTelefonofijo() {
-        return telefonofijo;
-    }
-
-    public void setTelefonofijo(Long telefonofijo) {
-        this.telefonofijo = telefonofijo;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public Especialidad getEspec() {
-        return espec;
-    }
-
-    public void setEspec(Especialidad espec) {
         this.espec = espec;
     }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
-
 
     @Override
     public String toString() {

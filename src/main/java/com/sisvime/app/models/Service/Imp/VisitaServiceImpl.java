@@ -71,7 +71,7 @@ public class VisitaServiceImpl implements IVisitaService {
         List<GroupNumberVisitas> listGroupNumberVisit = new ArrayList<>();
         visitadao.grupoVisitaPersonal().forEach(x -> {
             GroupNumberVisitas groupNumberVisitas = new GroupNumberVisitas();
-            groupNumberVisitas.setNumero(Integer.parseInt(String.valueOf(x[0])));
+            groupNumberVisitas.setVisitas(Integer.parseInt(String.valueOf(x[0])));
             groupNumberVisitas.setNombreMedico(String.valueOf(x[1]));
             groupNumberVisitas.setApellidoMedico(String.valueOf(x[2]));
             groupNumberVisitas.setNombreEnfermera(String.valueOf(x[3]));
@@ -89,7 +89,7 @@ public class VisitaServiceImpl implements IVisitaService {
         List<GroupNumberVisitas> listGroupNumberVisit = new ArrayList<>();
         visitadao.grupoVisitaPersonalMes(term, year).forEach(x -> {
             GroupNumberVisitas groupNumberVisitas = new GroupNumberVisitas();
-            groupNumberVisitas.setNumero(Integer.parseInt(String.valueOf(x[0])));
+            groupNumberVisitas.setVisitas(Integer.parseInt(String.valueOf(x[0])));
             groupNumberVisitas.setNombreMedico(String.valueOf(x[1]));
             groupNumberVisitas.setApellidoMedico(String.valueOf(x[2]));
             groupNumberVisitas.setNombreEnfermera(String.valueOf(x[3]));

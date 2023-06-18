@@ -1,5 +1,7 @@
 package com.sisvime.app.models.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -8,11 +10,10 @@ import java.util.Date;
 
 @Entity
 @Table(name = "horario")
+@Getter
+@Setter
 public class Horatrabajo implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -33,37 +34,6 @@ public class Horatrabajo implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Personal getIdper() {
-        return idper;
-    }
-
-    public void setIdper(Personal idper) {
-        this.idper = idper;
-    }
-
-    public Hora getIdhora() {
-        return idhora;
-    }
-
-    public void setIdhora(Hora idhora) {
-        this.idhora = idhora;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
 
     @Override
     public String toString() {
