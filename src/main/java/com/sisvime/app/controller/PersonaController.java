@@ -149,10 +149,12 @@ public class PersonaController {
 
         var medicos = citaService.listartodos();
         for (var personal : medicos) {
-            if (personal.getMed().equals(name) &&
-                    formatoFecha.format(fechaAtencion).equals(formatoFecha.format((personal.getFecha())))) {
-                var hour = horaService.Get(personal.getIdhora().getId());
-                horas.remove(hour);
+            if (personal.getMed() != null) {
+                if (personal.getMed().equals(name) &&
+                        formatoFecha.format(fechaAtencion).equals(formatoFecha.format((personal.getFecha())))) {
+                    var hour = horaService.Get(personal.getIdhora().getId());
+                    horas.remove(hour);
+                }
             }
         }
         return horas;

@@ -45,13 +45,14 @@
                         <i class="fas fa-user-tag"></i> &nbsp; Especialidad
 
                     </a>
+                    <!--
 
                     <a id="perfilubigeo" class="nav-link" th:href="@{/ubigeo/verubigeo}">
                         <i class="fas fa-bars"></i> &nbsp; Ubigeo
 
                     </a>
 
-                    <!--  <a class="nav-link" th:href="@{/listardep}">
+                     <a class="nav-link" th:href="@{/listardep}">
                         <i class="fas fa-bars"></i> &nbsp; Departamento
 
                     </a>
@@ -331,17 +332,17 @@
         </div>
     </div>
     <!-- ACA PODEMOS VER QUIEN SE A LOGUEADO LA FINALIDAD ES VER SU NOMBRE Y APELLIDO -->
-    <div class="sidenav-footer">
-        <div class="sidenav-footer-content">
-            <div class="sidenav-footer-subtitle">Logged in as:</div>
-            <div sec:authorize="isAuthenticated()">
-                <!--  <span class="text-light">Bienvenido</span>&nbsp;<span class="text-light" sec:authentication="name"></span>&nbsp;-->
-                <span th:if="${session.usuario != null}" class="text-dark"
-                      th:text="'Bienvenido ' + ${session.usuario.nombre}"></span>&nbsp;
+<!--    <div class="sidenav-footer">-->
+<!--        <div class="sidenav-footer-content">-->
+<!--            <div class="sidenav-footer-subtitle">Logged in as:</div>-->
+<!--            <div sec:authorize="isAuthenticated()">-->
+<!--                &lt;!&ndash;  <span class="text-light">Bienvenido</span>&nbsp;<span class="text-light" sec:authentication="name"></span>&nbsp;&ndash;&gt;-->
+<!--                <span th:if="${session.usuario != null}" class="text-dark"-->
+<!--                      th:text="'Bienvenido ' + ${session.usuario.nombre}"></span>&nbsp;-->
 
-            </div>
-        </div>
-    </div>
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
     <script>
                        	perfil();
                      	function perfil() {

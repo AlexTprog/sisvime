@@ -14,11 +14,11 @@ public class WebConfiguration implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         WebMvcConfigurer.super.addResourceHandlers(registry);
-//        registry.addResourceHandler("/personal/**").
-//                addResourceLocations("/imagen/personal/");
-//        registry.addResourceHandler("/paciente/**").
-//                addResourceLocations("/imagen/paciente/");
-//        registry.addResourceHandler("/vehiculo/**").
-//                addResourceLocations("/imagen/vehiculo/");
+        registry.addResourceHandler("/personal/**").
+                addResourceLocations("/imagen/personal/");
+        registry.addResourceHandler("/paciente/**").
+                addResourceLocations("/imagen/paciente/");
+        registry.addResourceHandler("/vehiculo/**").
+                addResourceLocations("/imagen/vehiculo/");
     }
 }

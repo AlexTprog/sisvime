@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/ubigeo")
+@RequestMapping("/views/ubigeo")
 public class UbigeoController {
 
     @GetMapping("/verubigeo")
     public String ubigeo() {
-        return "/ubigeo/listaubigeo";
+        return "/views/ubigeo/listaubigeo";
     }
 
 }
