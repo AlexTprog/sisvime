@@ -36,6 +36,10 @@ public class Usuario {
         perfiles.add(tempPerfil);
     }
 
+    public Usuario() {
+        this.estatus = 1;//ACTIVADO POR DEFECTO
+    }
+
     @Override
     public String toString() {
         return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email

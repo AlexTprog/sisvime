@@ -100,10 +100,10 @@
                                 Graficos
                                 <span class="badge badge-primary-soft text-primary ml-auto"></span>
                             </a>
-                            <a class="nav-link" href="account-notifications.html">
-                                Notificaciones
-                                <span class="badge badge-primary-soft text-primary ml-auto"></span>
-                            </a>
+                            <!--                            <a class="nav-link" href="account-notifications.html">-->
+                            <!--                                Notificaciones-->
+                            <!--                                <span class="badge badge-primary-soft text-primary ml-auto"></span>-->
+                            <!--                            </a>-->
                         </nav>
                     </div>
 
@@ -115,29 +115,6 @@
                     </a>
                     <div class="collapse" id="pagesCollapseError" data-parent="#accordionSidenavPagesMenu">
                         <nav id="calendariosvisitasmedica" class="sidenav-menu-nested nav">
-                            <a class="nav-link" href="/views/brigada/createbrigada">
-                                Programar Visita Medica
-                                <span class="badge badge-primary-soft text-primary ml-auto"></span>
-                            </a>
-                            <a class="nav-link" href="/views/brigada/listbrigadamedica">
-                                Visita Medica
-                                <span class="badge badge-primary-soft text-primary ml-auto"></span>
-                            </a>
-                            <a class="nav-link" href="/calendarbrigada">
-                                Calendario
-                                <span class="badge badge-primary-soft text-primary ml-auto"></span>
-                            </a>
-
-                        </nav>
-                    </div>
-                    <a id="calendariosbrigadasmedicas" class="nav-link collapsed" href="javascript:void(0);"
-                       data-toggle="collapse" data-target="#pagesCollapseKnowledgeBase" aria-expanded="false"
-                       aria-controls="pagesCollapseKnowledgeBase">
-                        Programacion Brigada
-                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="pagesCollapseKnowledgeBase" data-parent="#accordionSidenavPagesMenu">
-                        <nav id="calendariosbrigadasmedica" class="sidenav-menu-nested nav">
                             <a class="nav-link" href="/views/visitamed/createvisita">
                                 Programar Brigada
                                 <span class="badge badge-primary-soft text-primary ml-auto"></span>
@@ -150,6 +127,54 @@
                                 Calendario
                                 <span class="badge badge-primary-soft text-primary ml-auto"></span>
                             </a>
+                            <!--                            <a class="nav-link" href="/views/brigada/createbrigada">-->
+                            <!--                                Programar Visita Medica-->
+                            <!--                                <span class="badge badge-primary-soft text-primary ml-auto"></span>-->
+                            <!--                            </a>-->
+                            <!--                            <a class="nav-link" href="/views/brigada/listbrigadamedica">-->
+                            <!--                                Visita Medica-->
+                            <!--                                <span class="badge badge-primary-soft text-primary ml-auto"></span>-->
+                            <!--                            </a>-->
+                            <!--                            <a class="nav-link" href="/calendarbrigada">-->
+                            <!--                                Calendario-->
+                            <!--                                <span class="badge badge-primary-soft text-primary ml-auto"></span>-->
+                            <!--                            </a>-->
+
+                        </nav>
+                    </div>
+                    <a id="calendariosbrigadasmedicas" class="nav-link collapsed" href="javascript:void(0);"
+                       data-toggle="collapse" data-target="#pagesCollapseKnowledgeBase" aria-expanded="false"
+                       aria-controls="pagesCollapseKnowledgeBase">
+                        Programacion Brigada
+                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="pagesCollapseKnowledgeBase" data-parent="#accordionSidenavPagesMenu">
+                        <nav id="calendariosbrigadasmedica" class="sidenav-menu-nested nav">
+
+                            <a class="nav-link" href="/views/brigada/createbrigada">
+                                Programar Visita Medica
+                                <span class="badge badge-primary-soft text-primary ml-auto"></span>
+                            </a>
+                            <a class="nav-link" href="/views/brigada/listbrigadamedica">
+                                Visita Medica
+                                <span class="badge badge-primary-soft text-primary ml-auto"></span>
+                            </a>
+                            <a class="nav-link" href="/calendarbrigada">
+                                Calendario
+                                <span class="badge badge-primary-soft text-primary ml-auto"></span>
+                            </a>
+                            <!--                            <a class="nav-link" href="/views/visitamed/createvisita">-->
+                            <!--                                Programar Brigada-->
+                            <!--                                <span class="badge badge-primary-soft text-primary ml-auto"></span>-->
+                            <!--                            </a>-->
+                            <!--                            <a class="nav-link" href="/views/visitamed/listvisitamedica">-->
+                            <!--                                Brigada-->
+                            <!--                                <span class="badge badge-primary-soft text-primary ml-auto"></span>-->
+                            <!--                            </a>-->
+                            <!--                            <a class="nav-link" href="/calendarvisitamedica">-->
+                            <!--                                Calendario-->
+                            <!--                                <span class="badge badge-primary-soft text-primary ml-auto"></span>-->
+                            <!--                            </a>-->
 
                         </nav>
                     </div>
@@ -331,18 +356,18 @@
             </a>
         </div>
     </div>
-    <!-- ACA PODEMOS VER QUIEN SE A LOGUEADO LA FINALIDAD ES VER SU NOMBRE Y APELLIDO -->
-<!--    <div class="sidenav-footer">-->
-<!--        <div class="sidenav-footer-content">-->
-<!--            <div class="sidenav-footer-subtitle">Logged in as:</div>-->
-<!--            <div sec:authorize="isAuthenticated()">-->
-<!--                &lt;!&ndash;  <span class="text-light">Bienvenido</span>&nbsp;<span class="text-light" sec:authentication="name"></span>&nbsp;&ndash;&gt;-->
-<!--                <span th:if="${session.usuario != null}" class="text-dark"-->
-<!--                      th:text="'Bienvenido ' + ${session.usuario.nombre}"></span>&nbsp;-->
+<!--     ACA PODEMOS VER QUIEN SE A LOGUEADO LA FINALIDAD ES VER SU NOMBRE Y APELLIDO-->
+        <div class="sidenav-footer">
+            <div class="sidenav-footer-content">
+                <div class="sidenav-footer-subtitle">Logged in as:</div>
+                <div sec:authorize="isAuthenticated()">
+                    <!--  <span class="text-light">Bienvenido</span>&nbsp;<span class="text-light" sec:authentication="name"></span>&nbsp;-->
+                    <span th:if="${session.usuario != null}" class="text-dark"
+                          th:text="'Bienvenido ' + ${session.usuario.nombre}"></span>&nbsp;
 
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+                </div>
+            </div>
+        </div>
     <script>
                        	perfil();
                      	function perfil() {
@@ -446,7 +471,5 @@
 									
 								}
 							}
-
-
     </script>
 </nav>

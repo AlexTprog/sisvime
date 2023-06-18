@@ -94,9 +94,13 @@ public class DatabaseInitializer {
             admin.setPerfil("ADMIN");
             perfilesDao.save(admin);
 
-            var user = new Perfil();
-            user.setPerfil("USER");
-            perfilesDao.save(user);
+            var paciente = new Perfil();
+            paciente.setPerfil("PACIENTE");
+            perfilesDao.save(paciente);
+
+            var doctor = new Perfil();
+            doctor.setPerfil("DOCTOR");
+            perfilesDao.save(doctor);
         }
     }
 

@@ -9,7 +9,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>SISVIME</title>
-    <link href="css/styles.css" rel="stylesheet"/>
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
           crossorigin="anonymous"/>
 
@@ -21,11 +21,11 @@
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.27.0/feather.min.js"
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/fullcalendar/lib/main.css"/>
+    <link rel="stylesheet" th:href="@{/fullcalendar/lib/main.css}"/>
 
     <title></title>
     <script type="text/javascript" src="jquery-1.12.0.min.js"></script>
-    <script type="text/javascript" src="dist/Chart.bundle.min.js"></script>
+    <script type="text/javascript" src="/dist/Chart.bundle.min.js"></script>
 
 </head>
 
@@ -274,13 +274,13 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
-<script src="js/scripts.js"></script>
+<script th:src="@{/js/scripts.js}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" crossorigin="anonymous"></script>
-<script src="demo/chart-area-demo.js"></script>
-<script src="demo/chart-bar-demo.js"></script>
+<script th:src="@{/demo/chart-area-demo.js}"></script>
+<script th:src="@{/demo/chart-bar-demo.js}"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-<script src="assets/demo/datatables-demo.js"></script>
+<script th:src="@{/demo/datatables-demo.js}"></script>
 <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js" crossorigin="anonymous"></script>
 <script src="demo/date-range-picker-demo.js"></script>

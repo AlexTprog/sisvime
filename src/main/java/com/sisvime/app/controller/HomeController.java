@@ -1,6 +1,5 @@
 package com.sisvime.app.controller;
 
-
 import com.sisvime.app.models.Dao.IPerfilesDao;
 import com.sisvime.app.models.Service.IUsuarioService;
 import com.sisvime.app.models.entity.Usuario;
@@ -29,15 +28,16 @@ public class HomeController {
     @Autowired
     private IPerfilesDao perfilesDao;
 
-
     @GetMapping("/")
-    public String home(Model model) {
+    public String home(Model model, HttpSession session) {
+        if (session.getAttribute("usuario") == null) {
+            return "login";
+        }
         return "home";
-
     }
 
     @GetMapping("/calendarbrigada")
-    public String brigada(Model model) {
+    public String brigada(Authentication authentication, HttpSession session) {
         return "/calendarbrigada";
 
     }
@@ -75,19 +75,14 @@ public class HomeController {
     public String mostrarIndex(Authentication authentication, HttpSession session) {
         String username = authentication.getName();
 
-        System.out.println("Nombre de Usuario: " + username);
-
         for (GrantedAuthority rol : authentication.getAuthorities()) {
             System.out.println("ROL: " + rol.getAuthority());
         }
 
         if (session.getAttribute("usuario") == null) {
-            Usuario usuario = serviceUsuario.buscarPorUsername(username);
-            usuario.setPassword(null);
-            System.out.println("Usuario: " + usuario);
+            var usuario = serviceUsuario.buscarPorUsername(username);
             session.setAttribute("usuario", usuario);
         }
-
         return "redirect:/";
     }
 
@@ -98,14 +93,14 @@ public class HomeController {
 
     @PostMapping("/signup")
     public String guardarRegistro(Usuario usuario, RedirectAttributes attributes) {
-        String pwdPlano = usuario.getPassword();
-        String pwdEncriptado = passwordEncoder.encode(pwdPlano);
+        var pwdPlano = usuario.getPassword();
+        var pwdEncriptado = passwordEncoder.encode(pwdPlano);
         usuario.setPassword(pwdEncriptado);
 
         usuario.setEstatus(1);// Activado por defecto
 
         // Creamos el Perfil que le asignaremos al usuario nuevo-ACA OCURRE EL PROBLEMA
-        var perfil = perfilesDao.getReferenceById(1);
+        var perfil = perfilesDao.getReferenceById(2);
 
         usuario.agregar(perfil);
         serviceUsuario.guardar(usuario);

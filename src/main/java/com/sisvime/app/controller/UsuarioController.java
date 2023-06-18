@@ -67,10 +67,8 @@ public class UsuarioController {
     @GetMapping(value = "/veruser/{id}")
     public String ver(@PathVariable(value = "id") int id, Model model) {
         Usuario usuario = usuarioservice.buscarporId(id);
-
         model.addAttribute("usuario", usuario);
         model.addAttribute("titulo", "Detalle del Usuario");
-
         return "/views/usuario/verusuario";
     }
 

@@ -15,12 +15,15 @@ import java.io.IOException;
 public class LoginSuccessMessage extends SimpleUrlAuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(
-            HttpServletRequest request, HttpServletResponse response,
+            HttpServletRequest request, 
+            HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
         SessionFlashMapManager fManager = new SessionFlashMapManager();
         FlashMap fMap = new FlashMap();
         fMap.put("success", "Bienvenido ,Ha iniciado Sesion con exito");
         fManager.saveOutputFlashMap(fMap, request, response);
+        response.sendRedirect("/index");
         super.onAuthenticationSuccess(request, response, authentication);
+        return;    
     }
 }
