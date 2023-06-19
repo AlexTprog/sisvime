@@ -30,9 +30,12 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model, HttpSession session) {
+
         if (session.getAttribute("usuario") == null) {
             return "login";
         }
+        var usuario = (Usuario) session.getAttribute("usuario");
+        model.addAttribute("usuario", session.getAttribute("usuario"));
         return "home";
     }
 

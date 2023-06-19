@@ -1,6 +1,5 @@
 package com.sisvime.app.seeds;
 
-
 import com.sisvime.app.models.Dao.*;
 import com.sisvime.app.models.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +41,7 @@ public class DatabaseInitializer {
             IMedicamentoDao medicamentoDao,
             IHoratrabajoDao horatrabajoDao,
             IPersonaDao personaDao,
-            IVehiculoDao vehiculoDao
-    ) {
+            IVehiculoDao vehiculoDao) {
         this.encoder = encoder;
         this.usuarioDao = usuarioDao;
         this.perfilesDao = perfilesDao;
@@ -85,7 +83,6 @@ public class DatabaseInitializer {
         }
     }
 
-
     private void initPerfil() {
         var countPerfiles = perfilesDao.count();
 
@@ -108,6 +105,10 @@ public class DatabaseInitializer {
         var countUsuarios = usuarioDao.count();
         if (countUsuarios <= 0) {
             var userAdmin = createUserAdmin();
+            var userPaciente = createUserPaciente();
+            var userDoctor = createUserDoctor();
+            usuarioDao.save(userPaciente);
+            usuarioDao.save(userDoctor);
             usuarioDao.save(userAdmin);
         }
     }
@@ -122,7 +123,37 @@ public class DatabaseInitializer {
         userAdmin.setApellido("torre");
         userAdmin.setEmail("alex@mail.com");
         userAdmin.setPerfiles(perfils);
-        userAdmin.setEstatus(1);//ACTIVE
+        userAdmin.setEstatus(1);// ACTIVE
+        userAdmin.setPassword(encoder.encode("123qwe"));
+        return userAdmin;
+    }
+
+    private Usuario createUserPaciente() {
+        var userAdmin = new Usuario();
+        var admin = perfilesDao.getReferenceById(2);
+        var perfils = new ArrayList<Perfil>();
+        perfils.add(admin);
+        userAdmin.setNombre("paciente");
+        userAdmin.setUsername("paciente");
+        userAdmin.setApellido("paciente");
+        userAdmin.setEmail("paciente@mail.com");
+        userAdmin.setPerfiles(perfils);
+        userAdmin.setEstatus(1);// ACTIVE
+        userAdmin.setPassword(encoder.encode("123qwe"));
+        return userAdmin;
+    }
+
+    private Usuario createUserDoctor() {
+        var userAdmin = new Usuario();
+        var admin = perfilesDao.getReferenceById(3);
+        var perfils = new ArrayList<Perfil>();
+        perfils.add(admin);
+        userAdmin.setNombre("doctor");
+        userAdmin.setUsername("doctor");
+        userAdmin.setApellido("doctor");
+        userAdmin.setEmail("doctor@mail.com");
+        userAdmin.setPerfiles(perfils);
+        userAdmin.setEstatus(1);// ACTIVE
         userAdmin.setPassword(encoder.encode("123qwe"));
         return userAdmin;
     }
@@ -179,8 +210,7 @@ public class DatabaseInitializer {
                     new Hora(LocalTime.of(15, 30, 0)),
                     new Hora(LocalTime.of(16, 0, 0)),
                     new Hora(LocalTime.of(16, 30, 0)),
-                    new Hora(LocalTime.of(17, 0, 0))
-            );
+                    new Hora(LocalTime.of(17, 0, 0)));
             horaDao.saveAll(horas);
         }
     }
@@ -217,19 +247,19 @@ public class DatabaseInitializer {
     private void initCitas() {
         var countCitas = citaDao.count();
         if (countCitas <= 0) {
-            //var paciente = pacienteDao.findById(1L).orElseThrow();
+            // var paciente = pacienteDao.findById(1L).orElseThrow();
             var paciente = pacienteDao.findByNombre("Alexander");
-//            var doctor = personaDao.findById(1L).orElseThrow();
+            // var doctor = personaDao.findById(1L).orElseThrow();
             var doctor = (List<Personal>) personaDao.findAll();
-//            var hora = horaDao.findById(1).orElseThrow();
+            // var hora = horaDao.findById(1).orElseThrow();
             var hora = (List<Hora>) horaDao.findAll();
 
             var cita1 = new Cita();
-//            cita1.setPac(paciente);
+            // cita1.setPac(paciente);
             cita1.setPac(paciente.get(0));
-//            cita1.setEsp(doctor.getEspec().getNomespecialidad());
+            // cita1.setEsp(doctor.getEspec().getNomespecialidad());
             cita1.setEsp(doctor.get(0).getEspec().getNomespecialidad());
-//            cita1.setIdhora(hora);
+            // cita1.setIdhora(hora);
             cita1.setIdhora(hora.get(0));
             cita1.setFecha(new Date());
             cita1.setEstado("ABC ABC ABC");
