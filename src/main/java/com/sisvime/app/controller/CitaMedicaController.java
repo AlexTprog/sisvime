@@ -1,11 +1,12 @@
 package com.sisvime.app.controller;
 
-
 import com.sisvime.app.models.Service.*;
 import com.sisvime.app.models.entity.Cita;
 import com.sisvime.app.models.entity.Enfermedad;
 import com.sisvime.app.models.entity.Hora;
 import com.sisvime.app.models.entity.Medicamento;
+import com.sisvime.app.models.entity.Usuario;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/views/citas")
@@ -34,7 +37,6 @@ public class CitaMedicaController {
     @Autowired
     private IMedicamentoService medicamentoservice;
 
-
     @GetMapping("/reservacitas")
     public String listarcita(Model model) {
         var listcita = citaservice.listartodos();
@@ -44,7 +46,7 @@ public class CitaMedicaController {
         return "/views/citas/listareservacita";
     }
 
-    @GetMapping(value = "/visitalista", produces = {"application/json"})
+    @GetMapping(value = "/visitalista", produces = { "application/json" })
     public @ResponseBody List<Cita> listarCitas() {
         return citaservice.listartodos();
     }
@@ -83,28 +85,32 @@ public class CitaMedicaController {
 
         model.addAttribute("cita", cita);
 
-
         return "/views/citas/atendercita";
     }
 
-//	@GetMapping(value = "/atendercita/{id}")
-//	public String editar(@PathVariable(value = "id") int id, Model model) {
-//		
-//		Cita cita =citaservice.buscarporId(id);
-//
-//		
-//		model.addAttribute("titulo", "Formulario: Atender Cita");
-//		model.addAttribute("cita", cita);
-//		
-//		return "/views/citas/AtenderCita";
-//		
-//	}
+    // @GetMapping(value = "/atendercita/{id}")
+    // public String editar(@PathVariable(value = "id") int id, Model model) {
+    //
+    // Cita cita =citaservice.buscarporId(id);
+    //
+    //
+    // model.addAttribute("titulo", "Formulario: Atender Cita");
+    // model.addAttribute("cita", cita);
+    //
+    // return "/views/citas/AtenderCita";
+    //
+    // }
 
     @PostMapping("/savereservacita")
-    public String guardar(@ModelAttribute Cita cita, RedirectAttributes attribute, BindingResult result) {
+    public String guardar(@ModelAttribute Cita cita,
+            RedirectAttributes attribute,
+            BindingResult result,
+            HttpSession session) {
         citaservice.guardar(cita);
         attribute.addFlashAttribute("success", "Reserva de Cita Medica");
         System.out.println("Reserva de Cita Medica Reservada");
+
+        emailService.SendRegisterCite(cita.getPac().getCorreo(), cita.getPac().getNombre());
         return "redirect:/views/citas/reservacitas";
     }
 
@@ -113,6 +119,5 @@ public class CitaMedicaController {
         citaservice.eliminar(idcita);
         return "redirect:/views/citas/listareservacita";
     }
-
 
 }

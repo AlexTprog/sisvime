@@ -1,7 +1,9 @@
 package com.sisvime.app.controller;
 
+import com.sisvime.app.models.Dao.IPacienteDao;
 import com.sisvime.app.models.Dao.IPerfilesDao;
 import com.sisvime.app.models.Service.IUsuarioService;
+import com.sisvime.app.models.entity.Paciente;
 import com.sisvime.app.models.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,11 +24,12 @@ public class HomeController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Autowired
     private IUsuarioService serviceUsuario;
     @Autowired
     private IPerfilesDao perfilesDao;
+    @Autowired
+    private IPacienteDao pacienteDao;
 
     @GetMapping("/")
     public String home(Model model, HttpSession session) {
@@ -102,11 +105,16 @@ public class HomeController {
 
         usuario.setEstatus(1);// Activado por defecto
 
-        // Creamos el Perfil que le asignaremos al usuario nuevo-ACA OCURRE EL PROBLEMA
         var perfil = perfilesDao.getReferenceById(2);
 
         usuario.agregar(perfil);
         serviceUsuario.guardar(usuario);
+        // Crear Paciente
+        var paciente = new Paciente();
+        paciente.setApellido_pa(usuario.getApellido());
+        paciente.setNombre(usuario.getNombre());
+        paciente.setCorreo(usuario.getEmail());
+        pacienteDao.save(paciente);
         attributes.addFlashAttribute("msg", "El registro fue guardado correctamente!");
 
         return "redirect:/views/usuario/index";

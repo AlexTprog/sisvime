@@ -247,21 +247,16 @@ public class DatabaseInitializer {
     private void initCitas() {
         var countCitas = citaDao.count();
         if (countCitas <= 0) {
-            // var paciente = pacienteDao.findById(1L).orElseThrow();
             var paciente = pacienteDao.findByNombre("Alexander");
-            // var doctor = personaDao.findById(1L).orElseThrow();
             var doctor = (List<Personal>) personaDao.findAll();
-            // var hora = horaDao.findById(1).orElseThrow();
             var hora = (List<Hora>) horaDao.findAll();
 
             var cita1 = new Cita();
-            // cita1.setPac(paciente);
             cita1.setPac(paciente.get(0));
-            // cita1.setEsp(doctor.getEspec().getNomespecialidad());
             cita1.setEsp(doctor.get(0).getEspec().getNomespecialidad());
-            // cita1.setIdhora(hora);
             cita1.setIdhora(hora.get(0));
             cita1.setFecha(new Date());
+            cita1.setMed("Manuel");
             cita1.setEstado("ABC ABC ABC");
             citaDao.save(cita1);
         }

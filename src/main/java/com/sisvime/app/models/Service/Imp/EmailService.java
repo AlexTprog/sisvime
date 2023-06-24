@@ -46,13 +46,12 @@ public class EmailService implements IEmailService {
 
             var context = new Context();
             context.setVariable("nombreUsuario",UserName);
-
-            String content = templateEngine.process("register-cite", context);
+            var content = templateEngine.process("register-cite", context);
             helper.setText(content, true);
 
             mailSender.send(message);
         } catch (Exception e) {
-
+            System.out.println(e);
         }
 
     }
