@@ -9,6 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.security.SecureRandom;
 import java.util.Date;
 
 @Entity
@@ -17,12 +18,13 @@ import java.util.Date;
 @Setter
 public class Paciente implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     @Id
     @Column(name = "pac_nsa")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
+    private String nsa;
 
     @NotNull
     @Column(name = "pac_dni")
@@ -106,6 +108,16 @@ public class Paciente implements Serializable {
     @Column(name = "pac_enfermedad")
     private String enfermedad;
 
+    public Paciente() {
+        this.nsa = generateNsa();
+    }
+
+    private String generateNsa() {
+        SecureRandom secureRandom = new SecureRandom();
+        int num = secureRandom.nextInt(900000) + 100000;
+
+        return String.valueOf(num);
+    }
 
     @Override
     public String toString() {
@@ -127,6 +139,4 @@ public class Paciente implements Serializable {
                 + ", getEnfermedad()=" + getEnfermedad() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
                 + ", toString()=" + super.toString() + "]";
     }
-
-
 }

@@ -9,10 +9,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.security.SecureRandom;
 import java.util.Date;
 
 @Entity
-@Table(name = "personales")
+@Table(name = "personal")
 @Getter
 @Setter
 public class Personal implements Serializable {
@@ -21,7 +22,8 @@ public class Personal implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private static final long serialVersionUID = 1L;
+    @Column
+    private String nsa;
 
     @NotNull
     @Column(name = "per_dni")
@@ -80,7 +82,9 @@ public class Personal implements Serializable {
     public Personal() {
     }
 
-    public Personal(String dni, String nombre, String apellidopat, String apellidomat, String sexo, Date fechanacimiento, String correo, String celular, Especialidad espec) {
+    public Personal(String dni, String nombre, String apellidopat, String apellidomat, String sexo,
+            Date fechanacimiento, String correo, String celular, Especialidad espec) {
+        this.nsa = generateNsa();
         this.dni = dni;
         this.nombre = nombre;
         this.apellidopat = apellidopat;
@@ -92,6 +96,13 @@ public class Personal implements Serializable {
         this.espec = espec;
     }
 
+    private String generateNsa() {
+        SecureRandom secureRandom = new SecureRandom();
+        int num = secureRandom.nextInt(900000) + 100000;
+
+        return String.valueOf(num);
+    }
+
     @Override
     public String toString() {
         return "Personal [id=" + id + ", dni=" + dni + ", nombre=" + nombre + ", apellidopat=" + apellidopat
@@ -99,6 +110,5 @@ public class Personal implements Serializable {
                 + ", estadocivil=" + estadocivil + ", correo=" + correo + ", celular=" + celular + ", telefonofijo="
                 + telefonofijo + ", direccion=" + direccion + ", espec=" + espec + ", foto=" + foto + "]";
     }
-
 
 }

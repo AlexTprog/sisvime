@@ -14,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -47,7 +46,8 @@ public class PersonaController {
         Personal personal = personaservice.buscarporId(idver);
 
         model.addAttribute("personal", personal);
-        model.addAttribute("titulo", "Detalle del Personal Medico: " + ' ' + personal.getNombre() + ' ' + personal.getApellidopat());
+        model.addAttribute("titulo",
+                "Detalle del Personal Medico: " + ' ' + personal.getNombre() + ' ' + personal.getApellidopat());
 
         return "/views/personal/ver";
     }
@@ -63,7 +63,7 @@ public class PersonaController {
     /**
      * LISTA JSON DE PERSONAL
      */
-    @GetMapping(value = "/listarpersonal", produces = {"application/json"})
+    @GetMapping(value = "/listarpersonal", produces = { "application/json" })
     public @ResponseBody List<Personal> cargarPersonal() {
         return personaservice.listartodos();
     }
@@ -71,21 +71,18 @@ public class PersonaController {
     @GetMapping("/create")
     public String crear(Model model) {
         Personal personal = new Personal();
-        List<Especialidad> listespecialidades = especialidadservice.findAll();
-        //List<Genero> listgeneros=generoservice.findAll();
-        //List<Civil> listciviles=civilservice.findAll();
+        List<Especialidad> listespecialidades = especialidadservice.findAll();        
         model.addAttribute("titulo", "Formulario: Nuevo Personal Medico");
         model.addAttribute("personal", personal);
-        model.addAttribute("especialidades", listespecialidades);
-        //model.addAttribute("generos", listgeneros);
-        //model.addAttribute("civiles", listciviles);
+        model.addAttribute("especialidades", listespecialidades);        
         return "/views/personal/createper";
     }
 
-
     @PostMapping("/saveper")
-    public String guardar(@Valid @ModelAttribute Personal personal, BindingResult result, Model model, @RequestParam("file") MultipartFile foto,
-                          RedirectAttributes attribute) {
+    public String guardar(@Valid @ModelAttribute Personal personal, BindingResult result, Model model,
+            @RequestParam("file") MultipartFile foto,
+            RedirectAttributes attribute) {
+
         List<Especialidad> listespecialidades = especialidadservice.findAll();
         if (result.hasErrors()) {
             model.addAttribute("titulo", "Formulario: Nuevo Personal Medico");
@@ -95,7 +92,7 @@ public class PersonaController {
         }
 
         if (!foto.isEmpty()) {
-            //Path directorioImagenes = Paths.get("src//main//resources//static/img");
+            // Path directorioImagenes = Paths.get("src//main//resources//static/img");
             String rutaAbosluta = "/imagen/personal";
             try {
                 byte[] bytesImg = foto.getBytes();
@@ -112,18 +109,13 @@ public class PersonaController {
         return "redirect:/views/personal/listarper";
     }
 
-
     @GetMapping(value = "/editper/{id}")
     public String editar(@PathVariable(value = "id") Long idpersonal, Model model) {
         Personal personal = personaservice.buscarporId(idpersonal);
         List<Especialidad> listespecialidades = especialidadservice.findAll();
-        //List<Genero> listgeneros=generoservice.findAll();
-        //List<Civil> listciviles=civilservice.findAll();
         model.addAttribute("titulo", "Formulario: Editar Personal Medico");
         model.addAttribute("personal", personal);
-        model.addAttribute("especialidades", listespecialidades);
-        //model.addAttribute("generos", listgeneros);
-        //model.addAttribute("civiles", listciviles);
+        model.addAttribute("especialidades", listespecialidades);        
         return "/views/personal/createper";
     }
 
@@ -133,13 +125,12 @@ public class PersonaController {
         return "redirect:/views/personal/listarper";
     }
 
-    //    List horarios ocupados personal
+    // List horarios ocupados personal
 
-    @GetMapping(value = "/AvalibleTimes/{name}/{date}", produces = {"application/json"})
+    @GetMapping(value = "/AvalibleTimes/{name}/{date}", produces = { "application/json" })
     public @ResponseBody List<Hora> AvalibleTimes(
             @PathVariable(value = "name") String name,
-            @PathVariable(value = "date") String date
-    ) throws ParseException {
+            @PathVariable(value = "date") String date) throws ParseException {
         var formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         var fechaAtencion = new Date();
 
@@ -161,5 +152,3 @@ public class PersonaController {
     }
 
 }
-
-

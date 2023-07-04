@@ -98,6 +98,10 @@ public class DatabaseInitializer {
             var doctor = new Perfil();
             doctor.setPerfil("DOCTOR");
             perfilesDao.save(doctor);
+
+            var jefeEnfemeria = new Perfil();
+            jefeEnfemeria.setPerfil("JEFA ENFERMERIA");
+            perfilesDao.save(jefeEnfemeria);
         }
     }
 
@@ -118,29 +122,29 @@ public class DatabaseInitializer {
         var admin = perfilesDao.getReferenceById(1);
         var perfils = new ArrayList<Perfil>();
         perfils.add(admin);
-        userAdmin.setNombre("alex");
-        userAdmin.setUsername("alex");
-        userAdmin.setApellido("torre");
-        userAdmin.setEmail("alex@mail.com");
+        userAdmin.setNombre("admin");
+        userAdmin.setUsername("admin");
+        userAdmin.setApellido("admin");
+        userAdmin.setEmail("admin@mail.com");
         userAdmin.setPerfiles(perfils);
         userAdmin.setEstatus(1);// ACTIVE
-        userAdmin.setPassword(encoder.encode("123qwe"));
+        userAdmin.setPassword(encoder.encode("admin"));
         return userAdmin;
     }
 
     private Usuario createUserPaciente() {
-        var userAdmin = new Usuario();
+        var userPaciente = new Usuario();
         var admin = perfilesDao.getReferenceById(2);
         var perfils = new ArrayList<Perfil>();
         perfils.add(admin);
-        userAdmin.setNombre("paciente");
-        userAdmin.setUsername("paciente");
-        userAdmin.setApellido("paciente");
-        userAdmin.setEmail("paciente@mail.com");
-        userAdmin.setPerfiles(perfils);
-        userAdmin.setEstatus(1);// ACTIVE
-        userAdmin.setPassword(encoder.encode("123qwe"));
-        return userAdmin;
+        userPaciente.setNombre("paciente");
+        userPaciente.setUsername("paciente");
+        userPaciente.setApellido("paciente");
+        userPaciente.setEmail("paciente@mail.com");
+        userPaciente.setPerfiles(perfils);
+        userPaciente.setEstatus(1);// ACTIVE
+        userPaciente.setPassword(encoder.encode("123qwe"));
+        return userPaciente;
     }
 
     private Usuario createUserDoctor() {

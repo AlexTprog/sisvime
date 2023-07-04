@@ -88,19 +88,6 @@ public class CitaMedicaController {
         return "/views/citas/atendercita";
     }
 
-    // @GetMapping(value = "/atendercita/{id}")
-    // public String editar(@PathVariable(value = "id") int id, Model model) {
-    //
-    // Cita cita =citaservice.buscarporId(id);
-    //
-    //
-    // model.addAttribute("titulo", "Formulario: Atender Cita");
-    // model.addAttribute("cita", cita);
-    //
-    // return "/views/citas/AtenderCita";
-    //
-    // }
-
     @PostMapping("/savereservacita")
     public String guardar(@ModelAttribute Cita cita,
             RedirectAttributes attribute,

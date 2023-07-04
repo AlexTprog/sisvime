@@ -100,7 +100,7 @@
                                         </tfoot>
                                         <tbody>
                                             <tr th:each="personal : ${personales}">
-                                                <td><a class="btn btn-primary btn-xs" th:href="@{/views/personal/verp/} + ${personal.id}" th:text="${personal.id}" ></a></td>
+                                                <td><a class="btn btn-primary btn-xs" th:href="@{/views/personal/verp/} + ${personal.id}" th:text="${personal.nsa}" ></a></td>
                                                 <td th:text="${personal.dni}"></td>
 												<td th:text="${personal.nombre}"></td>
 												<td th:text="${personal.apellidopat}"></td>
