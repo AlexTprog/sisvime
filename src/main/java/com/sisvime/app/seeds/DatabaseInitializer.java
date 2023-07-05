@@ -2,7 +2,8 @@ package com.sisvime.app.seeds;
 
 import com.sisvime.app.models.Dao.*;
 import com.sisvime.app.models.entity.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.sisvime.app.share.RolesType;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +30,6 @@ public class DatabaseInitializer {
     private final IPersonaDao personaDao;
     private final IVehiculoDao vehiculoDao;
 
-    @Autowired
     public DatabaseInitializer(
             BCryptPasswordEncoder encoder,
             IUsuarioDao usuarioDao,
@@ -88,18 +88,22 @@ public class DatabaseInitializer {
 
         if (countPerfiles <= 0) {
             var admin = new Perfil();
+            admin.setId(RolesType.ADMIN.getIndex());
             admin.setPerfil("ADMIN");
             perfilesDao.save(admin);
 
             var paciente = new Perfil();
+            paciente.setId(RolesType.PACIENTE.getIndex());
             paciente.setPerfil("PACIENTE");
             perfilesDao.save(paciente);
 
             var doctor = new Perfil();
+            doctor.setId(RolesType.DOCTOR.getIndex());
             doctor.setPerfil("DOCTOR");
             perfilesDao.save(doctor);
 
             var jefeEnfemeria = new Perfil();
+            jefeEnfemeria.setId(RolesType.JEFA_ENFERMERIA.getIndex());
             jefeEnfemeria.setPerfil("JEFA ENFERMERIA");
             perfilesDao.save(jefeEnfemeria);
         }
@@ -119,7 +123,7 @@ public class DatabaseInitializer {
 
     private Usuario createUserAdmin() {
         var userAdmin = new Usuario();
-        var admin = perfilesDao.getReferenceById(1);
+        var admin = perfilesDao.getReferenceById(RolesType.ADMIN.getIndex());
         var perfils = new ArrayList<Perfil>();
         perfils.add(admin);
         userAdmin.setNombre("admin");
@@ -134,32 +138,49 @@ public class DatabaseInitializer {
 
     private Usuario createUserPaciente() {
         var userPaciente = new Usuario();
-        var admin = perfilesDao.getReferenceById(2);
+        var paciente = perfilesDao.getReferenceById(RolesType.PACIENTE.getIndex());
         var perfils = new ArrayList<Perfil>();
-        perfils.add(admin);
-        userPaciente.setNombre("paciente");
-        userPaciente.setUsername("paciente");
+        perfils.add(paciente);
+        userPaciente.setNombre("Richard");
+        userPaciente.setUsername("Smith");
         userPaciente.setApellido("paciente");
-        userPaciente.setEmail("paciente@mail.com");
+        userPaciente.setEmail("r.ramirez@mail.com");        
         userPaciente.setPerfiles(perfils);
         userPaciente.setEstatus(1);// ACTIVE
         userPaciente.setPassword(encoder.encode("123qwe"));
+
         return userPaciente;
     }
 
     private Usuario createUserDoctor() {
-        var userAdmin = new Usuario();
-        var admin = perfilesDao.getReferenceById(3);
+        var userDoctor = new Usuario();
+        var doctor = perfilesDao.getReferenceById(RolesType.DOCTOR.getIndex());
         var perfils = new ArrayList<Perfil>();
-        perfils.add(admin);
-        userAdmin.setNombre("doctor");
-        userAdmin.setUsername("doctor");
-        userAdmin.setApellido("doctor");
-        userAdmin.setEmail("doctor@mail.com");
-        userAdmin.setPerfiles(perfils);
-        userAdmin.setEstatus(1);// ACTIVE
-        userAdmin.setPassword(encoder.encode("123qwe"));
-        return userAdmin;
+        perfils.add(doctor);
+        userDoctor.setNombre("Cesar");
+        userDoctor.setUsername("Cerda");
+        userDoctor.setApellido("Cerdita");
+        userDoctor.setEmail("ccerda@mail.com");
+        userDoctor.setPerfiles(perfils);
+        userDoctor.setEstatus(1);// ACTIVE
+        userDoctor.setPassword(encoder.encode("123qwe"));
+        return userDoctor;
+    }
+
+    private Usuario createUsuarioJefaEnfermera() {
+        var userEnfermera = new Usuario();
+        var jefaEnf = perfilesDao.getReferenceById(RolesType.JEFA_ENFERMERIA.getIndex());
+        var perfils = new ArrayList<Perfil>();
+        perfils.add(jefaEnf);
+
+        userEnfermera.setNombre("Rocio");
+        userEnfermera.setUsername("Velasquez");
+        userEnfermera.setApellido("Freyre");
+        userEnfermera.setEmail("rvelazquez@mail.com");
+        userEnfermera.setPerfiles(perfils);
+        userEnfermera.setEstatus(1);// ACTIVE
+        userEnfermera.setPassword(encoder.encode("123qwe"));
+        return userEnfermera;
     }
 
     private void initMedicamentos() {
@@ -224,8 +245,13 @@ public class DatabaseInitializer {
         if (countCitas <= 0) {
             var esp = especialidadDao.findById(1L).orElse(null);
             var doctor1 = new Personal(
-                    "12345678", "Manuel", "Perez", "Sanchez",
+                    "87654321", "Manuel", "Perez", "Sanchez",
                     "M", new Date(), "manuel@mail.com", "abc", esp);
+            doctor1.setFoto("perfil9.jpg");
+            doctor1.setDireccion("Villa");
+            doctor1.setEstadocivil("Casado");
+            doctor1.setTelefonofijo("014311212");
+            doctor1.setCelular("980441255");
             personaDao.save(doctor1);
         }
     }
@@ -236,14 +262,24 @@ public class DatabaseInitializer {
         if (countPacientes <= 0) {
             var pac1 = new Paciente();
             pac1.setDni("7654321");
-            pac1.setNombre("Alexander");
-            pac1.setApellido_pa("Torre");
-            pac1.setApellidoma("Arteaga");
+            pac1.setNombre("John");
+            pac1.setApellido_pa("Smith");
+            pac1.setApellidoma("Paredes");
             pac1.setParentesco("Padre");
             pac1.setFecha_nacimiento(new Date());
-            pac1.setDireccion("Mi casa");
-            pac1.setCorreo("alex@gmail.com");
-            pac1.setCelular("933855094");
+            pac1.setDireccion("Villa");
+            pac1.setCorreo("doe@gmail.com");
+            pac1.setCelular("912855091");
+            pac1.setTelefonofijo("2920983");
+            pac1.setDireccion("Villa");
+            pac1.setAltura("1.60");
+            pac1.setMasa("60");
+            pac1.setPeso("60");
+            pac1.setDescalergia("Alergica al polvo, estornuda y duerme mucho.");
+            pac1.setTitular("Tecnico");
+            pac1.setDireccion("Ate");
+            pac1.setEstadocivil("Soltero");
+            pac1.setFoto("iconouser.png");
             pacienteDao.save(pac1);
         }
     }
@@ -251,7 +287,7 @@ public class DatabaseInitializer {
     private void initCitas() {
         var countCitas = citaDao.count();
         if (countCitas <= 0) {
-            var paciente = pacienteDao.findByNombre("Alexander");
+            var paciente = pacienteDao.findByNombre("John");
             var doctor = (List<Personal>) personaDao.findAll();
             var hora = (List<Hora>) horaDao.findAll();
 
@@ -261,7 +297,7 @@ public class DatabaseInitializer {
             cita1.setIdhora(hora.get(0));
             cita1.setFecha(new Date());
             cita1.setMed("Manuel");
-            cita1.setEstado("ABC ABC ABC");
+            cita1.setEstado("Este paciente se encuentra delicado de salud");
             citaDao.save(cita1);
         }
     }

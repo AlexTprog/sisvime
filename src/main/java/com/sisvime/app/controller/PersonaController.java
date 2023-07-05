@@ -10,11 +10,14 @@ import com.sisvime.app.models.entity.Personal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -71,17 +74,17 @@ public class PersonaController {
     @GetMapping("/create")
     public String crear(Model model) {
         Personal personal = new Personal();
-        List<Especialidad> listespecialidades = especialidadservice.findAll();        
+        List<Especialidad> listespecialidades = especialidadservice.findAll();
         model.addAttribute("titulo", "Formulario: Nuevo Personal Medico");
         model.addAttribute("personal", personal);
-        model.addAttribute("especialidades", listespecialidades);        
+        model.addAttribute("especialidades", listespecialidades);
         return "/views/personal/createper";
     }
 
     @PostMapping("/saveper")
     public String guardar(@Valid @ModelAttribute Personal personal, BindingResult result, Model model,
             @RequestParam("file") MultipartFile foto,
-            RedirectAttributes attribute) {
+            RedirectAttributes attribute) throws FileNotFoundException {
 
         List<Especialidad> listespecialidades = especialidadservice.findAll();
         if (result.hasErrors()) {
@@ -92,11 +95,11 @@ public class PersonaController {
         }
 
         if (!foto.isEmpty()) {
-            // Path directorioImagenes = Paths.get("src//main//resources//static/img");
-            String rutaAbosluta = "/imagen/personal";
+            String rutaBase = ResourceUtils.getFile("classpath:").getAbsolutePath();
+            String rutaAbsoluta = rutaBase + "/static/imagen/personal";
             try {
                 byte[] bytesImg = foto.getBytes();
-                Path rutacompleta = Paths.get(rutaAbosluta + "/" + foto.getOriginalFilename());
+                Path rutacompleta = Paths.get(rutaAbsoluta + "/" + foto.getOriginalFilename());
                 Files.write(rutacompleta, bytesImg);
                 personal.setFoto(foto.getOriginalFilename());
             } catch (IOException e) {
@@ -115,7 +118,7 @@ public class PersonaController {
         List<Especialidad> listespecialidades = especialidadservice.findAll();
         model.addAttribute("titulo", "Formulario: Editar Personal Medico");
         model.addAttribute("personal", personal);
-        model.addAttribute("especialidades", listespecialidades);        
+        model.addAttribute("especialidades", listespecialidades);
         return "/views/personal/createper";
     }
 
