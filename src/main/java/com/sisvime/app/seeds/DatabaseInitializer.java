@@ -116,10 +116,12 @@ public class DatabaseInitializer {
             var userAdmin = createUserAdmin();
             var userPaciente = createUserPaciente();
             var userDoctor = createUserDoctor();
+            var userJEnf = createUserJEnf();
 
             usuarioDao.save(userPaciente);
             usuarioDao.save(userDoctor);
             usuarioDao.save(userAdmin);
+            usuarioDao.save(userJEnf);
         }
     }
 
@@ -167,6 +169,20 @@ public class DatabaseInitializer {
         userDoctor.setEstatus(1);// ACTIVE
         userDoctor.setPassword(encoder.encode("123qwe"));
         return userDoctor;
+    }
+    private Usuario createUserJEnf() {
+        var userJenf = new Usuario();
+        var jEnf = perfilesDao.getReferenceById(RolesType.JEFA_ENFERMERIA.getIndex());
+        var perfils = new ArrayList<Perfil>();
+        perfils.add(jEnf);
+        userJenf.setNombre("jefaEnf");
+        userJenf.setUsername("jefaEnf");
+        userJenf.setApellido("jefaEnf");
+        userJenf.setEmail("jefaEnf@mail.com");
+        userJenf.setPerfiles(perfils);
+        userJenf.setEstatus(1);// ACTIVE
+        userJenf.setPassword(encoder.encode("123qwe"));
+        return userJenf;
     }
 
     private void initMedicamentos() {

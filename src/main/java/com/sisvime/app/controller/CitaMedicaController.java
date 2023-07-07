@@ -49,7 +49,9 @@ public class CitaMedicaController {
 
     @GetMapping(value = "/visitalista", produces = { "application/json" })
     public @ResponseBody List<Cita> listarCitas() {
-        return citaservice.listartodos();
+        return citaservice.listartodos().stream()
+                .filter(p -> !p.getIsDelete())
+                .collect(Collectors.toList());
     }
 
     @GetMapping(value = "/vercita/{id}")
