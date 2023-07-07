@@ -22,7 +22,4 @@ public class Especialidad implements Serializable {
     @Column(name = "esp_especialidad")
     private String nomespecialidad;
 
-
-
-
 }

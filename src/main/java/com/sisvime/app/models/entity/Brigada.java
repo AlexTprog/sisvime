@@ -40,12 +40,12 @@ public class Brigada implements Serializable {
     @Column(name = "pro_obs")
     private String obs;
 
+    @Column
+    private String observacion;
+
     @Column(name = "pro_fecha")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
-
-
-
 
 }

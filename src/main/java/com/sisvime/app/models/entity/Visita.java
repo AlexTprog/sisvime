@@ -94,6 +94,7 @@ public class Visita implements Serializable {
     @Column(name = "pro_espchf")
     private String espchf;
 
-
+    @Column
+    private Boolean isFree = true;
 
 }

@@ -36,5 +36,11 @@ public class CitaServiceImpl implements ICitaService {
 
     }
 
+    @Override
+    public void softDelete(int id) {
+        var cita = buscarporId(id);
+        cita.setIsDelete(true);
+        guardar(cita);
+    }
 
 }

@@ -65,7 +65,6 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>NSA</th>
                                             <th>DNI</th>
                                             <th>Nombre</th>
                                             <th>Apellido Paterno </th>
@@ -80,7 +79,6 @@
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
-                                            <th>NSA</th>
                                             <th>DNI</th>
                                             <th>Nombre</th>
                                             <th>Apellido Paterno </th>
@@ -95,7 +93,6 @@
                                     <tbody>
                                         <tr th:each="horatrabajo :${horatrabajos}">
                                             <td th:text="${horatrabajo.id}"></td>
-                                            <td th:text="${horatrabajo.idper.nsa}"></td>
                                             <td th:text="${horatrabajo.idper.dni}"></td>
                                             <td th:text="${horatrabajo.idper.nombre}"></td>
                                             <td th:text="${horatrabajo.idper.apellidopat}"></td>

@@ -9,8 +9,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.security.SecureRandom;
 import java.util.Date;
+import java.util.Random;
 
 @Entity
 @Table(name = "personal")
@@ -19,11 +19,7 @@ import java.util.Date;
 public class Personal implements Serializable {
     @Id
     @Column(name = "per_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column
-    private String nsa;
 
     @NotNull
     @Column(name = "per_dni")
@@ -84,7 +80,7 @@ public class Personal implements Serializable {
 
     public Personal(String dni, String nombre, String apellidopat, String apellidomat, String sexo,
             Date fechanacimiento, String correo, String celular, Especialidad espec) {
-        this.nsa = generateNsa();
+        this.id = generateNsa();
         this.dni = dni;
         this.nombre = nombre;
         this.apellidopat = apellidopat;
@@ -96,11 +92,10 @@ public class Personal implements Serializable {
         this.espec = espec;
     }
 
-    private String generateNsa() {
-        SecureRandom secureRandom = new SecureRandom();
-        int num = secureRandom.nextInt(900000) + 100000;
-
-        return String.valueOf(num);
+    private Long generateNsa() {
+        Random random = new Random();
+        long num = random.nextInt(900000) + 100000;
+        return num;
     }
 
     @Override

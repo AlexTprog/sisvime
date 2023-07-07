@@ -103,7 +103,7 @@
                                         <tr th:each="paciente : ${pacientes}">
                                             <td><a class="btn btn-primary btn-xs"
                                                     th:href="@{/views/paciente/verpa/} + ${paciente.id}"
-                                                    th:text="${paciente.nsa}"></a></td>
+                                                    th:text="${paciente.id}"></a></td>
 
                                             <td th:text="${paciente.dni}"></td>
                                             <td th:text="${paciente.nombre}"></td>
@@ -173,7 +173,7 @@
 
     <!-- Alertas para Eliminar el Modal-->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="/funcionesp.js"></script>
+    <script th:src="@{/funcionesp.js}"></script>
 </body>
 
 </html>

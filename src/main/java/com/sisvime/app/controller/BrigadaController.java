@@ -2,6 +2,7 @@ package com.sisvime.app.controller;
 
 import com.sisvime.app.models.Service.IBrigadaService;
 import com.sisvime.app.models.Service.IPacienteService;
+import com.sisvime.app.models.Service.IVisitaService;
 import com.sisvime.app.models.entity.Brigada;
 import com.sisvime.app.models.entity.DistritoParentesco;
 import com.sisvime.app.models.entity.Paciente;
@@ -15,9 +16,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+//VISITA MEDICA
 @Controller
 @RequestMapping("/views/brigada")
 public class BrigadaController {
+
+    @Autowired
+    private IVisitaService visitaservice;
 
     @Autowired
     private IBrigadaService brigadaservice;
@@ -29,19 +34,20 @@ public class BrigadaController {
     public String listarbrigadas(Model model) {
 
         var listadobrigada = brigadaservice.listartodos();
-        model.addAttribute("titulo", "Lista de Brigada");
+        model.addAttribute("titulo", "Lista de Visitas Medicas");
         model.addAttribute("brigadas", listadobrigada);
 
         return "/views/brigada/brigmedlist";
     }
 
-    @GetMapping(value = "/brigadamedicalista", produces = {"application/json"})
+    @GetMapping(value = "/brigadamedicalista", produces = { "application/json" })
     public @ResponseBody List<Brigada> listarBrigadas() {
         return brigadaservice.listartodos();
     }
 
-    @GetMapping(value = "/distritoparentesco/{month}/{year}", produces = {"application/json"})
-    public @ResponseBody List<DistritoParentesco> distritoParentesco(@PathVariable String month, @PathVariable String year) {
+    @GetMapping(value = "/distritoparentesco/{month}/{year}", produces = { "application/json" })
+    public @ResponseBody List<DistritoParentesco> distritoParentesco(@PathVariable String month,
+            @PathVariable String year) {
         int number = 0;
         int numbery = 0;
         number = Integer.parseInt(month);
@@ -49,18 +55,19 @@ public class BrigadaController {
         return brigadaservice.distritoParentesco(number, numbery);
     }
 
-    @GetMapping(value = "/distritoparentescoactual", produces = {"application/json"})
+    @GetMapping(value = "/distritoparentescoactual", produces = { "application/json" })
     public @ResponseBody List<DistritoParentesco> distritoParentescoActual() {
         return brigadaservice.distritoParentescoActual();
     }
 
-    @GetMapping(value = "/titularactual", produces = {"application/json"})
+    @GetMapping(value = "/titularactual", produces = { "application/json" })
     public @ResponseBody List<TitularParentesco> titularParentescoActual() {
         return brigadaservice.titularParentescoActual();
     }
 
-    @GetMapping(value = "/titularparentesco/{month}/{year}", produces = {"application/json"})
-    public @ResponseBody List<TitularParentesco> titularParentesco(@PathVariable String month, @PathVariable String year) {
+    @GetMapping(value = "/titularparentesco/{month}/{year}", produces = { "application/json" })
+    public @ResponseBody List<TitularParentesco> titularParentesco(@PathVariable String month,
+            @PathVariable String year) {
         int number = 0;
         int numbery = 0;
         number = Integer.parseInt(month);
@@ -74,7 +81,8 @@ public class BrigadaController {
         Brigada brigada = brigadaservice.buscarporId(idver);
 
         model.addAttribute("brigada", brigada);
-        model.addAttribute("titulo", "Detalle de la Visita Medica : " + ' ' + brigada.getTipobrigada() + ' ' + brigada.getZonabrigada());
+        model.addAttribute("titulo",
+                "Detalle de la Visita Medica : " + ' ' + brigada.getTipobrigada() + ' ' + brigada.getZonabrigada());
 
         return "/views/brigada/verbrig";
     }
@@ -92,13 +100,21 @@ public class BrigadaController {
         return "/views/brigada/brigadamedicaform";
     }
 
-
     @PostMapping("/savebrigada")
     public String guardar(@ModelAttribute Brigada brigada, RedirectAttributes attribute, BindingResult result) {
 
         brigadaservice.guardar(brigada);
+        var allvisits = visitaservice.listartodos();
+        for (var visita : allvisits) {
+            if (visita.getHora().equals(brigada.getHoraini()) &&
+                    visita.getIsFree() &&
+                    visita.getFecha().compareTo(brigada.getFecha()) == 0) {
+                visita.setIsFree(false);
+                visitaservice.guardar(visita);
+                break;
+            }
+        }
         attribute.addFlashAttribute("success", "Brigada Guardado con exito");
-        System.out.println("Guardado con Exito la Brigada");
         return "redirect:/views/brigada/listbrigadamedica";
     }
 
@@ -111,14 +127,11 @@ public class BrigadaController {
         return "/views/brigada/brigadamedicaform";
     }
 
-
     @GetMapping("/deletebrigada/{id}")
     public String eliminar(@PathVariable("id") int idbrigada) {
 
         brigadaservice.eliminar(idbrigada);
-
         return "redirect:/views/brigada/brigmedlist";
     }
-
 
 }

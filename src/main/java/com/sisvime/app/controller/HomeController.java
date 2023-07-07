@@ -36,8 +36,7 @@ public class HomeController {
 
         if (session.getAttribute("usuario") == null) {
             return "login";
-        }
-        var usuario = (Usuario) session.getAttribute("usuario");
+        }        
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return "home";
     }

@@ -43,15 +43,15 @@
 								let re3 = new RegExp(val)
 
 								/*check if the item starts with the same letters as the text field value:*/
-								if ((arr[i].espec.nomespecialidad !== 'Chofer' && arr[i].espec.nomespecialidad !== 'Enfermera' && arr[i].espec.nomespecialidad !== 'Técnica en Enfermería') && (re3.test(arr[i].nsa) || arr[i].nombre.toUpperCase().includes(val.toUpperCase()))) {
+								if ((arr[i].espec.nomespecialidad !== 'Chofer' && arr[i].espec.nomespecialidad !== 'Enfermera' && arr[i].espec.nomespecialidad !== 'Técnica en Enfermería') && (re3.test(arr[i].id) || arr[i].nombre.toUpperCase().includes(val.toUpperCase()))) {
 									/*create a DIV element for each matching element:*/
 									b = document.createElement("DIV");
 									/*make the matching letters bold:*/
-									b.innerHTML = "<strong>" + arr[i].nsa + ' ' + "</strong>";
+									b.innerHTML = "<strong>" + arr[i].id + ' ' + "</strong>";
 									b.innerHTML += arr[i].nombre + ' ';
 									b.innerHTML += arr[i].apellidopat;
 									/*insert a input field that will hold the current array item's value:*/
-									b.innerHTML += "<input type='hidden' data-nombre='" + arr[i].nombre + "' data-apellidos='" + arr[i].apellidopat + ' ' + arr[i].apellidomat + "' data-img='" + arr[i].foto + " '  data-dni='" + arr[i].dni + "' data-especialidad='" + arr[i].espec.nomespecialidad + "' value='" + arr[i].nsa + "'>";
+									b.innerHTML += "<input type='hidden' data-nombre='" + arr[i].nombre + "' data-apellidos='" + arr[i].apellidopat + ' ' + arr[i].apellidomat + "' data-img='" + arr[i].foto + " '  data-dni='" + arr[i].dni + "' data-especialidad='" + arr[i].espec.nomespecialidad + "' value='" + arr[i].id + "'>";
 									/*execute a function when someone clicks on the item value (DIV element):*/
 									b.addEventListener("click", function (e) {
 										/*insert the value for the autocomplete text field:*/
@@ -66,7 +66,7 @@
 										lastname.value = this.getElementsByTagName("input")[0].dataset.apellidos;
 										dni.value = this.getElementsByTagName("input")[0].dataset.dni;
 										espec.value = this.getElementsByTagName("input")[0].dataset.especialidad;
-										imgDoctor.src = "/personal/" + this.getElementsByTagName("input")[0].dataset.img;
+										imgDoctor.src = "/imagen/personal/" + this.getElementsByTagName("input")[0].dataset.img;
 										/*close the list of autocompleted values,
 										(or any other open lists of autocompleted values:*/
 										closeAllLists();

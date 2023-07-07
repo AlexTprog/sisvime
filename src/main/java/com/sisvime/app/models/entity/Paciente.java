@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.security.SecureRandom;
 import java.util.Date;
+import java.util.Random;
 
 @Entity
 @Table(name = "pacientes")
@@ -19,12 +20,9 @@ import java.util.Date;
 public class Paciente implements Serializable {
 
     @Id
+    @NotNull
     @Column(name = "pac_nsa")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column
-    private String nsa;
 
     @NotNull
     @Column(name = "pac_dni")
@@ -109,14 +107,13 @@ public class Paciente implements Serializable {
     private String enfermedad;
 
     public Paciente() {
-        this.nsa = generateNsa();
+        this.id = generateNsa();
     }
 
-    private String generateNsa() {
-        SecureRandom secureRandom = new SecureRandom();
-        int num = secureRandom.nextInt(900000) + 100000;
-
-        return String.valueOf(num);
+    private Long generateNsa() {
+        Random random = new Random();
+        long num = random.nextInt(900000) + 100000;
+        return num;
     }
 
     @Override

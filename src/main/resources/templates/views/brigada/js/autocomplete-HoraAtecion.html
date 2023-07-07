@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+    <script type="text/javascript" th:fragment="javascript">
+        document.addEventListener("DOMContentLoaded", function (event) {
+            autcomplete_hora_atencion(document.getElementById("tipobrigada"));
+        });
+
+        function autcomplete_hora_atencion(input) {
+            var input_hora = document.getElementById("horaini");
+            var input_fecha = document.getElementById("fecha");
+            input.addEventListener("change", function (e) {
+                var val = this.value;
+                fetch("http://localhost:8083/views/visitamed/getallvisitas")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        let brigadas = data;
+                        input_hora.innerHTML = '';
+                        console.log(data)
+                        for (let i = 0; i < brigadas.length; i++) {
+                            console.log(brigadas[i])
+                            if (brigadas[i].obs == val &&
+                                brigadas[i].fecha == input_fecha.value &&
+                                brigadas[i].isFree) {
+                                let opcion = brigadas[i].hora
+                                let optionElement = document.createElement('option');
+                                optionElement.textContent = opcion;
+                                optionElement.value = opcion;
+                                input_hora.appendChild(optionElement)
+                            }
+                        }
+                    });
+            });
+        }
+    </script>
+
+</body>
+
+</html>

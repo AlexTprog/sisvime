@@ -63,7 +63,8 @@ public class DatabaseInitializer {
         initMedicamentos();
         initSpecialidad();
         initPacientes();
-        initDoctor();
+        // Personal
+        initPersonal();        
         initHoras();
         initVehiculos();
         initCitas();
@@ -115,6 +116,7 @@ public class DatabaseInitializer {
             var userAdmin = createUserAdmin();
             var userPaciente = createUserPaciente();
             var userDoctor = createUserDoctor();
+
             usuarioDao.save(userPaciente);
             usuarioDao.save(userDoctor);
             usuarioDao.save(userAdmin);
@@ -144,7 +146,7 @@ public class DatabaseInitializer {
         userPaciente.setNombre("Richard");
         userPaciente.setUsername("Smith");
         userPaciente.setApellido("paciente");
-        userPaciente.setEmail("r.ramirez@mail.com");        
+        userPaciente.setEmail("r.ramirez@mail.com");
         userPaciente.setPerfiles(perfils);
         userPaciente.setEstatus(1);// ACTIVE
         userPaciente.setPassword(encoder.encode("123qwe"));
@@ -165,22 +167,6 @@ public class DatabaseInitializer {
         userDoctor.setEstatus(1);// ACTIVE
         userDoctor.setPassword(encoder.encode("123qwe"));
         return userDoctor;
-    }
-
-    private Usuario createUsuarioJefaEnfermera() {
-        var userEnfermera = new Usuario();
-        var jefaEnf = perfilesDao.getReferenceById(RolesType.JEFA_ENFERMERIA.getIndex());
-        var perfils = new ArrayList<Perfil>();
-        perfils.add(jefaEnf);
-
-        userEnfermera.setNombre("Rocio");
-        userEnfermera.setUsername("Velasquez");
-        userEnfermera.setApellido("Freyre");
-        userEnfermera.setEmail("rvelazquez@mail.com");
-        userEnfermera.setPerfiles(perfils);
-        userEnfermera.setEstatus(1);// ACTIVE
-        userEnfermera.setPassword(encoder.encode("123qwe"));
-        return userEnfermera;
     }
 
     private void initMedicamentos() {
@@ -208,10 +194,34 @@ public class DatabaseInitializer {
             var odontologo = new Especialidad();
             odontologo.setNomespecialidad("Odontologo");
 
+            var enfermera = new Especialidad();
+            enfermera.setNomespecialidad("Enfermera");
+
+            var psicologo = new Especialidad();
+            psicologo.setNomespecialidad("Psicologo");
+
+            var nutricionista = new Especialidad();
+            nutricionista.setNomespecialidad("Nutricionista");
+
+            var chofer = new Especialidad();
+            chofer.setNomespecialidad("Chofer");
+
+            var tecnicaEnf = new Especialidad();
+            tecnicaEnf.setNomespecialidad("T\u00E9cnica en Enfermer\u00EDa");
+
+            var cirujano = new Especialidad();
+            cirujano.setNomespecialidad("Cirujano");
+
             especialidadDao.save(geriatra);
             especialidadDao.save(general);
             especialidadDao.save(especialista);
             especialidadDao.save(odontologo);
+            especialidadDao.save(enfermera);
+            especialidadDao.save(psicologo);
+            especialidadDao.save(nutricionista);
+            especialidadDao.save(chofer);
+            especialidadDao.save(tecnicaEnf);
+            especialidadDao.save(cirujano);
         }
     }
 
@@ -240,20 +250,53 @@ public class DatabaseInitializer {
         }
     }
 
-    private void initDoctor() {
-        var countCitas = personaDao.count();
-        if (countCitas <= 0) {
-            var esp = especialidadDao.findById(1L).orElse(null);
-            var doctor1 = new Personal(
-                    "87654321", "Manuel", "Perez", "Sanchez",
-                    "M", new Date(), "manuel@mail.com", "abc", esp);
-            doctor1.setFoto("perfil9.jpg");
-            doctor1.setDireccion("Villa");
-            doctor1.setEstadocivil("Casado");
-            doctor1.setTelefonofijo("014311212");
-            doctor1.setCelular("980441255");
-            personaDao.save(doctor1);
+    private void initPersonal() {
+        if (especialidadDao.count() <= 0) {
+            return;
         }
+        var geriatra = especialidadDao.findById(1L).orElse(null);
+        var enfermera = especialidadDao.findById(5L).orElse(null);
+        var chofer = especialidadDao.findById(8L).orElse(null);
+        var tecEnfermera = especialidadDao.findById(9L).orElse(null);
+
+        var doc1 = new Personal(
+                "87654321", "Anderson", "Diaz", "Diaz",
+                "M", new Date(), "anderson@gmail.com", "999222333", geriatra);
+        doc1.setFoto("perfil9.jpg");
+        doc1.setDireccion("Villa");
+        doc1.setEstadocivil("Casado");
+        doc1.setTelefonofijo("014311212");
+        doc1.setCelular("980441255");
+
+        var enf1 = new Personal(
+                "212131", "Stefany", "Ramirez", "Diaz",
+                "F", new Date(), "stefany@gmail.com", "98840012", enfermera);
+        enf1.setFoto("perfil9.jpg");
+        enf1.setDireccion("Surco");
+        enf1.setEstadocivil("Casado");
+        enf1.setTelefonofijo("2920983");
+        enf1.setFoto("img.jpg");
+
+        var ch1 = new Personal(
+                "74299833", "Manuel", "Perez", "Sanchez",
+                "M", new Date(), "perez@gmail.com", "980441299", chofer);
+        ch1.setFoto("perfil4.jpg");
+        ch1.setDireccion("Parques de Surco");
+        ch1.setEstadocivil("Casado");
+        ch1.setTelefonofijo("2920983");
+
+        var tec1 = new Personal(
+                "2192058", "Maria", "Loaysa", "Cruz",
+                "M", new Date(), "maria@gmail.com", "980441277", tecEnfermera);
+        tec1.setFoto("perfil7.jpg");
+        tec1.setDireccion("parques de san juan");
+        tec1.setEstadocivil("Soltero");
+        tec1.setTelefonofijo("2192058");
+
+        personaDao.save(enf1);
+        personaDao.save(doc1);
+        personaDao.save(ch1);
+        personaDao.save(tec1);
     }
 
     private void initPacientes() {
@@ -266,8 +309,8 @@ public class DatabaseInitializer {
             pac1.setApellido_pa("Smith");
             pac1.setApellidoma("Paredes");
             pac1.setParentesco("Padre");
+            pac1.setSexo("M");
             pac1.setFecha_nacimiento(new Date());
-            pac1.setDireccion("Villa");
             pac1.setCorreo("doe@gmail.com");
             pac1.setCelular("912855091");
             pac1.setTelefonofijo("2920983");
@@ -279,7 +322,9 @@ public class DatabaseInitializer {
             pac1.setTitular("Tecnico");
             pac1.setDireccion("Ate");
             pac1.setEstadocivil("Soltero");
-            pac1.setFoto("iconouser.png");
+            pac1.setFoto("perfil3.jpg");
+            pac1.setDistrito("LIMA");
+            pac1.setSangre("O");
             pacienteDao.save(pac1);
         }
     }
@@ -311,6 +356,7 @@ public class DatabaseInitializer {
             ambulancia.setModelo("4x4");
             ambulancia.setColor("Blanco");
             ambulancia.setCombustible("Gasolina");
+            ambulancia.setFoto("amb3.jpg");
             ambulancia.setEjes(2);
             ambulancia.setMotor(1200L);
             ambulancia.setFabrica(new Date());

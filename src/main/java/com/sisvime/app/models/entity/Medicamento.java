@@ -28,6 +28,4 @@ public class Medicamento implements Serializable {
     @Column(name = "med_descripcion")
     private String descripcion;
 
-
-
 }

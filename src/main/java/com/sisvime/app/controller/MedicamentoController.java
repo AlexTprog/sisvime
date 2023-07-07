@@ -5,7 +5,6 @@ import com.sisvime.app.models.Service.IMedicamentoService;
 import com.sisvime.app.models.entity.Medicamento;
 import com.sisvime.app.share.pagination.PageRender;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;

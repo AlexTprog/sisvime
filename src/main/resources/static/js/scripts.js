@@ -94,6 +94,3 @@
 
 })(jQuery);
 
-document.getElementById('logoutButton').addEventListener('click', function () {
-  localStorage.clear();
-});

@@ -55,8 +55,6 @@
                 </a>
                 <div class="collapse" id="collapsePages" data-parent="#accordionSidenav">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
-
-
                         <a id="calendariosmedicos" class="nav-link collapsed" href="javascript:void(0);"
                             data-toggle="collapse" data-target="#pagesCollapseAccount" aria-expanded="false"
                             aria-controls="pagesCollapseAccount">
@@ -85,7 +83,7 @@
                             <a id="calendariosvisitasmedicas" class="nav-link collapsed" href="javascript:void(0);"
                                 data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false"
                                 aria-controls="pagesCollapseError">
-                                Programacion Visita Medica
+                                Programacion Brigada
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="pagesCollapseError" data-parent="#accordionSidenavPagesMenu">
@@ -105,12 +103,13 @@
                                 </nav>
                             </div>
                         </div>
+
                         <div sec:authorize="hasAnyAuthority('ADMIN')">
 
                             <a id="calendariosbrigadasmedicas" class="nav-link collapsed" href="javascript:void(0);"
                                 data-toggle="collapse" data-target="#pagesCollapseKnowledgeBase" aria-expanded="false"
                                 aria-controls="pagesCollapseKnowledgeBase">
-                                Programacion Brigada
+                                Programacion Visita Medica
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="pagesCollapseKnowledgeBase"
@@ -131,6 +130,7 @@
                                 </nav>
                             </div>
                         </div>
+                        
                         <a id="citamedica" class="nav-link collapsed" th:href="@{/views/citas/reservacitas}">
                             Cita Medica
                         </a>

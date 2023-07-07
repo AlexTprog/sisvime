@@ -36,11 +36,11 @@ function autocomplete(inp) {
 					for (i = 0; i < arr.length; i++) {
 						let re3 = new RegExp(val)
 
-						if ((arr[i].espec.nomespecialidad !== 'Chofer' && arr[i].espec.nomespecialidad !== 'Enfermera' && arr[i].espec.nomespecialidad !== 'Técnica en Enfermería') && (re3.test(arr[i].nsa) || arr[i].nombre.toUpperCase().includes(val.toUpperCase()))) {
+						if ((arr[i].espec.nomespecialidad !== 'Chofer' && arr[i].espec.nomespecialidad !== 'Enfermera' && arr[i].espec.nomespecialidad !== 'Técnica en Enfermería') && (re3.test(arr[i].id) || arr[i].nombre.toUpperCase().includes(val.toUpperCase()))) {
 							/*create a DIV element for each matching element:*/
 							b = document.createElement("DIV");
 							/*make the matching letters bold:*/
-							b.innerHTML = "<strong>" + arr[i].nsa + ' ' + "</strong>";
+							b.innerHTML = "<strong>" + arr[i].id + ' ' + "</strong>";
 							b.innerHTML += arr[i].nombre + ' ';
 							b.innerHTML += arr[i].apellidopat;
 							b.innerHTML += "<input type='hidden' data-nombre='" + arr[i].nombre + "' data-apellidos='" + arr[i].apellidopat + ' ' + arr[i].apellidomat + "'  data-dni='" + arr[i].dni + "' data-especialidad='" + arr[i].espec.nomespecialidad + "' value='" + arr[i].id + "'>";

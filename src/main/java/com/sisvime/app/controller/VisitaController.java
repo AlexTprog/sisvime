@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+//BRIGADA
 @Controller
 @RequestMapping("/views/visitamed")
 public class VisitaController {
@@ -36,20 +37,24 @@ public class VisitaController {
         model.addAttribute("titulos", "Lista de Visita Medica");
         model.addAttribute("visitas", listavisita);
         return "/views/visitamed/visitamedicalist";
-
     }
 
-    @GetMapping(value = "/visitalista", produces = {"application/json"})
+    @GetMapping(value = "/visitalista", produces = { "application/json" })
     public @ResponseBody List<Visita> listarVisitas() {
         return visitaservice.listartodos();
     }
 
-    @GetMapping(value = "/numerovisita", produces = {"application/json"})
+    @GetMapping(value = "/numerovisita", produces = { "application/json" })
     public @ResponseBody List<NumberVisitas> visitaMedica() {
         return visitaservice.visitaMedica();
     }
 
-    @GetMapping(value = "/numerovisitames/{term}/{year}", produces = {"application/json"})
+    @GetMapping(value = "/getallvisitas", produces = { "application/json" })
+    public @ResponseBody  List<Visita> getAllVisit() {        
+        return visitaservice.listartodos();
+    }
+
+    @GetMapping(value = "/numerovisitames/{term}/{year}", produces = { "application/json" })
     public @ResponseBody List<NumberVisitas> visitaMedicaMes(@PathVariable String term, @PathVariable String year) {
         int number = 0;
         int numbery = 0;
@@ -58,13 +63,14 @@ public class VisitaController {
         return visitaservice.visitaMedicaMes(number, numbery);
     }
 
-    @GetMapping(value = "/gruponumerovisita", produces = {"application/json"})
+    @GetMapping(value = "/gruponumerovisita", produces = { "application/json" })
     public @ResponseBody List<GroupNumberVisitas> grupoVisitaMedica() {
         return visitaservice.grupoVisitaMedica();
     }
 
-    @GetMapping(value = "/gruponumerovisitames/{term}/{year}", produces = {"application/json"})
-    public @ResponseBody List<GroupNumberVisitas> grupoVisitaMedicaMes(@PathVariable String term, @PathVariable String year) {
+    @GetMapping(value = "/gruponumerovisitames/{term}/{year}", produces = { "application/json" })
+    public @ResponseBody List<GroupNumberVisitas> grupoVisitaMedicaMes(@PathVariable String term,
+            @PathVariable String year) {
         int number = 0;
         int numbery = 0;
         number = Integer.parseInt(term);
@@ -72,12 +78,12 @@ public class VisitaController {
         return visitaservice.grupoVisitaMedicaMes(number, numbery);
     }
 
-    @GetMapping(value = "/visitachofer", produces = {"application/json"})
+    @GetMapping(value = "/visitachofer", produces = { "application/json" })
     public @ResponseBody List<VisitasChofer> visitasChofer() {
         return visitaservice.visitaChofer();
     }
 
-    @GetMapping(value = "/visitachofermes/{term}/{year}", produces = {"application/json"})
+    @GetMapping(value = "/visitachofermes/{term}/{year}", produces = { "application/json" })
     public @ResponseBody List<VisitasChofer> visitasChoferMes(@PathVariable String term, @PathVariable String year) {
         int number = 0;
         int numbery = 0;
@@ -97,7 +103,6 @@ public class VisitaController {
         return "/views/visitamed/vervisita";
     }
 
-
     @GetMapping("/createvisita")
     public String crear(Model model) {
         Visita visita = new Visita();
@@ -106,7 +111,6 @@ public class VisitaController {
         List<Paciente> listpaciente = pacienteservice.listartodos();
         List<Vehiculo> listvehiculo = vehiculoservice.findAll();
 
-        model.addAttribute("titulo", "Formulario:Nueva Visita");
         model.addAttribute("visita", visita);
         model.addAttribute("personal", listvisita);
         model.addAttribute("paciente", listpaciente);
@@ -117,13 +121,11 @@ public class VisitaController {
 
     @PostMapping("/savevisita")
     public String guardar(@ModelAttribute Visita visita, RedirectAttributes attribute, BindingResult result) {
-
         visitaservice.guardar(visita);
         attribute.addFlashAttribute("success", "Visita Medica Guardado con Exito");
         System.out.println("Guardado con exito la Visita Medica");
 
         return "redirect:/views/visitamed/listvisitamedica";
-
     }
 
     @GetMapping(value = "/editvisita/{id}")
@@ -132,8 +134,6 @@ public class VisitaController {
 
         model.addAttribute("Titulo", "Formulario:Editar Visita Medica");
         model.addAttribute("visita", visita);
-
-
         return "/views/visitamed/visitamedform";
     }
 
@@ -142,6 +142,5 @@ public class VisitaController {
         visitaservice.eliminar(idvisita);
         return "redirect:/views/visitamed/visitamedicalist";
     }
-
 
 }

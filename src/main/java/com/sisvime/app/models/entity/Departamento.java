@@ -22,5 +22,4 @@ public class Departamento implements Serializable {
     @Column(name = "dep_nombre")
     private String nombredep;
 
-
 }

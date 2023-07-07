@@ -10,7 +10,7 @@ function deletereservacita(id) {
 			if (OK) {
 							
 			$.ajax({
-					url:"/views/citas/deletereservacita/"+id,
+					url:"/views/citas/softdeletereservacita/"+id,
 					success: function(res){
 					 Console.log(res);
 					}			

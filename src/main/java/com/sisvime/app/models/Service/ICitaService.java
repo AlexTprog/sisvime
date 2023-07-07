@@ -15,4 +15,6 @@ public interface ICitaService {
     public Cita buscarporId(int id);
 
     public void eliminar(int id);
+    
+    public void softDelete(int id);
 }

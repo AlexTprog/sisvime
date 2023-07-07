@@ -11,5 +11,4 @@ public class DistritoParentesco {
     private String distrito;
     private String parentesco;
 
-
 }

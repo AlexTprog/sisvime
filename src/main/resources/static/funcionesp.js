@@ -8,22 +8,20 @@ function eliminarpa(id) {
 	})
 		.then((OK) => {
 			if (OK) {
-							
-			$.ajax({
-					url:"/views/paciente/deletepac/"+id,
-					success: function(res){
-					 Console.log(res);
-					}			
-			
-			});
-			
+
+				$.ajax({
+					url: "/views/paciente/deletepac/" + id,
+					success: function (res) {
+						Console.log(res);
+					}
+				});
+
 				swal("¡Eliminado!,Tu archivo ha sido eliminado.", {
 					icon: "success",
-				}).then((ok)=>{
-						if(ok){
-						 location.href="/views/paciente/listarpac";
-						}
-				
+				}).then((ok) => {
+					if (ok) {
+						location.href = "/views/paciente/listarpac";
+					}
 				});
 			} else {
 				swal("¡Tu archivo no a sido Eliminado!");

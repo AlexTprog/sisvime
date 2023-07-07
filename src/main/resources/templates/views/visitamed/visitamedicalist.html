@@ -19,8 +19,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.27.0/feather.min.js"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/fullcalendar/lib/main.css" />
-
-    <title></title>
     <script type="text/javascript" src="jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="dist/Chart.bundle.min.js"></script>
 
@@ -73,8 +71,6 @@
                                             class="fas fa-calendar-alt"></i></a>
                                 </h4>
 
-
-
                                 <table class="table table-bordered table-hover" id="dataTable" width="100%"
                                     cellspacing="0">
                                     <thead>
@@ -92,7 +88,6 @@
                                             <th>Distrito</th>
                                             <th>Zona</th>
                                             <th>Turno</th>
-
                                             <th>Acciones</th>
 
                                         </tr>
@@ -112,7 +107,6 @@
                                             <th>Distrito</th>
                                             <th>Zona</th>
                                             <th>Turno</th>
-
                                             <th>Acciones</th>
                                         </tr>
                                     </tfoot>
@@ -125,12 +119,12 @@
                                             <td th:text="${visita.nomenf}"></td>
                                             <td th:text="${visita.idtec}"></td>
                                             <td th:text="${visita.nomtec}"></td>
-                                            <td th:text="${visita.idveh.id}"></td>
+                                            <td th:text="${visita.idveh.placa}"></td>
                                             <td th:text="${visita.hora}"></td>
                                             <td th:text="${visita.fecha}"></td>
-                                            <td th:text="${visita.tit}"></td>
                                             <td th:text="${visita.dist}"></td>
                                             <td th:text="${visita.zona}"></td>
+                                            <td th:text="${visita.time}"></td>
                                             <td>
                                                 <a class="btn btn-light btn-xs"
                                                     th:href="@{/views/visitamed/editvisita/}+${visita.id}"><i

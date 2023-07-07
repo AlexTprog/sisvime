@@ -41,7 +41,6 @@
 
 							for (i = 0; i < arr.length; i++) {
 								let re3 = new RegExp(val)
-								console.log(323)
 								/*check if the item starts with the same letters as the text field value:*/
 								if ((arr[i].espec.nomespecialidad == 'Chofer') && (re3.test(arr[i].id) || arr[i].nombre.toUpperCase().includes(val.toUpperCase()))) {
 									/*create a DIV element for each matching element:*/
@@ -66,7 +65,7 @@
 										lastname.value = this.getElementsByTagName("input")[0].dataset.apellidos;
 										dni.value = this.getElementsByTagName("input")[0].dataset.dni;
 										espec.value = this.getElementsByTagName("input")[0].dataset.especialidad;
-										imgChofer.src = "/personal/" + this.getElementsByTagName("input")[0].dataset.imagen;
+										imgChofer.src = "/imagen/personal/" + this.getElementsByTagName("input")[0].dataset.imagen;
 										/*close the list of autocompleted values,
 										(or any other open lists of autocompleted values:*/
 										closeAllLists();

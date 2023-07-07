@@ -72,7 +72,7 @@
                       <div class="form-group col-md-6">
                         <label class="small mb-1" for="inputFirstName">NSA</label>
                         <input maxlength="6" class="form-control" id="inputFirstName" type="text"
-                          placeholder="Ingrese su Numero de Serie" th:field="*{nsa}" />
+                          placeholder="Ingrese su Numero de Serie" th:field="*{id}" />
                         <small class="form-text text-danger" th:if="${#fields.hasErrors('id')}"
                           th:errors="*{id}"></small>
                       </div>
@@ -126,7 +126,7 @@
                       </div>
                     </div>
 
-                    <!-- Form Row        -->
+                    <!-- Form Row -->
                     <div class="form-row">
                       <!-- Form Group (location)-->
                       <div class="form-group col-md-6">
@@ -238,8 +238,6 @@
                           <option th:value="Madre" th:text="'Madre'"></option>
                           <option th:value="Conyuge" th:text="'Conyuge'"></option>
                           <option th:value="HijoDiscapacitado" th:text="'Hijo Discapacitado'"></option>
-
-
                         </select>
 
                       </div>
@@ -251,7 +249,6 @@
                           <option th:value="---SeleccionarPlana---" th:text="'---Seleccionar Plana---'"></option>
                           <option th:value="Oficial" th:text="'Oficial'"></option>
                           <option th:value="Tecnico" th:text="'Tecnico'"></option>
-
                         </select>
                       </div>
 
@@ -287,7 +284,6 @@
                                 <!-- Form Group (NSA)-->
                                 <div class="form-group col-md-6">
                                   <label class="small mb-1" for="inputFirstName">Peso</label>
-                                  <!-- <input class="form-control" id="inputNsa" type="text" placeholder="Ingrese su Numero de Serie"/>-->
                                   <div class="autocomplete" style="width: 100%">
                                     <input class="form-control" id="myInput" type="text" name="myCountry"
                                       placeholder="Ingrese Peso" th:field="*{peso}" />
@@ -319,11 +315,8 @@
                                     <option th:value="B" th:text="'B+'"></option>
                                     <option th:value="B" th:text="'B-'"></option>
                                     <option th:value="AB" th:text="'AB+'"></option>
-
-
                                   </select>
                                 </div>
-
 
                               </div>
 
@@ -349,7 +342,6 @@
                                 <!-- Form Group (NSA)-->
                                 <div class="form-group col-md-6">
                                   <label class="small mb-1" for="inputFirstName">Alergia</label>
-                                  <!-- <input class="form-control" id="inputNsa" type="text" placeholder="Ingrese su Numero de Serie"/>-->
                                   <div class="autocomplete" style="width: 100%">
 
                                     <select class="custom-select" th:field="*{alergia}">
@@ -386,15 +378,11 @@
                                   <textarea type="text" class="form-control" id="inputLastNameEnfermera"
                                     placeholder="Ingrese Enfermedades" th:field="*{enfermedad}"></textarea>
                                 </div>
-
-
                               </div>
-
                             </div>
                           </div>
                         </div>
                       </div>
-
 
                     </div>
 

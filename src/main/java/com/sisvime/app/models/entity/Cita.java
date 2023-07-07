@@ -31,12 +31,10 @@ public class Cita implements Serializable {
     @Column(name = "cit_med")
     private String med;
 
-
     @Column(name = "cit_fecha")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
-
 
     @ManyToOne
     @JoinColumn(name = "hora_id")
@@ -57,6 +55,8 @@ public class Cita implements Serializable {
     @Column(name = "cit_receta")
     private String receta;
 
+    @Column
+    private Boolean isDelete = false;
 
     @Override
     public String toString() {
@@ -69,6 +69,5 @@ public class Cita implements Serializable {
                 + getReceta() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
                 + super.toString() + "]";
     }
-
 
 }
