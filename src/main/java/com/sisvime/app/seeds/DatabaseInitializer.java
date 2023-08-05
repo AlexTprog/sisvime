@@ -67,8 +67,8 @@ public class DatabaseInitializer {
         initPersonal();        
         initHoras();
         initVehiculos();
-        initCitas();
         initHorarioTrabajo();
+        initCitas();
     }
 
     private void initHorarioTrabajo() {
@@ -350,6 +350,7 @@ public class DatabaseInitializer {
         if (countCitas <= 0) {
             var paciente = pacienteDao.findByNombre("John");
             var doctor = (List<Personal>) personaDao.findAll();
+
             var hora = (List<Hora>) horaDao.findAll();
 
             var cita1 = new Cita();
