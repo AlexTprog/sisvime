@@ -49,15 +49,17 @@
                     <div class="page-header-icon">
                       <i data-feather="user"></i>
                     </div>
-                    Programar Brigada Medica - Nuevo
+                    Brigada Médica a Domicilio
                   </h1>
                 </div>
-                <div class="col-12 col-xl-auto mb-3">Personal Medico FAP</div>
+                <div class="col-12 col-xl-auto mb-3">Personal Médico FAP</div>
               </div>
             </div>
           </div>
         </header>
-
+        <center>
+            <h4>PROGRAMAR BRIGADA MÉDICA</h4>
+        </center>
         <!-- Main page content-->
         <form method="post" th:action="@{/views/visitamed/savevisita}" th:object="${visita}"
           enctype="multipart/form-data">
@@ -289,7 +291,7 @@
                       <h5 class="mb-0">
                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                           data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                          Personal de Choferes
+                          Conductor Ambulancia
                         </button>
                       </h5>
                     </div>
@@ -451,24 +453,21 @@
                 </div>
                 <div class="card mb-4">
                   <div class="card-header">
-                    Datos Brigada
+                    Brigada Médica
                   </div>
                   <div class="card-body">
                     <div class="form-row">
-                      <!-- Form Group (NSA)-->
+                      <!-- Form Group (DNI) BRIGADA-->
                       <div class="form-group col-md-6">
-                        <label class="small mb-1" for="inputLastName">Hora Salida </label>
-                        <input type="time" class="form-control" id="inputLastName" placeholder="Observacion"
-                          th:field="*{hora}" required />
+                        <label class="small mb-1" for="inputLastName">Brigada </label>
+                        <select class="custom-select" th:field="*{obs}">
+                          <option th:value="Brigada1" th:text="'Brigada 1'"></option>
+                          <option th:value="Brigada2" th:text="'Brigada 2'"></option>
+                          <option th:value="Brigada3" th:text="'Brigada 3'"></option>
+                          <option th:value="Brigada4" th:text="'Brigada 4'"></option>
+                        </select>
                       </div>
-                      <!-- Form Group (DNI)-->
-                      <div class="form-group col-md-6">
-                        <label class="small mb-1" for="inputLastName">Fecha
-                        </label>
-                        <input type="date" class="form-control" id="inputLastName" placeholder="Ingrese disponibilidad"
-                          th:field="*{fecha}" required />
-                      </div>
-                      <!-- Form Group (DNI)-->
+                      <!-- Form Group (DNI) DISTRITOS -->
                       <div class="form-group col-md-6">
                         <label class="small mb-1" for="inputLastName">Distrito</label>
                         <select class="custom-select" th:field="*{dist}">
@@ -492,15 +491,22 @@
                           <!--  -->
                         </select>
                       </div>
-
+                      <!-- Form Group (DNI) FECHA -->
                       <div class="form-group col-md-6">
-                        <label class="small mb-1" for="inputLastName">Zona</label>
-                        <select class="custom-select" th:field="*{zona}">
-                          <option th:value="Sur" th:text="'Zona Sur'"></option>
-                          <option th:value="Norte" th:text="'Zona Norte'"></option>
-                        </select>
+                        <label class="small mb-1" for="inputLastName">Fecha Brigada
+                        </label>
+                        <input type="date" class="form-control" id="inputLastName" placeholder="Ingrese disponibilidad"
+                               th:field="*{fecha}" required />
+                      </div>
+                      <!-- Form Group (NSA) HORA-->
+                      <div class="form-group col-md-6">
+                        <label class="small mb-1" for="inputLastName">Hora </label>
+                        <input type="time" class="form-control" id="inputLastName" placeholder="Observacion"
+                          th:field="*{hora}" required />
                       </div>
 
+
+                      <!-- Form Group (DNI) TURNO ATENCION -->
                       <div class="form-group col-md-6">
                         <label class="small mb-1" for="inputLastName">Turno Atención</label>
                         <select class="custom-select" th:field="*{time}">
@@ -508,19 +514,17 @@
                           <option th:value="Tarde" th:text="'Turno Tarde'"></option>
                         </select>
                       </div>
-
+                      <!-- Form Group (DNI) ZONA -->
                       <div class="form-group col-md-6">
-                        <label class="small mb-1" for="inputLastName">Brigada </label>
-                        <select class="custom-select" th:field="*{obs}">
-                          <option th:value="Brigada1" th:text="'Brigada 1'"></option>
-                          <option th:value="Brigada2" th:text="'Brigada 2'"></option>
-                          <option th:value="Brigada3" th:text="'Brigada 3'"></option>
-                          <option th:value="Brigada4" th:text="'Brigada 4'"></option>
+                        <label class="small mb-1" for="inputLastName">Zona</label>
+                        <select class="custom-select" th:field="*{zona}">
+                          <option th:value="Sur" th:text="'Zona Sur'"></option>
+                          <option th:value="Norte" th:text="'Zona Norte'"></option>
                         </select>
                       </div>
-
+                      <!-- Form Group (DNI) DESCRIPCION -->
                       <div class="form-group col-md-12">
-                        <label class="small mb-1" for="inputFirstName">Descripcion</label>
+                        <label class="small mb-1" for="inputFirstName">Descripción</label>
                         <input class="form-control" id="inputFirstName" type="text" placeholder="Descripcion"
                           th:field="*{desc}" required />
                       </div>

@@ -44,11 +44,11 @@
                     <div class="page-header-icon">
                       <i data-feather="file"></i>
                     </div>
-                    Generar Cita Medica
+                    Generar Cita Médica
                   </h1>
                 </div>
                 <div class="col-12 col-xl-auto mb-3">
-                  Para el Personal Medico FAP
+                  Personal Médico FAP
                 </div>
               </div>
             </div>
@@ -56,7 +56,7 @@
         </header>
 
         <center>
-          <h3>RESERVA DE CITA MEDICA</h3>
+          <h3>RESERVA DE CITA MÉDICA A DOMICILIO</h3>
         </center>
         <!-- Main page content-->
 
@@ -122,6 +122,13 @@
             </div>
           </div>
           <div class="container mt-4 inputCita paciente">
+            <!-- Form fecha (Fecha) -->
+            <div class="card">
+              <div class="card-header">Selecione Fecha de Consulta</div>
+              <input class="form-control" type="date" id="data" required th:field="*{fecha}" />
+            </div>
+          </div>
+          <div class="container mt-4 inputCita paciente">
             <div class="card">
               <div class="card-header">
                 Selecione una especialidad medica referente a una consulta.
@@ -138,13 +145,7 @@
             </div>
           </div>
 
-          <div class="container mt-4 inputCita paciente">
-            <!-- Form fecha (Fecha) -->
-            <div class="card">
-              <div class="card-header">Selecione Fecha de Consulta</div>
-              <input class="form-control" type="date" id="data" required th:field="*{fecha}" />
-            </div>
-          </div>
+
 
           <div class="container mt-4 inputCita paciente">
             <!-- Form Hora (Hora) -->

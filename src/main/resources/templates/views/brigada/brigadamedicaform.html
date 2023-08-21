@@ -37,7 +37,7 @@
                                 <div class="col-auto mb-3">
                                     <h1 class="page-header-title">
                                         <div class="page-header-icon"><i data-feather="user"></i></div>
-                                        Programar Visita Medica - Nuevo
+                                        Visita Médica a Domicilio
                                     </h1>
                                 </div>
                                 <div class="col-12 col-xl-auto mb-3">Personal Medico FAP</div>
@@ -45,6 +45,9 @@
                         </div>
                     </div>
                 </header>
+                <center>
+                    <h4>PROGRAMAR VISITA MÉDICA</h4>
+                </center>
                 <!-- Main page content-->
                 <div class="container mt-4">
                     <hr class="mt-0 mb-4" />
@@ -55,7 +58,7 @@
                             <form method="post" th:action="@{/views/brigada/savebrigada}" th:object="${brigada}"
                                 enctype="multipart/form-data">
                                 <div class="card mb-4">
-                                    <div class="card-header">Paciente</div>
+                                    <div class="card-header">Información del Paciente</div>
                                     <div class="card-body">
 
 
@@ -118,7 +121,7 @@
                                     </div>
                                 </div>
                                 <div class="card mb-4">
-                                    <div class="card-header">Informacion del Paciente</div>
+                                    <div class="card-header"></div>
                                     <div class="card-body">
 
 
@@ -153,26 +156,11 @@
                                 </div>
 
                                 <div class="card mb-4">
-                                    <div class="card-header">Datos</div>
+                                    <div class="card-header">Programar visita médica</div>
                                     <div class="card-body">
                                         <form method="post" enctype="multipart/form-data">
                                             <div class="form-row">
-                                                <!-- Form Group (NSA)-->
-                                                <div class="form-group col-md-6">
-                                                    <label class="small mb-1" for="inputFirstName">Hora Visita</label>
-                                                    <select class="custom-select" th:field="*{horaini}" required>
-                                                    </select>
-                                                </div>
-                                                <!-- Form Group (NSA)-->
-                                                <div class="form-group col-md-6">
-                                                    <label class="small mb-1" for="inputEspc">Observaciones</label>
-                                                    <input type="text" class="form-control" th:field="*{observacion}"
-                                                        placeholder="Observaciones" />
-                                                </div>
-                                            </div>
-
-                                            <div class="form-row">
-                                                <!-- Form Group (NSA)-->
+                                                <!-- Form Group (NSA) BRIGADA-->
                                                 <div class="form-group col-md-6">
                                                     <label class="small mb-1" for="inputFirstName">Seleccionar
                                                         Brigada</label>
@@ -183,7 +171,7 @@
                                                         <option th:value="Brigada4" th:text="'Brigada 4'"></option>
                                                     </select>
                                                 </div>
-                                                <!-- Form Group (DNI)-->
+                                                <!-- Form Group (DNI) ZONA -->
                                                 <div class="form-group col-md-6">
                                                     <label class="small mb-1" for="inputLastName">Zona Brigada</label>
                                                     <select class="custom-select" th:field="*{zonabrigada}">
@@ -191,14 +179,7 @@
                                                         <option th:value="Norte" th:text="'Zona Norte'"></option>
                                                     </select>
                                                 </div>
-                                                <!-- Form Group (DNI)-->
-                                                <div class="form-group col-md-6">
-                                                    <label class="small mb-1" for="inputLastName">Fecha </label>
-                                                    <input type="date" class="form-control" id="fecha"
-                                                        placeholder="Ingrese disponibilidad" th:field="*{fecha}"
-                                                        required />
-                                                </div>
-                                                <!-- Form Group (DNI)-->
+                                                <!-- Form Group (DNI) DISTRITO-->
                                                 <div class="form-group col-md-6">
                                                     <label class="small mb-1" for="inputLastName">Distrito</label>
                                                     <select class="custom-select" th:field="*{obs}">
@@ -221,6 +202,31 @@
                                                         <option value="SAN BORJA">SAN BORJA</option>
                                                         <!--  -->
                                                     </select>
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="form-row">
+
+                                                <!-- Form Group (DNI) FECHA-->
+                                                <div class="form-group col-md-6">
+                                                    <label class="small mb-1" for="inputLastName">Fecha </label>
+                                                    <input type="date" class="form-control" id="fecha"
+                                                        placeholder="Ingrese disponibilidad" th:field="*{fecha}"
+                                                        required />
+                                                </div>
+                                                <!-- Form Group (NSA) HORA VISITA-->
+                                                <div class="form-group col-md-6">
+                                                    <label class="small mb-1" for="inputFirstName">Hora Visita</label>
+                                                    <select class="custom-select" th:field="*{horaini}" required>
+                                                    </select>
+                                                </div>
+                                                <!-- Form Group (NSA) OBSERVACIONES-->
+                                                <div class="form-group col-md-6">
+                                                    <label class="small mb-1" for="inputEspc">Observaciones</label>
+                                                    <input type="text" class="form-control" th:field="*{observacion}"
+                                                           placeholder="Observaciones" />
                                                 </div>
                                             </div>
                                             <input type="submit" value="Crear Visita" class="btn btn-primary" />
