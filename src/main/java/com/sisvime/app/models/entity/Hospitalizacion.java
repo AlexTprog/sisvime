@@ -25,7 +25,6 @@ public class Hospitalizacion implements Serializable {
     public Cama Cama;
     public Date FechaAdmision;
     public Date FechaAlta;
-    public Boolean EstaBorrado;
     @ManyToOne
     public Orden Orden;
 }
