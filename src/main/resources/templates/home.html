@@ -32,9 +32,7 @@
         var user = /*[[${usuario}]]*/ null;        
         if (user) {
             localStorage.setItem('usuario', user);
-            console.log('Nombre de usuario recuperado:', user);
         }
-        console.log('Nombre de usuario recuperado:', user);
     </script>
     <!-- AQUI ESTA EL NAVBAR -AUTOMATIZADO -->
     <header th:insert="fragments/menu :: menu-principal">

@@ -1,17 +1,27 @@
 package com.sisvime.app.controller;
 
+import com.sisvime.app.models.Dto.MessageDto;
+import com.sisvime.app.models.Dto.VisitaDto;
 import com.sisvime.app.models.Service.IPacienteService;
 import com.sisvime.app.models.Service.IPersonaService;
 import com.sisvime.app.models.Service.IVehiculoService;
 import com.sisvime.app.models.Service.IVisitaService;
 import com.sisvime.app.models.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 //BRIGADA
@@ -39,22 +49,22 @@ public class VisitaController {
         return "/views/visitamed/visitamedicalist";
     }
 
-    @GetMapping(value = "/visitalista", produces = { "application/json" })
+    @GetMapping(value = "/visitalista", produces = {"application/json"})
     public @ResponseBody List<Visita> listarVisitas() {
         return visitaservice.listartodos();
     }
 
-    @GetMapping(value = "/numerovisita", produces = { "application/json" })
+    @GetMapping(value = "/numerovisita", produces = {"application/json"})
     public @ResponseBody List<NumberVisitas> visitaMedica() {
         return visitaservice.visitaMedica();
     }
 
-    @GetMapping(value = "/getallvisitas", produces = { "application/json" })
-    public @ResponseBody  List<Visita> getAllVisit() {        
+    @GetMapping(value = "/getallvisitas", produces = {"application/json"})
+    public @ResponseBody List<Visita> getAllVisit() {
         return visitaservice.listartodos();
     }
 
-    @GetMapping(value = "/numerovisitames/{term}/{year}", produces = { "application/json" })
+    @GetMapping(value = "/numerovisitames/{term}/{year}", produces = {"application/json"})
     public @ResponseBody List<NumberVisitas> visitaMedicaMes(@PathVariable String term, @PathVariable String year) {
         int number = 0;
         int numbery = 0;
@@ -63,14 +73,14 @@ public class VisitaController {
         return visitaservice.visitaMedicaMes(number, numbery);
     }
 
-    @GetMapping(value = "/gruponumerovisita", produces = { "application/json" })
+    @GetMapping(value = "/gruponumerovisita", produces = {"application/json"})
     public @ResponseBody List<GroupNumberVisitas> grupoVisitaMedica() {
         return visitaservice.grupoVisitaMedica();
     }
 
-    @GetMapping(value = "/gruponumerovisitames/{term}/{year}", produces = { "application/json" })
+    @GetMapping(value = "/gruponumerovisitames/{term}/{year}", produces = {"application/json"})
     public @ResponseBody List<GroupNumberVisitas> grupoVisitaMedicaMes(@PathVariable String term,
-            @PathVariable String year) {
+                                                                       @PathVariable String year) {
         int number = 0;
         int numbery = 0;
         number = Integer.parseInt(term);
@@ -78,12 +88,12 @@ public class VisitaController {
         return visitaservice.grupoVisitaMedicaMes(number, numbery);
     }
 
-    @GetMapping(value = "/visitachofer", produces = { "application/json" })
+    @GetMapping(value = "/visitachofer", produces = {"application/json"})
     public @ResponseBody List<VisitasChofer> visitasChofer() {
         return visitaservice.visitaChofer();
     }
 
-    @GetMapping(value = "/visitachofermes/{term}/{year}", produces = { "application/json" })
+    @GetMapping(value = "/visitachofermes/{term}/{year}", produces = {"application/json"})
     public @ResponseBody List<VisitasChofer> visitasChoferMes(@PathVariable String term, @PathVariable String year) {
         int number = 0;
         int numbery = 0;
@@ -126,6 +136,61 @@ public class VisitaController {
         System.out.println("Guardado con exito la Visita Medica");
 
         return "redirect:/views/visitamed/listvisitamedica";
+    }
+
+    @PostMapping(value = "/savevisitaDto")
+    public ResponseEntity<String> guardarVisitaDto(VisitaDto visita) {
+        var formato = new SimpleDateFormat("yyyy-MM-dd");
+        var StringDates = visita.fecha.split(",");
+
+        Visita visit;
+        for (var fecha : StringDates) {
+            Date date;
+            try {
+                date = formato.parse(fecha);
+            } catch (ParseException e) {
+                date = new Date();
+            }
+            visit = new Visita();
+
+            //Pero
+            visit.setIdper(visita.idper);
+
+            //Enf
+            visit.setIdenf(visita.idenf);
+            visit.setApeenf(visita.apeenf);
+            visit.setNomenf(visita.nomenf);
+            visit.setPro_espenf(visita.pro_espenf);
+
+            //Chofer
+            visit.setIdchf(visita.idchf);
+            visit.setApechf(visita.apechf);
+            visit.setNomchf(visita.nomchf);
+
+            //Tec
+            visit.setIdtec(visita.idtec);
+            visit.setApetec(visita.apetec);
+            visit.setEspchf(visita.espchf);
+            visit.setNomtec(visita.nomtec);
+
+            //Vehi
+            visit.setIdveh(visita.idveh);
+
+            //Visita
+            visit.setDist(visita.dist);
+            visit.setDesc(visita.desc);
+            visit.setHora(visita.hora);
+            visit.setZona(visita.zona);
+            visit.setTit(visita.tit);
+            visit.setTime(visita.time);
+            visit.setObs(visita.obs);
+            //Fecha
+            visit.setFecha(date);
+
+            visitaservice.guardar(visit);
+        }
+
+        return new ResponseEntity<>("Las Brigada fueron creadas con exito", HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/editvisita/{id}")

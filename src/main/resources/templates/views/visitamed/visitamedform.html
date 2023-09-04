@@ -2,570 +2,691 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:fragment="head">
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-  <title>SISVIME</title>
-  <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
-    crossorigin="anonymous" />
-  <link href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" rel="stylesheet"
-    crossorigin="anonymous" />
-  <link th:href="@{/css/styles.css}" rel="stylesheet" />
-  <link th:href="@{/imagen/favicon.ico}" rel="icon" />
-  <link th:href="@{/fullcalendar/lib/main.css}" rel="stylesheet" />
-  <link th:href="@{/css/visita.css}" rel="stylesheet" />
-  <link th:href="@{/css/utilidades.css}" rel="stylesheet" />
-  <link th:href="@{/css/personal.css}" rel="stylesheet" />
-  <script data-search-pseudo-elements defer
-    src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.27.0/feather.min.js"
-    crossorigin="anonymous"></script>
-  <script th:src="@{/jquery-1.12.0.min.js}" type="text/javascript" s></script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>SISVIME</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <link th:href="@{/imagen/favicon.ico}" rel="icon"/>
+    <link th:href="@{/fullcalendar/lib/main.css}" rel="stylesheet"/>
+    <link th:href="@{/css/visita.css}" rel="stylesheet"/>
+    <link th:href="@{/css/utilidades.css}" rel="stylesheet"/>
+    <link th:href="@{/css/personal.css}" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.27.0/feather.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.10.0/dist/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.10.0/dist/css/bootstrap-datepicker3.min.css">
 </head>
 
 <body class="nav-fixed">
-  <!-- AQUI ESTA EL NAVBAR -AUTOMATIZADO -->
-  <header th:insert="fragments/menu :: menu-principal"></header>
+<!-- AQUI ESTA EL NAVBAR -AUTOMATIZADO -->
+<header th:insert="fragments/menu :: menu-principal"></header>
 
-  <!-- AQUI ESTA EL DASBHBOARD PARTE IZQUIERDA -AUTOMATIZADO -->
-  <!-- AQUI SE ENCUENTRA LA PARTE FRONTAL -->
-  <div id="layoutSidenav">
+<!-- AQUI ESTA EL DASBHBOARD PARTE IZQUIERDA -AUTOMATIZADO -->
+<!-- AQUI SE ENCUENTRA LA PARTE FRONTAL -->
+<div id="layoutSidenav">
     <div th:insert="fragments/dashboard :: dashboard-principal" id="layoutSidenav_nav"></div>
 
     <div id="layoutSidenav_content">
-      <main>
-        <header class="
-              page-header page-header-compact page-header-light
-              border-bottom
-              bg-white
-              mb-4
-            ">
-          <div class="container-fluid">
-            <div class="page-header-content">
-              <div class="row align-items-center justify-content-between pt-3">
-                <div class="col-auto mb-3">
-                  <h1 class="page-header-title">
-                    <div class="page-header-icon">
-                      <i data-feather="user"></i>
+        <main>
+            <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+                <div class="container-fluid">
+                    <div class="page-header-content">
+                        <div class="row align-items-center justify-content-between pt-3">
+                            <div class="col-auto mb-3">
+                                <h1 class="page-header-title">
+                                    <div class="page-header-icon">
+                                        <i data-feather="user"></i>
+                                    </div>
+                                    Brigada Médica a Domicilio
+                                </h1>
+                            </div>
+                            <div class="col-12 col-xl-auto mb-3">Personal Médico FAP</div>
+                        </div>
                     </div>
-                    Brigada Médica a Domicilio
-                  </h1>
                 </div>
-                <div class="col-12 col-xl-auto mb-3">Personal Médico FAP</div>
-              </div>
-            </div>
-          </div>
-        </header>
-        <center>
-            <h4>PROGRAMAR BRIGADA MÉDICA</h4>
-        </center>
-        <!-- Main page content-->
-        <form method="post" th:action="@{/views/visitamed/savevisita}" th:object="${visita}"
-          enctype="multipart/form-data">
-          <div class="container mt-4">
-            <hr class="mt-0 mb-4" />
-            <div class="row">
-              <div class="col-xl-8">
-                <!-- Account details card-->
+            </header>
+            <center>
+                <h4>PROGRAMAR BRIGADA MÉDICA</h4>
+            </center>
+            <!-- Main page content-->
 
-                <div class="accordion" id="accordionExample">
-                  <div class="card">
-                    <div class="card-header" id="headingOne">
-                      <h5 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                          aria-expanded="true" aria-controls="collapseOne">
-                          Doctor
-                        </button>
-                      </h5>
-                    </div>
+            <form method="post" th:action="@{/views/visitamed/savevisitaDto}" th:object="${visita}"
+                  enctype="multipart/form-data" onsubmit="submitForm(event)">
+                <div class="container mt-4">
+                    <hr class="mt-0 mb-4"/>
+                    <div class="row">
+                        <div class="col-xl-8">
+                            <!-- Account details card-->
 
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                      data-parent="#accordionExample">
-                      <div class="card-body">
-                        <div class="card-body">
+                            <div class="accordion" id="accordionExample">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                                    data-target="#collapseOne"
+                                                    aria-expanded="true" aria-controls="collapseOne">
+                                                Doctor
+                                            </button>
+                                        </h5>
+                                    </div>
 
-                          <div class="form-row">
-                            <!-- Form Group (NSA)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputFirstName">NSA</label>
-                              <div class="autocomplete" style="width: 100%">
-                                <input autocomplete="ÑÖcompletes" class="form-control" id="myInput" type="text"
-                                  name="myCountry" placeholder="Ingrese su Numero de Serie" th:field="*{idper}"
-                                  required />
-                              </div>
-                            </div>
-                            <!-- Form Group (DNI)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputdni">DNI</label>
-                              <input readonly="readonly" type="text" class="form-control" id="inputdni"
-                                placeholder="Ingrese su DNI" th:field="*{idper}" />
-                            </div>
-                          </div>
-                          <div class="form-row">
-                            <!-- Form Group (NSA)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputFirstName">Nombre</label>
-                              <input readonly="readonly" class="form-control" id="inputFirstName" type="text"
-                                placeholder="Ingrese su Nombre" />
-                            </div>
-                            <!-- Form Group (DNI)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputLastName">Apellido</label>
-                              <input readonly="readonly" type="text" class="form-control" id="inputLastName"
-                                placeholder="Ingrese su Apellido" />
-                            </div>
+                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="card-body">
 
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputEspc">Especialidad</label>
-                              <input readonly="readonly" type="text" class="form-control" id="inputEspc"
-                                placeholder="Ingrese su Especialidad" />
-                            </div>
+                                                <div class="form-row">
+                                                    <!-- Form Group (NSA)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1" for="inputFirstName">NSA</label>
+                                                        <div class="autocomplete" style="width: 100%">
+                                                            <input autocomplete="ÑÖcompletes" class="form-control"
+                                                                   id="myInput" type="text"
+                                                                   name="myCountry"
+                                                                   placeholder="Ingrese su Numero de Serie"
+                                                                   th:field="*{idper}"
+                                                                   required/>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Form Group (DNI)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1" for="inputdni">DNI</label>
+                                                        <input readonly="readonly" type="text" class="form-control"
+                                                               id="inputdni"
+                                                               placeholder="Ingrese su DNI" th:field="*{idper}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <!-- Form Group (NSA)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1" for="inputFirstName">Nombre</label>
+                                                        <input readonly="readonly" class="form-control"
+                                                               id="inputFirstName" type="text"
+                                                               placeholder="Ingrese su Nombre"/>
+                                                    </div>
+                                                    <!-- Form Group (DNI)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1" for="inputLastName">Apellido</label>
+                                                        <input readonly="readonly" type="text" class="form-control"
+                                                               id="inputLastName"
+                                                               placeholder="Ingrese su Apellido"/>
+                                                    </div>
 
-                            <div class="col-md-6" style="margin-bottom: 20px;">
-                              <!-- Profile picture card-->
-                              <div class="card">
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1" for="inputEspc">Especialidad</label>
+                                                        <input readonly="readonly" type="text" class="form-control"
+                                                               id="inputEspc"
+                                                               placeholder="Ingrese su Especialidad"/>
+                                                    </div>
 
-                                <div class="card-body text-center">
-                                  <!-- Profile picture image-->
-                                  <img id="imgDoctor" class="img-thumbnail rounded mb-2" src="" alt="Foto" width="150"
-                                    height="450" />
-                                  <!-- Profile picture help block-->
+                                                    <div class="col-md-6" style="margin-bottom: 20px;">
+                                                        <!-- Profile picture card-->
+                                                        <div class="card">
 
-                                  <!-- Profile picture upload button-->
+                                                            <div class="card-body text-center">
+                                                                <!-- Profile picture image-->
+                                                                <img id="imgDoctor" class="img-thumbnail rounded mb-2"
+                                                                     src="" alt="Foto" width="150"
+                                                                     height="450"/>
+                                                                <!-- Profile picture help block-->
 
+                                                                <!-- Profile picture upload button-->
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
-                            </div>
-                          </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                    data-target="#collapseTwo" aria-expanded="false"
+                                                    aria-controls="collapseTwo">
+                                                Enfermera
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="card-body">
 
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card">
-                    <div class="card-header" id="headingTwo">
-                      <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                          data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                          Enfermera
-                        </button>
-                      </h5>
-                    </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                      <div class="card-body">
-                        <div class="card-body">
+                                                <div class="form-row">
+                                                    <!-- Form Group (NSA)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1" for="inputFirstName">NSA</label>
+                                                        <div class="autocomplete" style="width: 100%">
+                                                            <input autocomplete="ÑÖcompletes" class="form-control"
+                                                                   id="myInputEnfermera" type="text"
+                                                                   name="myCountry"
+                                                                   placeholder="Ingrese su Numero de Serie"
+                                                                   th:field="*{idenf}"
+                                                                   required/>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Form Group (DNI)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1" for="inputdniEnfermera">DNI</label>
+                                                        <input readonly="readonly" type="text" class="form-control"
+                                                               id="inputdniEnfermera"
+                                                               placeholder="Ingrese su DNI"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <!-- Form Group (NSA)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1"
+                                                               for="inputFirstNameEnfermera">Nombre</label>
+                                                        <input readonly="readonly" class="form-control"
+                                                               id="inputFirstNameEnfermera" type="text"
+                                                               placeholder="Ingrese su Nombre" th:field="*{nomenf}"/>
+                                                    </div>
+                                                    <!-- Form Group (DNI)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1"
+                                                               for="inputLastNameEnfermera">Apellido</label>
+                                                        <input readonly="readonly" type="text" class="form-control"
+                                                               id="inputLastNameEnfermera"
+                                                               placeholder="Ingrese su Apellido" th:field="*{apeenf}"/>
+                                                    </div>
 
-                          <div class="form-row">
-                            <!-- Form Group (NSA)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputFirstName">NSA</label>
-                              <div class="autocomplete" style="width: 100%">
-                                <input autocomplete="ÑÖcompletes" class="form-control" id="myInputEnfermera" type="text"
-                                  name="myCountry" placeholder="Ingrese su Numero de Serie" th:field="*{idenf}"
-                                  required />
-                              </div>
-                            </div>
-                            <!-- Form Group (DNI)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputdniEnfermera">DNI</label>
-                              <input readonly="readonly" type="text" class="form-control" id="inputdniEnfermera"
-                                placeholder="Ingrese su DNI" />
-                            </div>
-                          </div>
-                          <div class="form-row">
-                            <!-- Form Group (NSA)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputFirstNameEnfermera">Nombre</label>
-                              <input readonly="readonly" class="form-control" id="inputFirstNameEnfermera" type="text"
-                                placeholder="Ingrese su Nombre" th:field="*{nomenf}" />
-                            </div>
-                            <!-- Form Group (DNI)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputLastNameEnfermera">Apellido</label>
-                              <input readonly="readonly" type="text" class="form-control" id="inputLastNameEnfermera"
-                                placeholder="Ingrese su Apellido" th:field="*{apeenf}" />
-                            </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1"
+                                                               for="inputEspcEnfermera">Especialidad</label>
+                                                        <input readonly="readonly" type="text" class="form-control"
+                                                               id="inputEspcEnfermera"
+                                                               placeholder="Ingrese su Especialidad"
+                                                               th:field="*{pro_espenf}"/>
+                                                    </div>
 
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputEspcEnfermera">Especialidad</label>
-                              <input readonly="readonly" type="text" class="form-control" id="inputEspcEnfermera"
-                                placeholder="Ingrese su Especialidad" th:field="*{pro_espenf}" />
-                            </div>
+                                                    <div class="form-group col-md-6" style="margin-bottom: 20px;">
+                                                        <!-- Profile picture card-->
+                                                        <div class="card">
 
-                            <div class="form-group col-md-6" style="margin-bottom: 20px;">
-                              <!-- Profile picture card-->
-                              <div class="card">
+                                                            <div class="card-body text-center">
+                                                                <!-- Profile picture image-->
+                                                                <img id="imgEnfermera"
+                                                                     class="img-thumbnail rounded mb-2" src=""
+                                                                     alt="Foto"
+                                                                     width="150" height="450"/>
+                                                                <!-- Profile picture help block-->
+                                                                <!-- Profile picture upload button-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                <div class="card-body text-center">
-                                  <!-- Profile picture image-->
-                                  <img id="imgEnfermera" class="img-thumbnail rounded mb-2" src="" alt="Foto"
-                                    width="150" height="450" />
-                                  <!-- Profile picture help block-->
-                                  <!-- Profile picture upload button-->
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
-                            </div>
-                          </div>
 
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingThree">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                    data-target="#collapseThree" aria-expanded="false"
+                                                    aria-controls="collapseThree">
+                                                Técnica de Enfermeria
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="card-body">
 
-                  <div class="card">
-                    <div class="card-header" id="headingThree">
-                      <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                          data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                          Técnica de Enfermeria
-                        </button>
-                      </h5>
-                    </div>
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                      data-parent="#accordionExample">
-                      <div class="card-body">
-                        <div class="card-body">
+                                                <div class="form-row">
+                                                    <!-- Form Group (NSA)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1"
+                                                               for="inputFirstNameTecnica">NSA</label>
+                                                        <div class="autocomplete" style="width: 100%">
+                                                            <input autocomplete="ÑÖcompletes" class="form-control"
+                                                                   id="myInputTecnica" type="text"
+                                                                   name="myCountry"
+                                                                   placeholder="Ingrese su Numero de Serie"
+                                                                   th:field="*{idtec}"
+                                                                   required/>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Form Group (DNI)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1" for="inputdniTecnica">DNI</label>
+                                                        <input readonly="readonly" type="text" class="form-control"
+                                                               id="inputdniTecnica"
+                                                               placeholder="Ingrese su DNI"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <!-- Form Group (NSA)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1"
+                                                               for="inputFirstNameTecnica">Nombre</label>
+                                                        <input readonly="readonly" class="form-control"
+                                                               id="inputFirstNameTecnica" type="text"
+                                                               placeholder="Ingrese su Nombre" th:field="*{nomtec}"/>
+                                                    </div>
+                                                    <!-- Form Group (DNI)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1"
+                                                               for="inputLastNameTecnica">Apellido</label>
+                                                        <input readonly="readonly" type="text" class="form-control"
+                                                               id="inputLastNameTecnica"
+                                                               placeholder="Apellido" th:field="*{apetec}"/>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1"
+                                                               for="inputEspcTecnica">Especialidad</label>
+                                                        <input readonly="readonly" type="text" class="form-control"
+                                                               id="inputEspcTecnica"
+                                                               placeholder="Especialidad" th:field="*{esptec}"/>
+                                                    </div>
 
-                          <div class="form-row">
-                            <!-- Form Group (NSA)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputFirstNameTecnica">NSA</label>
-                              <div class="autocomplete" style="width: 100%">
-                                <input autocomplete="ÑÖcompletes" class="form-control" id="myInputTecnica" type="text"
-                                  name="myCountry" placeholder="Ingrese su Numero de Serie" th:field="*{idtec}"
-                                  required />
-                              </div>
-                            </div>
-                            <!-- Form Group (DNI)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputdniTecnica">DNI</label>
-                              <input readonly="readonly" type="text" class="form-control" id="inputdniTecnica"
-                                placeholder="Ingrese su DNI" />
-                            </div>
-                          </div>
-                          <div class="form-row">
-                            <!-- Form Group (NSA)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputFirstNameTecnica">Nombre</label>
-                              <input readonly="readonly" class="form-control" id="inputFirstNameTecnica" type="text"
-                                placeholder="Ingrese su Nombre" th:field="*{nomtec}" />
-                            </div>
-                            <!-- Form Group (DNI)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputLastNameTecnica">Apellido</label>
-                              <input readonly="readonly" type="text" class="form-control" id="inputLastNameTecnica"
-                                placeholder="Apellido" th:field="*{apetec}" />
-                            </div>
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputEspcTecnica">Especialidad</label>
-                              <input readonly="readonly" type="text" class="form-control" id="inputEspcTecnica"
-                                placeholder="Especialidad" th:field="*{esptec}" />
-                            </div>
+                                                    <div class="form-group col-md-6" style="margin-bottom: 20px;">
+                                                        <!-- Profile picture card-->
+                                                        <div class="card">
 
-                            <div class="form-group col-md-6" style="margin-bottom: 20px;">
-                              <!-- Profile picture card-->
-                              <div class="card">
-
-                                <div class="card-body text-center">
-                                  <!-- Profile picture image-->
-                                  <img id="imgTecnica" class="img-thumbnail rounded mb-2" src="" alt="Foto" width="150"
-                                    height="450" />
-                                  <!-- Profile picture help block-->
+                                                            <div class="card-body text-center">
+                                                                <!-- Profile picture image-->
+                                                                <img id="imgTecnica" class="img-thumbnail rounded mb-2"
+                                                                     src="" alt="Foto" width="150"
+                                                                     height="450"/>
+                                                                <!-- Profile picture help block-->
 
 
-                                  <!-- Profile picture upload button-->
+                                                                <!-- Profile picture upload button-->
 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
-                            </div>
-                          </div>
+                                <!-- ******************ACA IRA PERSONAL DE CHOFERES*****************-->
+                                <div class="card">
+                                    <div class="card-header" id="headingFour">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                    data-target="#collapseFour" aria-expanded="false"
+                                                    aria-controls="collapseFour">
+                                                Conductor Ambulancia
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="card-body">
 
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- ******************ACA IRA PERSONAL DE CHOFERES*****************-->
-                  <div class="card">
-                    <div class="card-header" id="headingFour">
-                      <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                          data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                          Conductor Ambulancia
-                        </button>
-                      </h5>
-                    </div>
-                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
-                      data-parent="#accordionExample">
-                      <div class="card-body">
-                        <div class="card-body">
+                                                <div class="form-row">
+                                                    <!-- Form Group (NSA)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1" for="inputChofer">NSA</label>
+                                                        <div class="autocomplete" style="width: 100%">
+                                                            <input autocomplete="ÑÖcompletes" class="form-control"
+                                                                   id="inputChofer" type="text"
+                                                                   name="myCountry"
+                                                                   placeholder="Ingrese su Numero de Serie"
+                                                                   th:field="*{idchf}"
+                                                                   required/>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Form Group (DNI)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1" for="choferDni">DNI</label>
+                                                        <input readonly="readonly" type="text" class="form-control"
+                                                               id="choferDni"
+                                                               placeholder="Ingrese su DNI"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <!-- Form Group (NSA)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1" for="choferNombre">Nombre</label>
+                                                        <input readonly="readonly" class="form-control"
+                                                               id="choferNombre" type="text"
+                                                               placeholder="Nombre" th:field="*{nomchf}"/>
+                                                    </div>
+                                                    <!-- Form Group (DNI)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1" for="choferApellido">Apellido</label>
+                                                        <input readonly="readonly" type="text" class="form-control"
+                                                               id="choferApellido"
+                                                               placeholder="Apellido" th:field="*{apechf}"/>
+                                                    </div>
 
-                          <div class="form-row">
-                            <!-- Form Group (NSA)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputChofer">NSA</label>
-                              <div class="autocomplete" style="width: 100%">
-                                <input autocomplete="ÑÖcompletes" class="form-control" id="inputChofer" type="text"
-                                  name="myCountry" placeholder="Ingrese su Numero de Serie" th:field="*{idchf}"
-                                  required />
-                              </div>
-                            </div>
-                            <!-- Form Group (DNI)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="choferDni">DNI</label>
-                              <input readonly="readonly" type="text" class="form-control" id="choferDni"
-                                placeholder="Ingrese su DNI" />
-                            </div>
-                          </div>
-                          <div class="form-row">
-                            <!-- Form Group (NSA)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="choferNombre">Nombre</label>
-                              <input readonly="readonly" class="form-control" id="choferNombre" type="text"
-                                placeholder="Nombre" th:field="*{nomchf}" />
-                            </div>
-                            <!-- Form Group (DNI)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="choferApellido">Apellido</label>
-                              <input readonly="readonly" type="text" class="form-control" id="choferApellido"
-                                placeholder="Apellido" th:field="*{apechf}" />
-                            </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1"
+                                                               for="choferEspecialidad">Especialidad</label>
+                                                        <input readonly="readonly" type="text" class="form-control"
+                                                               id="choferEspecialidad"
+                                                               placeholder="Especialidad" th:field="*{espchf}"/>
+                                                    </div>
 
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="choferEspecialidad">Especialidad</label>
-                              <input readonly="readonly" type="text" class="form-control" id="choferEspecialidad"
-                                placeholder="Especialidad" th:field="*{espchf}" />
-                            </div>
+                                                    <div class="form-group col-md-6" style="margin-bottom: 20px;">
+                                                        <!-- Profile picture card-->
+                                                        <div class="card">
 
-                            <div class="form-group col-md-6" style="margin-bottom: 20px;">
-                              <!-- Profile picture card-->
-                              <div class="card">
-
-                                <div class="card-body text-center">
-                                  <!-- Profile picture image-->
-                                  <img id="imgChofer" class="img-thumbnail rounded mb-2" src="" alt="Foto" width="150"
-                                    height="450" />
-                                  <!-- Profile picture help block-->
+                                                            <div class="card-body text-center">
+                                                                <!-- Profile picture image-->
+                                                                <img id="imgChofer" class="img-thumbnail rounded mb-2"
+                                                                     src="" alt="Foto" width="150"
+                                                                     height="450"/>
+                                                                <!-- Profile picture help block-->
 
 
-                                  <!-- Profile picture upload button-->
+                                                                <!-- Profile picture upload button-->
 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
-                            </div>
 
-                          </div>
+                                <!-- ******************ACA IRA VEHICULO *****************-->
+                                <div class="card">
+                                    <div class="card-header" id="headingFive">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                    data-target="#collapseFive" aria-expanded="false"
+                                                    aria-controls="collapseFive">
+                                                Ambulancia
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="card-body">
 
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                                                <div class="form-row">
+                                                    <!-- Form Group (NSA)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1" for="inputPlaca">Codigo
+                                                            Vehicular</label>
+                                                        <div class="autocomplete" style="width: 100%">
+                                                            <input autocomplete="ÑÖcompletes" class="form-control"
+                                                                   id="inputPlaca" type="text"
+                                                                   name="myCountry" placeholder="Ingrese Codigo"
+                                                                   th:field="*{idveh}" required/>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Form Group (DNI)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1" for="placa">Placa</label>
+                                                        <input readonly="readonly" type="text" class="form-control"
+                                                               id="placa"
+                                                               placeholder="Placa Vehiculo"/>
+                                                    </div>
 
-                  <!-- ******************ACA IRA VEHICULO *****************-->
-                  <div class="card">
-                    <div class="card-header" id="headingFive">
-                      <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                          data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                          Ambulancia
-                        </button>
-                      </h5>
-                    </div>
-                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive"
-                      data-parent="#accordionExample">
-                      <div class="card-body">
-                        <div class="card-body">
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1" for="marca">Marca</label>
+                                                        <input readonly="readonly" type="text" class="form-control"
+                                                               id="marca"
+                                                               placeholder="Marca Vehiculo"/>
+                                                    </div>
+                                                    <!-- Form Group (NSA)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1"
+                                                               for="modelo">Modelo</label>
+                                                        <input readonly="readonly" class="form-control" id="modelo"
+                                                               type="text"
+                                                               placeholder="Modelo"/>
+                                                    </div>
+                                                </div>
 
-                          <div class="form-row">
-                            <!-- Form Group (NSA)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputFirstNamePaciente">Codigo Vehicular</label>
-                              <div class="autocomplete" style="width: 100%">
-                                <input autocomplete="ÑÖcompletes" class="form-control" id="inputPlaca" type="text"
-                                  name="myCountry" placeholder="Ingrese Codigo" th:field="*{idveh}" required />
-                              </div>
-                            </div>
-                            <!-- Form Group (DNI)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputdniPaciente">Placa</label>
-                              <input readonly="readonly" type="text" class="form-control" id="placa"
-                                placeholder="Placa Vehiculo" />
-                            </div>
+                                                <div class="form-row">
+                                                    <!-- Form Group (NSA)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1" for="color">Color</label>
+                                                        <input readonly="readonly" type="text" class="form-control"
+                                                               id="color"
+                                                               placeholder="Color Vehiculo"/>
+                                                    </div>
+                                                    <!-- Form Group (DNI)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1"
+                                                               for="combustible">Combustible</label>
+                                                        <input readonly="readonly" type="text" class="form-control"
+                                                               id="combustible"
+                                                               placeholder="Marca Vehiculo"/>
+                                                    </div>
 
-                          </div>
-                          <div class="form-row">
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputdniPaciente">Marca</label>
-                              <input readonly="readonly" type="text" class="form-control" id="marca"
-                                placeholder="Marca Vehiculo" />
-                            </div>
-                            <!-- Form Group (NSA)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputFirstNamePaciente">Modelo</label>
-                              <input readonly="readonly" class="form-control" id="modelo" type="text"
-                                placeholder="Modelo" />
-                            </div>
-                          </div>
+                                                </div>
 
-                          <div class="form-row">
-                            <!-- Form Group (NSA)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputdniPaciente">Color</label>
-                              <input readonly="readonly" type="text" class="form-control" id="color"
-                                placeholder="Color Vehiculo" />
-                            </div>
-                            <!-- Form Group (DNI)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputdniPaciente">Combustible</label>
-                              <input readonly="readonly" type="text" class="form-control" id="combustible"
-                                placeholder="Marca Vehiculo" />
-                            </div>
+                                                <div class="form-row">
+                                                    <!-- Form Group (NSA)-->
+                                                    <!-- Form Group (DNI)-->
+                                                    <div class="form-group col-md-6">
+                                                        <label class="small mb-1"
+                                                               for="disponible">Disponible</label>
+                                                        <input readonly="readonly" type="text" class="form-control"
+                                                               id="disponible"
+                                                               placeholder="Disponibilidad"/>
+                                                    </div>
 
-                          </div>
+                                                    <div class="form-group col-md-6" style="margin-bottom: 20px;">
+                                                        <!-- Profile picture card-->
+                                                        <div class="card">
 
-                          <div class="form-row">
-                            <!-- Form Group (NSA)-->
-                            <!-- Form Group (DNI)-->
-                            <div class="form-group col-md-6">
-                              <label class="small mb-1" for="inputLastNamePaciente">Disponible</label>
-                              <input readonly="readonly" type="text" class="form-control" id="disponible"
-                                placeholder="Disponibilidad" />
-                            </div>
-
-                            <div class="form-group col-md-6" style="margin-bottom: 20px;">
-                              <!-- Profile picture card-->
-                              <div class="card">
-
-                                <div class="card-body text-center">
-                                  <!-- Profile picture image-->
-                                  <img id="imgVehiculo" class="img-thumbnail rounded mb-2" src="" alt="Foto Vehiculo"
-                                    width="150" height="450" />
-                                  <!-- Profile picture help block-->
-                                  <!-- Profile picture upload button-->
+                                                            <div class="card-body text-center">
+                                                                <!-- Profile picture image-->
+                                                                <img id="imgVehiculo" class="img-thumbnail rounded mb-2"
+                                                                     src="" alt="Foto Vehiculo"
+                                                                     width="150" height="450"/>
+                                                                <!-- Profile picture help block-->
+                                                                <!-- Profile picture upload button-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
                             </div>
-                          </div>
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    Brigada Médica
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <!-- Form Group (DNI) BRIGADA-->
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="inputLastName">Brigada </label>
+                                            <select class="custom-select" th:field="*{obs}">
+                                                <option th:value="Brigada1" th:text="'Brigada 1'"></option>
+                                                <option th:value="Brigada2" th:text="'Brigada 2'"></option>
+                                                <option th:value="Brigada3" th:text="'Brigada 3'"></option>
+                                                <option th:value="Brigada4" th:text="'Brigada 4'"></option>
+                                            </select>
+                                        </div>
+                                        <!-- Form Group (DNI) DISTRITOS -->
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="inputLastName">Distrito</label>
+                                            <select class="custom-select" th:field="*{dist}">
+                                                <!--  -->
+                                                <option value="SAN ISIDRO">SAN ISIDRO</option>
+                                                <option value="MIRAFLORES">MIRAFLORES</option>
+                                                <option value="SURQUILLO">SURQUILLO</option>
+                                                <option value="LOS OLIVOS">LOS OLIVOS</option>
+                                                <option value="S.J LURIGANCHO">S.J LURIGANCHO</option>
+                                                <option value="S.M.P">S.M.P</option>
+                                                <option value="SAN MIGUEL">SAN MIGUEL</option>
+                                                <option value="CALLAO">CALLAO</option>
+                                                <option value="MAGDALENA">MAGDALENA</option>
+                                                <option value="BREÑA">BREÑA</option>
+                                                <option value="JESUS MARIA">JESUS MARIA</option>
+                                                <option value="LIMA">LIMA</option>
+                                                <option value="LINCE">LINCE</option>
+                                                <option value="PUEBLO LIBRE">PUEBLO LIBRE</option>
+                                                <option value="LA VICTORIA">LA VICTORIA</option>
+                                                <option value="SAN BORJA">SAN BORJA</option>
+                                                <!--  -->
+                                            </select>
+                                        </div>
+                                        <!-- Form Group FECHA -->
+
+
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="inputDate">Fechas Brigada</label>
+                                            <input type="text" class="form-control" id="inputDate"
+                                                   placeholder="Seleccione fechas"
+                                                   name="fecha" th:field="*{fecha}" required/>
+                                        </div>
+
+                                        <!-- Form Group (NSA) HORA-->
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="inputHora">Hora </label>
+                                            <select class="form-control" name="inputLastName" id="inputHora"
+                                                    th:field="*{hora}" required>
+                                                <option value="8:00">8:00</option>
+                                                <option value="9:00">9:00</option>
+                                                <option value="10:00">10:00</option>
+                                                <option value="11:00">11:00</option>
+                                                <option value="12:00">12:00</option>
+                                                <option value="13:00">13:00</option>
+                                                <option value="14:00">14:00</option>
+                                                <option value="15:00">15:00</option>
+                                                <option value="16:00">16:00</option>
+                                                <option value="17:00">17:00</option>
+                                                <option value="18:00">18:00</option>
+                                            </select>
+                                            <!-- <input type="time" class="form-control" id="inputLastName" placeholder="Observacion"
+                                              th:field="*{hora}" required /> -->
+                                        </div>
+
+
+                                        <!-- Form Group (DNI) TURNO ATENCION -->
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="inputLastName" id="turno">Turno
+                                                Atención</label>
+                                            <select class="custom-select" id="time" th:field="*{time}">
+                                                <option th:value="Mañana" th:text="'Turno Mañana'"></option>
+                                                <option th:value="Tarde" th:text="'Turno Tarde'"></option>
+                                            </select>
+                                        </div>
+                                        <!-- Form Group (DNI) ZONA -->
+                                        <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="Zona">Zona</label>
+                                            <select class="custom-select" id="Zona" th:field="*{zona}">
+                                                <option th:value="Sur" th:text="'Zona Sur'"></option>
+                                                <option th:value="Norte" th:text="'Zona Norte'"></option>
+                                            </select>
+                                        </div>
+                                        <!-- Form Group (DNI) DESCRIPCION -->
+                                        <div class="form-group col-md-12">
+                                            <label class="small mb-1" for="BrigadaDesc">Descripción</label>
+                                            <input class="form-control" id="BrigadaDesc" type="text"
+                                                   placeholder="Descripcion" th:field="*{desc}"
+                                                   required/>
+                                        </div>
+                                    </div>
+                                    <input type="submit" value="Crear Brigada" class="btn btn-primary"/>
+                                </div>
+
+
+                            </div>
                         </div>
-                      </div>
                     </div>
-                  </div>
                 </div>
-                <div class="card mb-4">
-                  <div class="card-header">
-                    Brigada Médica
-                  </div>
-                  <div class="card-body">
-                    <div class="form-row">
-                      <!-- Form Group (DNI) BRIGADA-->
-                      <div class="form-group col-md-6">
-                        <label class="small mb-1" for="inputLastName">Brigada </label>
-                        <select class="custom-select" th:field="*{obs}">
-                          <option th:value="Brigada1" th:text="'Brigada 1'"></option>
-                          <option th:value="Brigada2" th:text="'Brigada 2'"></option>
-                          <option th:value="Brigada3" th:text="'Brigada 3'"></option>
-                          <option th:value="Brigada4" th:text="'Brigada 4'"></option>
-                        </select>
-                      </div>
-                      <!-- Form Group (DNI) DISTRITOS -->
-                      <div class="form-group col-md-6">
-                        <label class="small mb-1" for="inputLastName">Distrito</label>
-                        <select class="custom-select" th:field="*{dist}">
-                          <!--  -->
-                          <option value="SAN ISIDRO">SAN ISIDRO</option>
-                          <option value="MIRAFLORES">MIRAFLORES</option>
-                          <option value="SURQUILLO">SURQUILLO</option>
-                          <option value="LOS OLIVOS">LOS OLIVOS</option>
-                          <option value="S.J LURIGANCHO">S.J LURIGANCHO</option>
-                          <option value="S.M.P">S.M.P</option>
-                          <option value="SAN MIGUEL">SAN MIGUEL</option>
-                          <option value="CALLAO">CALLAO</option>
-                          <option value="MAGDALENA">MAGDALENA</option>
-                          <option value="BREÑA">BREÑA</option>
-                          <option value="JESUS MARIA">JESUS MARIA</option>
-                          <option value="LIMA">LIMA</option>
-                          <option value="LINCE">LINCE</option>
-                          <option value="PUEBLO LIBRE">PUEBLO LIBRE</option>
-                          <option value="LA VICTORIA">LA VICTORIA</option>
-                          <option value="SAN BORJA">SAN BORJA</option>
-                          <!--  -->
-                        </select>
-                      </div>
-                      <!-- Form Group (DNI) FECHA -->
-                      <div class="form-group col-md-6">
-                        <label class="small mb-1" for="inputLastName">Fecha Brigada
-                        </label>
-                        <input type="date" class="form-control" id="inputLastName" placeholder="Ingrese disponibilidad"
-                               th:field="*{fecha}" required />
-                      </div>
-                      <!-- Form Group (NSA) HORA-->
-                      <div class="form-group col-md-6">
-                        <label class="small mb-1" for="inputLastName">Hora </label>
-                        <input type="time" class="form-control" id="inputLastName" placeholder="Observacion"
-                          th:field="*{hora}" required />
-                      </div>
+            </form>
 
+        </main>
 
-                      <!-- Form Group (DNI) TURNO ATENCION -->
-                      <div class="form-group col-md-6">
-                        <label class="small mb-1" for="inputLastName">Turno Atención</label>
-                        <select class="custom-select" th:field="*{time}">
-                          <option th:value="Mañana" th:text="'Turno Mañana'"></option>
-                          <option th:value="Tarde" th:text="'Turno Tarde'"></option>
-                        </select>
-                      </div>
-                      <!-- Form Group (DNI) ZONA -->
-                      <div class="form-group col-md-6">
-                        <label class="small mb-1" for="inputLastName">Zona</label>
-                        <select class="custom-select" th:field="*{zona}">
-                          <option th:value="Sur" th:text="'Zona Sur'"></option>
-                          <option th:value="Norte" th:text="'Zona Norte'"></option>
-                        </select>
-                      </div>
-                      <!-- Form Group (DNI) DESCRIPCION -->
-                      <div class="form-group col-md-12">
-                        <label class="small mb-1" for="inputFirstName">Descripción</label>
-                        <input class="form-control" id="inputFirstName" type="text" placeholder="Descripcion"
-                          th:field="*{desc}" required />
-                      </div>
-                    </div>
-                    <input type="submit" value="Crear Brigada" class="btn btn-primary" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </main>
+        <!-- AQUI SE ENCUENTRA EL FOOTER-AUTOMATIZADO-->
+        <footer th:insert="fragments/footer :: pie-pagina" class="footer mt-auto footer-light"></footer>
 
-      <!-- AQUI SE ENCUENTRA EL FOOTER-AUTOMATIZADO-->
-      <footer th:insert="fragments/footer :: pie-pagina" class="footer mt-auto footer-light"></footer>
     </div>
-  </div>
-  <script>
-    window.setTimeout(function () {
-      $(".alert")
-        .fadeTo(1500, 0)
-        .slideDown(1000, function () {
-          $(this).remove();
+
+</div>
+
+<div id="modalM" class="modal" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Alerta</h5>
+                <button type="button" class="close" onclick="$(modalM).hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="mensajeExito">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#inputDate').datepicker({
+            language: "es",
+            multidate: true,
+            format: 'yyyy-mm-dd',
         });
+    });
+
+    function submitForm(event) {
+        event.preventDefault(); // Evitar el envío normal del formulario
+
+        const form = event.target; // Obtener el formulario que se envió
+        const formData = new FormData(form); // Obtener los datos del formulario
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.text()) // Convertir la respuesta a texto
+            .then(data => {
+                $('#mensajeExito').text(data);
+                $('#modalM').show();
+            })
+            .catch(error => {
+                $('#mensajeExito').text("Ocurrio un error");
+                $('#modalM').show();
+                console.error('Error:', error);
+            }
+            );
+    }
+
+    window.setTimeout(function () {
+        $(".alert")
+            .fadeTo(1500, 0)
+            .slideDown(1000, function () {
+                $(this).remove();
+            });
     }, 2000);
-  </script>
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"
-    crossorigin="anonymous"></script>
-  <script th:src="@{/js/scripts.js}"></script>
-  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js" crossorigin="anonymous"></script>
-  <script src="demo/date-range-picker-demo.js"></script>
-  <script th:replace="/views/visitamed/js/autocompleteVisita-medico :: javascript"></script>
-  <script th:replace="/views/visitamed/js/autocompleteVisita-enfermera :: javascript"></script>
-  <script th:replace="/views/visitamed/js/autocompleteVisita-tecnica :: javascript"></script>
-  <script th:replace="/views/visitamed/js/autocomplete-chofer :: javascript"></script>
-  <script th:replace="/views/visitamed/js/autocomplete-vehiculo :: javascript"></script>
-  <script th:replace="/views/visitamed/js/autoselect-brigada :: javascript"></script>
+</script>
+<script th:src="@{/js/scripts.js}"></script>
+<script th:replace="/views/visitamed/js/autocompleteVisita-medico :: javascript"></script>
+<script th:replace="/views/visitamed/js/autocompleteVisita-enfermera :: javascript"></script>
+<script th:replace="/views/visitamed/js/autocompleteVisita-tecnica :: javascript"></script>
+<script th:replace="/views/visitamed/js/autocomplete-chofer :: javascript"></script>
+<script th:replace="/views/visitamed/js/autocomplete-vehiculo :: javascript"></script>
+<script th:replace="/views/visitamed/js/autoselect-brigada :: javascript"></script>
 </body>
 
 </html>

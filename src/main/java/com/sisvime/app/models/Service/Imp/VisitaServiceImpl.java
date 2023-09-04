@@ -69,18 +69,21 @@ public class VisitaServiceImpl implements IVisitaService {
     @Override
     public List<GroupNumberVisitas> grupoVisitaMedica() {
         List<GroupNumberVisitas> listGroupNumberVisit = new ArrayList<>();
-        visitadao.grupoVisitaPersonal().forEach(x -> {
-            GroupNumberVisitas groupNumberVisitas = new GroupNumberVisitas();
-            groupNumberVisitas.setVisitas(Integer.parseInt(String.valueOf(x[0])));
-            groupNumberVisitas.setNombreMedico(String.valueOf(x[1]));
-            groupNumberVisitas.setApellidoMedico(String.valueOf(x[2]));
-            groupNumberVisitas.setNombreEnfermera(String.valueOf(x[3]));
-            groupNumberVisitas.setApellidoEnfermera(String.valueOf(x[4]));
-            groupNumberVisitas.setNombreTecnico(String.valueOf(x[5]));
-            groupNumberVisitas.setApellidoTecnico(String.valueOf(x[6]));
-            listGroupNumberVisit.add(groupNumberVisitas);
-        });
-
+        try {
+            visitadao.grupoVisitaPersonal().forEach(x -> {
+                GroupNumberVisitas groupNumberVisitas = new GroupNumberVisitas();
+                groupNumberVisitas.setVisitas(Integer.parseInt(String.valueOf(x[0])));
+                groupNumberVisitas.setNombreMedico(String.valueOf(x[1]));
+                groupNumberVisitas.setApellidoMedico(String.valueOf(x[2]));
+                groupNumberVisitas.setNombreEnfermera(String.valueOf(x[3]));
+                groupNumberVisitas.setApellidoEnfermera(String.valueOf(x[4]));
+                groupNumberVisitas.setNombreTecnico(String.valueOf(x[5]));
+                groupNumberVisitas.setApellidoTecnico(String.valueOf(x[6]));
+                listGroupNumberVisit.add(groupNumberVisitas);
+            });
+        } catch (Exception ex) {
+            listGroupNumberVisit.add(new GroupNumberVisitas());
+        }
         return listGroupNumberVisit;
     }
 
