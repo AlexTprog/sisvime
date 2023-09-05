@@ -2,62 +2,101 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <body>
-    <script type="text/javascript" th:fragment="javascript">
+<script type="text/javascript" th:fragment="javascript">
 
-        const BrigadaOptions = {
-            "Brigada1": ["SAN ISIDRO", "MIRAFLORES", "SURQUILLO", "LOS OLIVOS", "S.J LURIGANCHO", "S.M.P", "SAN MIGUEL", "CALLAO", "MAGDALENA", "BREÑA", "JESUS MARIA", "LIMA", "LINCE", "PUEBLO LIBRE", "LA VICTORIA", "SAN BORJA"],
-            "Brigada2": ["BARRANCO", "CHORRILLOS", "LA MOLINA", "S.J MIRAFLORES", "V.M.T", "SALAMANCA", "CHACARILLA", "MONTERRICO", "SURCO", "SAN BORJA"],
-            "Brigada3": ["SAN ISIDRO", "MIRAFLORES", "SURQUILLO", "LOS OLIVOS", "S.J LURIGANCHO", "S.M.P", "SAN MIGUEL", "CALLAO", "MAGDALENA", "BREÑA", "JESUS MARIA", "LIMA", "LINCE", "PUEBLO LIBRE", "LA VICTORIA", "SAN BORJA"],
-            "Brigada4": ["SAN ISIDRO", "MIRAFLORES", "SURQUILLO", "LOS OLIVOS", "S.J LURIGANCHO", "S.M.P", "SAN MIGUEL", "CALLAO", "MAGDALENA", "BREÑA", "JESUS MARIA", "LIMA", "LINCE", "PUEBLO LIBRE", "LA VICTORIA", "SAN BORJA", "BARRANCO", "CHORRILLOS", "LA MOLINA", "S.J MIRAFLORES", "V.M.T", "SALAMANCA", "CHACARILLA", "MONTERRICO", "SURCO", "SAN BORJA"],
-        }
+    const BrigadaOptions = {
+        "Brigada1": ["SAN ISIDRO", "MIRAFLORES", "SURQUILLO", "LOS OLIVOS", "S.J LURIGANCHO", "S.M.P", "SAN MIGUEL", "CALLAO", "MAGDALENA", "BREÑA", "JESUS MARIA", "LIMA", "LINCE", "PUEBLO LIBRE", "LA VICTORIA", "SAN BORJA"],
+        "Brigada2": ["BARRANCO", "CHORRILLOS", "LA MOLINA", "S.J MIRAFLORES", "V.M.T", "SALAMANCA", "CHACARILLA", "MONTERRICO", "SURCO", "SAN BORJA"],
+        "Brigada3": ["SAN ISIDRO", "MIRAFLORES", "SURQUILLO", "LOS OLIVOS", "S.J LURIGANCHO", "S.M.P", "SAN MIGUEL", "CALLAO", "MAGDALENA", "BREÑA", "JESUS MARIA", "LIMA", "LINCE", "PUEBLO LIBRE", "LA VICTORIA", "SAN BORJA"],
+        "Brigada4": ["SAN ISIDRO", "MIRAFLORES", "SURQUILLO", "LOS OLIVOS", "S.J LURIGANCHO", "S.M.P", "SAN MIGUEL", "CALLAO", "MAGDALENA", "BREÑA", "JESUS MARIA", "LIMA", "LINCE", "PUEBLO LIBRE", "LA VICTORIA", "SAN BORJA", "BARRANCO", "CHORRILLOS", "LA MOLINA", "S.J MIRAFLORES", "V.M.T", "SALAMANCA", "CHACARILLA", "MONTERRICO", "SURCO", "SAN BORJA"],
+    }
 
-        document.addEventListener("DOMContentLoaded", function (event) {
-            autocompleteDistrito(document.getElementById("obs"));
-        });
+    document.addEventListener("DOMContentLoaded", function (event) {
+        autcompleteZonaBrigadaDistrito(document.getElementById("inputDistritoPaciente"));
+    });
 
-        function autocompleteDistrito(inp) {
-            var currentFocus;
-            var district = document.getElementById("dist");
-            var zona = document.getElementById("zona");
-            var turno = document.getElementById("turno");
-
-            inp.addEventListener("change", function (e) {
-
-                var val = this.value;
-                district.innerHTML = '';
-
-                if (val) {
-
-                    var opc = BrigadaOptions[val];
-
+    function autcompleteZonaBrigadaDistrito(inp) {
+        var brigada = document.getElementById("tipobrigada");
+        var zona = document.getElementById("zonabrigada");
+        var distrito = document.getElementById("obs");
+        inp.addEventListener("change", function (e) {
+            var val = this.value.toUpperCase();
+            console.log("A");
+            for (let clave in BrigadaOptions) {
+                if (BrigadaOptions[clave].includes(val)) {
+                    distrito.innerHTML = '';
+                    var opc = BrigadaOptions[clave];
                     for (let i = 0; i < opc.length; i++) {
                         let opcion = opc[i];
                         let optionElement = document.createElement('option');
                         optionElement.textContent = opcion;
                         optionElement.value = opcion;
-                        district.appendChild(optionElement);
+                        distrito.appendChild(optionElement);
+                        if (opcion == inp.value) {
+                            console.log("B");
+                            inp.selectedIndex = i;
+                        }
                     }
+                    distrito.value = val;
+                    brigada.value = clave;
+                    break;
                 }
+            }
 
-                switch (val) {
-                    case "Brigada1":
-                        //Sur
-                        zona.selectedIndex = 0;
-                        turno.selectedIndex = 0;
-                        break;
-                    case "Brigada2":
-                        //Norte
-                        zona.selectedIndex = 1;
-                        turno.selectedIndex = 0;
-                        break;
+            switch (brigada.value) {
+                case "Brigada1":
+                    zona.selectedIndex = 0;
+                    break;
+                case "Brigada2":
+                    zona.selectedIndex = 1;
+                    break;
+            }
+        });
+    }
+
+
+    document.addEventListener("DOMContentLoaded", function (event) {
+        autocompleteDistrito(document.getElementById("tipobrigada"));
+    });
+
+    function autocompleteDistrito(inp) {
+        var currentFocus;
+        var district = document.getElementById("obs");
+        var zona = document.getElementById("zonabrigada");
+
+        inp.addEventListener("change", function (e) {
+
+            var val = this.value;
+            district.innerHTML = '';
+
+            if (val) {
+
+                var opc = BrigadaOptions[val];
+
+                for (let i = 0; i < opc.length; i++) {
+                    let opcion = opc[i];
+                    let optionElement = document.createElement('option');
+                    optionElement.textContent = opcion;
+                    optionElement.value = opcion;
+                    district.appendChild(optionElement);
                 }
+            }
 
-            });
-        }
+            switch (val) {
+                case "Brigada1":
+                    //Sur
+                    zona.selectedIndex = 0;
+                    break;
+                case "Brigada2":
+                    //Norte
+                    zona.selectedIndex = 1;
+                    break;
+            }
 
+        });
+    }
 
-
-    </script>
+</script>
 
 </body>
 

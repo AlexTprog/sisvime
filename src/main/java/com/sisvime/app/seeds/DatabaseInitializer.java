@@ -64,7 +64,7 @@ public class DatabaseInitializer {
         initSpecialidad();
         initPacientes();
         // Personal
-        initPersonal();        
+        initPersonal();
         initHoras();
         initVehiculos();
         initHorarioTrabajo();
