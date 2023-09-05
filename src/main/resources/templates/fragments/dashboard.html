@@ -50,7 +50,7 @@
                 <a id="perfilprogramacion" class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
                     data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                     <div class="nav-link-icon"><i data-feather="grid"></i></div>
-                    Programaci&oacute;n
+                    Programación Médica
                     <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
                 <div class="collapse" id="collapsePages" data-parent="#accordionSidenav">
@@ -59,7 +59,7 @@
                             sec:authorize="hasAnyAuthority('ADMIN','DOCTOR','JEFA ENFERMERIA')" data-toggle="collapse"
                             data-target="#pagesCollapseAccount" aria-expanded="false"
                             aria-controls="pagesCollapseAccount">
-                            Calendario Medico
+                            Calendario Médico
                             <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="pagesCollapseAccount" data-parent="#accordionSidenavPagesMenu">
@@ -70,12 +70,12 @@
                                     <span class="badge badge-primary-soft text-primary ml-auto"></span>
                                 </a>
                                 <a class="nav-link" href="/calendarvisitamedica">
-                                    Calendario de Visitas Medicas
+                                    Calendario de Visitas Médicas
                                     <span class="badge badge-primary-soft text-primary ml-auto"></span>
                                 </a>
                                 <a class="nav-link" href="/graficosmedicos"
                                     sec:authorize="hasAnyAuthority('ADMIN','DOCTOR')">
-                                    Graficos
+                                    Gráficos
                                     <span class="badge badge-primary-soft text-primary ml-auto"></span>
                                 </a>
                             </nav>
@@ -86,7 +86,7 @@
                             <a id="calendariosvisitasmedicas" class="nav-link collapsed" href="javascript:void(0);"
                                 data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false"
                                 aria-controls="pagesCollapseError">
-                                Programacion Brigada
+                                Programación Brigada
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="pagesCollapseError" data-parent="#accordionSidenavPagesMenu">
@@ -112,18 +112,18 @@
                             <a id="calendariosbrigadasmedicas" class="nav-link collapsed" href="javascript:void(0);"
                                 data-toggle="collapse" data-target="#pagesCollapseKnowledgeBase" aria-expanded="false"
                                 aria-controls="pagesCollapseKnowledgeBase">
-                                Programacion Visita Medica
+                                Programación Visita Médica
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="pagesCollapseKnowledgeBase"
                                 data-parent="#accordionSidenavPagesMenu">
                                 <nav id="calendariosbrigadasmedica" class="sidenav-menu-nested nav">
                                     <a class="nav-link" href="/views/brigada/createbrigada">
-                                        Programar Visita Medica
+                                        Programar Visita Médica
                                         <span class="badge badge-primary-soft text-primary ml-auto"></span>
                                     </a>
                                     <a class="nav-link" href="/views/brigada/listbrigadamedica">
-                                        Visita Medica
+                                        Visita Médica
                                         <span class="badge badge-primary-soft text-primary ml-auto"></span>
                                     </a>
                                     <a class="nav-link" href="/calendarbrigada">
@@ -137,12 +137,30 @@
 
                         <a id="citamedica" class="nav-link collapsed" th:href="@{/views/citas/reservacitas}"
                             sec:authorize="hasAnyAuthority('ADMIN','DOCTOR','PACIENTE')">
-                            Cita Medica
+                            Cita Médica
                         </a>
-
                     </nav>
                 </div>
             </div>
+
+            <div sec:authorize="hasAnyAuthority('ADMIN','DOCTOR','JEFA ENFERMERIA')">
+                <a id="hospitalizacion" class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
+                   data-target="#collapseFlows" aria-expanded="false" aria-controls="collapseFlows">
+                    <div class="nav-link-icon"><i data-feather="grid"></i></i></div>
+                    Hospitalización
+                    <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseFlows" data-parent="#accordionSidenav">
+                    <nav class="sidenav-menu-nested nav accordion">
+                        <a  href="/views/hospitalizacion/IndicacionesMedicas">
+                            Indicaciones Médicas
+                        </a>
+                    </nav>
+                </div>
+
+            </div>
+
+
 
             <div sec:authorize="hasAnyAuthority('ADMIN','DOCTOR')">
                 <a id="perfilreporte" class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
