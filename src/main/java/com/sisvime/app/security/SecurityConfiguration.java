@@ -30,7 +30,8 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.csrf().disable()
+                .authorizeRequests()
                 .antMatchers("/css/**", "/imagen/**", "/js/**").permitAll()
                 .antMatchers("/", "/login", "/signup", "/bcrypt/**").permitAll()
                 .anyRequest().authenticated()
@@ -38,6 +39,7 @@ public class SecurityConfiguration {
                 .and().logout().permitAll();
         return http.build();
     }
+
 
     @Autowired
     public void configure(AuthenticationManagerBuilder auth) throws Exception {

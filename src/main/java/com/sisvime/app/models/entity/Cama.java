@@ -12,11 +12,16 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
-public class Cama  implements Serializable {
+public class Cama implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int Id;
     public String Habitacion;
     public String Cama;
     public Boolean EstaOcupado;
+
+    @Override
+    public String toString() {
+        return Habitacion + " / " + Cama;
+    }
 }

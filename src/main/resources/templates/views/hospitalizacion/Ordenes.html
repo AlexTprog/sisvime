@@ -3,24 +3,25 @@
 
 <head th:fragment="head">
 
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
     <title>SISVIME</title>
-    <link href="/css/styles.css" rel="stylesheet" />
-    <link href="/css/personal.css" rel="stylesheet" />
+    <link href="/css/styles.css" rel="stylesheet"/>
+    <link href="/css/personal.css" rel="stylesheet"/>
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
-          crossorigin="anonymous" />
+          crossorigin="anonymous"/>
     <link href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" rel="stylesheet"
-          crossorigin="anonymous" />
-    <link rel="icon" th:href="@{/imagen/favicon.ico}" />
+          crossorigin="anonymous"/>
+    <link rel="icon" th:href="@{/imagen/favicon.ico}"/>
     <script data-search-pseudo-elements defer
-            src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+            src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+            crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.27.0/feather.min.js"
             crossorigin="anonymous"></script>
-    <link th:href="@{/css/jquery-ui.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/jquery-ui.min.css}" rel="stylesheet"/>
 
 </head>
 <body class="nav-fixed">
@@ -38,27 +39,33 @@
             <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
                 <div class="container-fluid">
                     <div class="page-header-content">
-                        <div class="row align-items-center justify-content-between pt-3">
+                        <div class="row align-items-center justify-content-between pt-3 mt-5">
                             <div class="col-auto mb-3">
                                 <h1 class="page-header-title">
                                     <div class="page-header-icon">
                                         <i class="fas fa-procedures"></i>
                                     </div>
-                                    Paciente:Juan Carlos Diaz Diaz
+                                    Paciente: <span
+                                        th:text="${hospitalizacion.Paciente.apellido_pa + ' '+ hospitalizacion.Paciente.apellidoma + ' '+ hospitalizacion.Paciente.nombre}">Nombre
+                                            del Paciente</span>
                                 </h1>
                                 <br>
                                 <h1 class="page-header-title">
                                     <div class="page-header-icon">
                                         <i class="fas fa-calendar-week"></i>
                                     </div>
-                                    Fec. Nac.:04/09/2023 (67 años)
+                                    Fec. Nac.:<span
+                                        th:text="${hospitalizacion.Paciente.fecha_nacimiento + '('+ PacEdad + ')'}">Fecha
+                                            de nacimiento</span>
                                 </h1>
                                 <br>
                                 <h1 class="page-header-title">
                                     <div class="page-header-icon">
                                         <i class="fas fa-weight"></i>
                                     </div>
-                                    Peso/Estatura:80 kg/168 cm
+                                    Peso/Estatura:<span
+                                        th:text="${hospitalizacion.Paciente.peso + 'KG /'+ hospitalizacion.Paciente.altura + 'CM'}">Kg
+                                            / cm</span>
                                 </h1>
                             </div>
 
@@ -68,47 +75,36 @@
                                     <div class="page-header-icon">
                                         <i class="fas fa-user-md"></i>
                                     </div>
-                                    Médico:Juan Perez
+                                    Médico:<span
+                                        th:text="${hospitalizacion.Personal.apellidopat +' '+ hospitalizacion.Personal.apellidomat +' '+ hospitalizacion.Personal.nombre}">Medico</span>
                                 </h1>
                                 <br>
                                 <h1 class="page-header-title">
                                     <div class="page-header-icon">
                                         <i class="fas fa-calendar-week"></i>
                                     </div>
-                                    Admisión:04/09/2023 14:29
+                                    Admisión:<span
+                                        th:text="${#dates.format(hospitalizacion.FechaAdmision, 'dd-MM-yyyy HH:mm')}">Fecha</span>
                                 </h1>
                                 <br>
-                                <h1 class="page-header-title">
-                                    <div class="page-header-icon">
-                                        <i class="fas fa-file-alt"></i>
-                                    </div>
-                                    Consetimiento:Apoyo total
-                                </h1>
                             </div>
 
 
                             <div class="col-auto mb-3">
                                 <h1 class="page-header-title">
                                     <div class="page-header-icon">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                    </div>
-                                    Ubicación:Hospitalización 01 piso
-                                </h1>
-                                <br>
-                                <h1 class="page-header-title">
-                                    <div class="page-header-icon">
                                         <i class="fas fa-procedures"></i>
                                     </div>
-                                    Cama: Estandar/HAB-101
+                                    Cama: <span th:text="${hospitalizacion.Cama}">Nombre del Paciente</span>
                                 </h1>
                             </div>
-                            <div class="col-12 col-xl-auto mb-3">Personal
-                                Médico FAP</div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-xl-auto mb-3">Personal Médico FAP</div>
                         </div>
                     </div>
                 </div>
-
-
             </header>
 
 
@@ -116,33 +112,62 @@
                 <div class="card">
                     <div class="card-header">Medicamentos</div>
 
-                    <label for="buscar_paciente" class="col-sm-6 col-form-label"
-                           th:text="'Órdenes'"></label>
-
-                    <div class="autocomplete col-sm-9">
-
-                        <div class="page-header-icon">
-                            <a class="btn btn-light btn-xs" href="/views/hospitalizacion/ModuloMedico"><i class="fas fa-stethoscope fa-lg"></i></a>
+                    <!-- Buscador de medicamentos -->
+                    <div class="card-body">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Buscar medicamentos" aria-label="Buscar medicamentos" aria-describedby="buscar-medicamentos">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="buscar-medicamentos">Buscar</button>
+                            </div>
                         </div>
                     </div>
-                    <br>
+
+                    <!-- Tabla que muestra los medicamentos -->
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Dosis</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- Aquí se generarán dinámicamente las filas de la tabla con los medicamentos -->
+                            <tr>
+                                <td>Medicamento 1</td>
+                                <td>10 mg</td>
+                                <td>
+                                    <button class="btn btn-primary">Editar</button>
+                                    <button class="btn btn-danger">Eliminar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Medicamento 2</td>
+                                <td>20 mg</td>
+                                <td>
+                                    <button class="btn btn-primary">Editar</button>
+                                    <button class="btn btn-danger">Eliminar</button>
+                                </td>
+                            </tr>
+                            <!-- Puedes agregar más filas aquí con los datos de tus medicamentos -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Botón para agregar medicamentos -->
+                    <div class="card-footer">
+                        <button class="btn btn-success">Agregar Medicamento</button>
+                    </div>
                 </div>
             </div>
+
 
             <div class="container mt-4">
                 <div class="card">
                     <div class="card-header">Servicios</div>
 
-                    <label for="buscar_paciente" class="col-sm-6 col-form-label"
-                           th:text="'Órdenes'"></label>
 
-                    <div class="autocomplete col-sm-9">
-
-                        <div class="page-header-icon">
-                            <a class="btn btn-light btn-xs" href="/views/hospitalizacion/ModuloMedico"><i class="fas fa-stethoscope fa-lg"></i></a>
-                        </div>
-                    </div>
-                    <br>
                 </div>
             </div>
 
@@ -151,16 +176,7 @@
                 <div class="card">
                     <div class="card-header">Dietas</div>
 
-                    <label for="buscar_paciente" class="col-sm-6 col-form-label"
-                           th:text="'Órdenes'"></label>
 
-                    <div class="autocomplete col-sm-9">
-
-                        <div class="page-header-icon">
-                            <a class="btn btn-light btn-xs" href="/views/hospitalizacion/ModuloMedico"><i class="fas fa-stethoscope fa-lg"></i></a>
-                        </div>
-                    </div>
-                    <br>
                 </div>
             </div>
 
@@ -168,16 +184,7 @@
                 <div class="card">
                     <div class="card-header">Otras Indicaciones</div>
 
-                    <label for="buscar_paciente" class="col-sm-6 col-form-label"
-                           th:text="'Órdenes'"></label>
 
-                    <div class="autocomplete col-sm-9">
-
-                        <div class="page-header-icon">
-                            <a class="btn btn-light btn-xs" href="/views/hospitalizacion/ModuloMedico"><i class="fas fa-stethoscope fa-lg"></i></a>
-                        </div>
-                    </div>
-                    <br>
                 </div>
             </div>
 

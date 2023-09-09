@@ -10,6 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.security.SecureRandom;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
@@ -106,6 +107,9 @@ public class Paciente implements Serializable {
     @Column(name = "pac_enfermedad")
     private String enfermedad;
 
+    @Column
+    private Boolean estaHospitalizado = false;
+
     public Paciente() {
         this.id = generateNsa();
     }
@@ -114,6 +118,23 @@ public class Paciente implements Serializable {
         Random random = new Random();
         long num = random.nextInt(900000) + 100000;
         return num;
+    }
+
+    public int calculaEdad() {
+        Date fechaNacimiento = this.fecha_nacimiento;
+
+        Calendar fechaActual = Calendar.getInstance();
+
+        Calendar fechaNac = Calendar.getInstance();
+        fechaNac.setTime(fechaNacimiento);
+
+        int edad = fechaActual.get(Calendar.YEAR) - fechaNac.get(Calendar.YEAR);
+
+        if (fechaActual.get(Calendar.DAY_OF_YEAR) < fechaNac.get(Calendar.DAY_OF_YEAR)) {
+            edad--;
+        }
+
+        return edad;
     }
 
     @Override
