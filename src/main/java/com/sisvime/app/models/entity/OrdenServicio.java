@@ -18,5 +18,6 @@ public class OrdenServicio implements Serializable {
     public Orden Orden;
     public String Servicio;
     public String Prioridad;
-    public Date SolicitadoA;
+    public String SolicitadoA;
+    public Date FechaInicio;
 }

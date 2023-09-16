@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -15,9 +16,11 @@ public class OrdenMedicamento implements Serializable {
     public int Id;
     @ManyToOne
     public Orden Orden;
-    @ManyToOne
-    public Medicamento Medicamento;
+    public String Medicamento;
+    public String Administrado;
     public int Cantidad;
+    public String TipoCantidad;
     public String ViaAdmision;
     public String Frecuencia;
+    public Date FechaInicio;
 }

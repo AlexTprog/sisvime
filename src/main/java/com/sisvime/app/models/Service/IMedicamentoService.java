@@ -18,5 +18,4 @@ public interface IMedicamentoService {
 
     public void delete(int id);
 
-
 }
