@@ -121,13 +121,19 @@
         try {
 
             let visita = await visitas();
-            for (i = 0; i < visita.length; i++) {
 
-                horario.push({
-                    title: "" + visita[i].idper.nombre + " " + visita[i].idper.apellidopat + "  " + visita[i].idper.id + " ", start: visita[i].fecha + "T" + visita[i].hora,
-                    url: "http://localhost:8083/views/visitamed/vervist/+" + visita[i].id
-                });
+            for (i = 0; i < visita.length; i++) {
+                horario.push(
+                {
+                    title: visita[i].idper.nombre + " " + visita[i].idper.apellidopat + "  " + visita[i].idper.id + " ",
+                    start: visita[i].fecha + "T" + visita[i].hora,
+                    url: "http://localhost:8083/views/visitamed/vervist/+" + visita[i].id,
+                    //end: visita[i].fecha + "T" + visita[i].hora,
+                }
+                );
             }
+
+            console.log(horario);
 
             var calendarUI = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarUI, {
@@ -137,8 +143,8 @@
                     right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth',
                 },
                 events: horario
-
             });
+
             calendar.render();
             calendar.setOption('locale', 'es');
         } catch (e) {

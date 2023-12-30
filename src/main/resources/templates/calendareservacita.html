@@ -105,13 +105,12 @@
 <script src="/fullcalendar/lib/locales-all.js"></script>
 <script>
         
-        		async function citas() {
-					return (await fetch("http://localhost:8083/views/citas/visitalista")).json();
-				}
+            async function citas() {
+                return (await fetch("http://localhost:8083/views/citas/visitalista")).json();
+            }
 	
         	document.addEventListener('DOMContentLoaded',async () => {
-				
-				
+
 				
 				let brigada = [];
 				let horario = [];
@@ -122,9 +121,7 @@
 					for (i = 0; i < cita.length; i++){
 						
 						let hora = cita[i].idhora.hora;
-						
-					
-						
+
 						horario.push({title: cita[i].pac.id+ "-"+cita[i].pac.nombre+ " "+cita[i].pac.apellido_pa +" - "+cita[i].med +"-"+cita[i].estado,start: cita[i].fecha +"T"+hora, 
 						url:"http://localhost:8083/views/citas/vercita/+"+cita[i].id});
 					}

@@ -112,38 +112,8 @@ async function graficoBarra() {
 		madre1.push(validar)
 	
 	})
-	/** Conyuge */
-	conyuge1 = []
-     labels.forEach(e => {
-	
-		 let validar = null
-		for(let i = 0 ; i < data.length; i++) {
-			if(data[i].titular == e && data[i].parentesco == 'Conyuge' ) {
-				
-			
-				validar = data[i].numero
-			}  
 
-		}
-		conyuge1.push(validar)
-	
-	})
-	/** Hijo Discapacitado */
-	hijo1 = []
-     labels.forEach(e => {
-		 
-		 let validar = null
-		for(let i = 0 ; i < data.length; i++) {
-			if(data[i].titular == e && data[i].parentesco == 'HijoDiscapacitado' ) {
-				
-			
-				validar = data[i].numero
-			}  
 
-		}
-		hijo1.push(validar)
-	
-	})
 	
 	/** PRUEBAS */
 	
@@ -209,16 +179,8 @@ async function graficoBarra() {
 				      data: madre1,
 				      backgroundColor:'#FE2E64',
 				    },
-				    {
-				      label: 'Conyuge',
-				      data: conyuge1,
-				      backgroundColor: '#BB8FCE',
-				    },
-				    {
-				      label: 'Hijo Discapacitado',
-				      data: hijo1,
-				      backgroundColor: '#28B463',
-				    }
+
+
 				    ]
 		},
 	  options: {
@@ -362,37 +324,7 @@ async function updateGrafico3(chart,mes,year) {
 	
 	})
 	/** Conyuge */
-	conyuge = []
-     labels.forEach(e => {
-	
-		 let validar = null
-		for(let i = 0 ; i < data.length; i++) {
-			if(data[i].titular == e && data[i].parentesco == 'Conyuge' ) {
-				
-			
-				validar = data[i].numero
-			}  
 
-		}
-		conyuge.push(validar)
-	
-	})
-	/** Hijo Discapacitado */
-	hijo = []
-     labels.forEach(e => {
-		 
-		 let validar = null
-		for(let i = 0 ; i < data.length; i++) {
-			if(data[i].titular == e && data[i].parentesco == 'HijoDiscapacitado' ) {
-				
-			
-				validar = data[i].numero
-			}  
-
-		}
-		hijo.push(validar)
-	
-	})
 	
 	let color = [];
   	let border = []
@@ -405,8 +337,7 @@ async function updateGrafico3(chart,mes,year) {
 	  chart.data.datasets[0].data = titular
 	  chart.data.datasets[1].data = padre
 	  chart.data.datasets[2].data = madre
-	  chart.data.datasets[3].data = conyuge
-	  chart.data.datasets[4].data = hijo
+
 	  /*chart.data.datasets[0].backgroundColor = color*/
 	  chart.data.labels = labels
 	  chart.update();

@@ -42,7 +42,11 @@ public class HospitalizacionController {
     @Autowired
     private IPacienteService pacienteservice;
 
+    @GetMapping("/AtenderPaciente")
+    public String Atencion(Model model) {
+        return "/views/hospitalizacion/AtenderPaciente";
 
+    }
     @GetMapping("/IndicacionesMedicas")
     public String Hospitalizacion(Model model) {
 

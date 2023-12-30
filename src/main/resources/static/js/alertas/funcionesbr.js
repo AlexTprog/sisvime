@@ -1,6 +1,6 @@
 function deletebrigada(id) {
 	swal({
-		title: "¿Está seguro de Eliminar?",
+		title: "¿Está seguro que desea cancelar la visita médica creada?",
 		text: "¡Esta operación no se pude revertir!",
 		icon: "warning",
 		buttons: true,
@@ -17,7 +17,7 @@ function deletebrigada(id) {
 			
 			});
 			
-				swal("¡Eliminado!,Tu archivo ha sido eliminado.", {
+				swal("¡Cancelado,ha sido cancelado con éxito.", {
 					icon: "success",
 				}).then((ok)=>{
 						if(ok){

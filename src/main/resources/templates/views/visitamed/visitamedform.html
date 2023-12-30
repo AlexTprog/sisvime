@@ -563,8 +563,6 @@
                                             <label class="small mb-1" for="inputHora">Hora </label>
                                             <select class="form-control" name="inputLastName" id="inputHora"
                                                     th:field="*{hora}" required>
-                                                <option value="8:00">8:00</option>
-                                                <option value="9:00">9:00</option>
                                                 <option value="10:00">10:00</option>
                                                 <option value="11:00">11:00</option>
                                                 <option value="12:00">12:00</option>
@@ -573,7 +571,6 @@
                                                 <option value="15:00">15:00</option>
                                                 <option value="16:00">16:00</option>
                                                 <option value="17:00">17:00</option>
-                                                <option value="18:00">18:00</option>
                                             </select>
                                             <!-- <input type="time" class="form-control" id="inputLastName" placeholder="Observacion"
                                               th:field="*{hora}" required /> -->
@@ -602,7 +599,7 @@
                                             <label class="small mb-1" for="BrigadaDesc">Descripción</label>
                                             <input class="form-control" id="BrigadaDesc" type="text"
                                                    placeholder="Descripcion" th:field="*{desc}"
-                                                   required/>
+                                                   />
                                         </div>
                                     </div>
                                     <input type="submit" value="Crear Brigada" class="btn btn-primary"/>
@@ -646,6 +643,7 @@
             language: "es",
             multidate: true,
             format: 'yyyy-mm-dd',
+            startDate: new Date()
         });
     });
 

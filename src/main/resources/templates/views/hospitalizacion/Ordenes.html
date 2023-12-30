@@ -281,7 +281,6 @@
                                     <br>
                                     <button id="btnAddDieta" class="btn btn-success">Agregar</button>
                                 </div>
-
                             </div>
                         </div>
 
@@ -316,12 +315,56 @@
                             </div>
 
                         </div>
+
+                    </div>
+                </div>
+
+                <!-- Aquí vamos a agregar a la enfermera asignada-->
+                <div class="container mt-4">
+                    <div class="card">
+                        <div class="card-header">Enfermera Asignada</div>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <label for="data1">Enfermera</label>
+                                    <select name="data1" id="data1" class="form-control">
+                                        <option value="Analisis 1">Lucia Diaz</option>
+                                        <option value="Analisis 2">Liz Sandoval</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label for="data2">Turno</label>
+                                    <select name="data2" id="data2" class="form-control">
+                                        <option value="Programado">Diurno</option>
+                                        <option value="Critico">Nocturno</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label for="data3">Horario</label>
+                                    <select name="data3" id="data3" class="form-control">
+                                        <option value="Laboratorio Neumologia">8:00 a.m - 8:00 p.m</option>
+                                        <option value="Laboratorio Cardiologia">8:00 p.m - 8:00 a.m</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputIndicaciones">Indicaciones:</label>
+                                    <textarea class="form-control" id="inputreportenf" rows="5"></textarea>
+                                </div>
+
+                            </div>
+
+                        </div>
                         <div class="card-footer">
                             <button id="bntGuardarOrden" class="btn btn-primary">Guardar Orden</button>
                             <button id="btnResumen" class="btn btn-info">Resumen Orden</button>
                         </div>
                     </div>
                 </div>
+                <!-- Aquí vamos a agregar a la enfermera asignada-->
+
 
             </main>
             <div id="modalM" class="modal" tabindex="-1" role="dialog" style="display: none;">
@@ -404,6 +447,24 @@
                             <!-- Indicaciones -->
                             <h6 class="text-primary">Indicaciones</h6>
                             <p id="resumenIndi"><!-- Aquí puedes agregar texto con las indicaciones --></p>
+
+                            <!-- Dietas -->
+                            <h6 class="text-primary">Enfermera Asignada</h6>
+                            <table class="table table-striped" id="resumenenfermera">
+                                <thead>
+                                <tr>
+                                    <th>Enfermera</th>
+                                    <th>Turno</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!-- Aquí puedes agregar filas con datos de dietas -->
+                                <tr>
+                                    <td>Lucia Diaz</td>
+                                    <td>Diurno</td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

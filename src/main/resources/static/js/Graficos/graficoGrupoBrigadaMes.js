@@ -9,7 +9,7 @@ function ComboYear5(){
     var d = new Date();
     var n = d.getFullYear();
     var select = document.getElementById("yearGrupo");
-    for(var i = n; i >= 2015; i--) {
+    for(var i = n; i >= 2023; i--) {
         var opc = document.createElement("option");
         opc.text = i;
         opc.value = i;
