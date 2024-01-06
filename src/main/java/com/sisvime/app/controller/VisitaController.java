@@ -109,7 +109,6 @@ public class VisitaController {
 
         model.addAttribute("visita", visita);
         model.addAttribute("titulo", "Detalle de la Brigada : " + ' ' + visita.getFecha() + ' ' + visita.getZona());
-
         return "/views/visitamed/vervisita";
     }
 
@@ -140,57 +139,62 @@ public class VisitaController {
 
     @PostMapping(value = "/savevisitaDto")
     public ResponseEntity<String> guardarVisitaDto(VisitaDto visita) {
-        var formato = new SimpleDateFormat("yyyy-MM-dd");
-        var StringDates = visita.fecha.split(",");
+       try{
 
-        Visita visit;
-        for (var fecha : StringDates) {
-            Date date;
-            try {
-                date = formato.parse(fecha);
-            } catch (ParseException e) {
-                date = new Date();
-            }
-            visit = new Visita();
+           var formato = new SimpleDateFormat("yyyy-MM-dd");
+           var StringDates = visita.fecha.split(",");
 
-            //Pero
-            visit.setIdper(visita.idper);
+           Visita visit;
+           for (var fecha : StringDates) {
+               Date date;
+               try {
+                   date = formato.parse(fecha);
+               } catch (ParseException e) {
+                   date = new Date();
+               }
+               visit = new Visita();
 
-            //Enf
-            visit.setIdenf(visita.idenf);
-            visit.setApeenf(visita.apeenf);
-            visit.setNomenf(visita.nomenf);
-            visit.setPro_espenf(visita.pro_espenf);
+               //Pero
+               visit.setIdper(visita.idper);
 
-            //Chofer
-            visit.setIdchf(visita.idchf);
-            visit.setApechf(visita.apechf);
-            visit.setNomchf(visita.nomchf);
+               //Enf
+               visit.setIdenf(visita.idenf);
+               visit.setApeenf(visita.apeenf);
+               visit.setNomenf(visita.nomenf);
+               visit.setPro_espenf(visita.pro_espenf);
 
-            //Tec
-            visit.setIdtec(visita.idtec);
-            visit.setApetec(visita.apetec);
-            visit.setEspchf(visita.espchf);
-            visit.setNomtec(visita.nomtec);
+               //Chofer
+               visit.setIdchf(visita.idchf);
+               visit.setApechf(visita.apechf);
+               visit.setNomchf(visita.nomchf);
 
-            //Vehi
-            visit.setIdveh(visita.idveh);
+               //Tec
+               visit.setIdtec(visita.idtec);
+               visit.setApetec(visita.apetec);
+               visit.setEspchf(visita.espchf);
+               visit.setNomtec(visita.nomtec);
 
-            //Visita
-            visit.setDist(visita.dist);
-            visit.setDesc(visita.desc);
-            visit.setHora(visita.hora);
-            visit.setZona(visita.zona);
-            visit.setTit(visita.tit);
-            visit.setTime(visita.time);
-            visit.setObs(visita.obs);
-            //Fecha
-            visit.setFecha(date);
+               //Vehi
+               visit.setIdveh(visita.idveh);
 
-            visitaservice.guardar(visit);
-        }
+               //Visita
+               visit.setDist(visita.dist);
+               visit.setDesc(visita.desc);
+               visit.setHora(visita.hora);
+               visit.setZona(visita.zona);
+               visit.setTit(visita.tit);
+               visit.setTime(visita.time);
+               visit.setObs(visita.obs);
+               //Fecha
+               visit.setFecha(date);
 
-        return new ResponseEntity<>("Las Brigada fueron creadas con exito", HttpStatus.CREATED);
+               visitaservice.guardar(visit);
+           }
+
+           return new ResponseEntity<>("Las Brigada fueron creadas con exito", HttpStatus.CREATED);
+       }catch (Exception ex){
+           return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_GATEWAY);
+       }
     }
 
     @GetMapping(value = "/editvisita/{id}")
@@ -206,6 +210,11 @@ public class VisitaController {
     public String eliminar(@PathVariable("id") int idvisita) {
         visitaservice.eliminar(idvisita);
         return "redirect:/views/visitamed/visitamedicalist";
+    }
+
+    @DeleteMapping("/deletevisita/{id}")
+    public void  delete(@PathVariable("id") int idvisita) {
+        visitaservice.eliminar(idvisita);
     }
 
 }

@@ -66,11 +66,13 @@
                             <nav id="calendariosmedico" class="sidenav-menu-nested nav">
                                 <a class="nav-link" href="/calendarbrigada"
                                     sec:authorize="hasAnyAuthority('ADMIN','DOCTOR')">
-                                    Calendario de Brigada
+                                    <!-- Calendario de Brigada -->
+                                    Calendario de Visitas Médicas
                                     <span class="badge badge-primary-soft text-primary ml-auto"></span>
                                 </a>
                                 <a class="nav-link" href="/calendarvisitamedica">
-                                    Calendario de Visitas Médicas
+                                    <!-- Calendario de Visitas Médicas -->
+                                    Calendario de Brigada
                                     <span class="badge badge-primary-soft text-primary ml-auto"></span>
                                 </a>
                                 <a class="nav-link" href="/graficosmedicos"
@@ -145,7 +147,7 @@
 
             <div sec:authorize="hasAnyAuthority('ADMIN','DOCTOR','JEFA ENFERMERIA')">
                 <a id="hospitalizacion" class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
-                   data-target="#hospCollapseFlows" aria-expanded="false" aria-controls="hospCollapseFlows">
+                    data-target="#hospCollapseFlows" aria-expanded="false" aria-controls="hospCollapseFlows">
                     <div class="nav-link-icon"><i data-feather="grid"></i></i></div>
                     Hospitalización
                     <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>

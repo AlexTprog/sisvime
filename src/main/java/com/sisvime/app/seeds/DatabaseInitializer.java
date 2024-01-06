@@ -58,17 +58,19 @@ public class DatabaseInitializer {
     @PostConstruct
     @Transactional
     public void init() {
-//        initPerfil();
-//        initUsers();
-//        initMedicamentos();
-//        initSpecialidad();
-//        initPacientes();
-//        // Personal
-//        initPersonal();
-//        initHoras();
-//        initVehiculos();
-//        initHorarioTrabajo();
-//        initCitas();
+        /*
+        initPerfil();
+        initUsers();
+        initMedicamentos();
+        initSpecialidad();
+        initPacientes();
+        // Personal
+        initPersonal();
+        initHoras();
+        initVehiculos();
+        initHorarioTrabajo();
+        initCitas();
+        */
     }
 
     private void initHorarioTrabajo() {

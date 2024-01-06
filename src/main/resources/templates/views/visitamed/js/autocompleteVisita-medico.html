@@ -4,7 +4,7 @@
 <body>
 	<script type="text/javascript" th:fragment="javascript">
 		document.addEventListener("DOMContentLoaded", function (event) {
-			autocompleteVisita(document.getElementById("myInput"));
+			autocompleteVisita(document.getElementById("NSADoctor"));
 		});
 
 
@@ -56,11 +56,11 @@
 									b.addEventListener("click", function (e) {
 										/*insert the value for the autocomplete text field:*/
 										inp.value = this.getElementsByTagName("input")[0].value;
-										const firstname = document.getElementById("inputFirstName");
-										const lastname = document.getElementById("inputLastName");
-										const dni = document.getElementById("inputdni");
-										const espec = document.getElementById("inputEspc");
-										const imgDoctor = document.getElementById("imgDoctor");
+										const firstname = document.getElementById("FirstNameDoctor");
+										const lastname = document.getElementById("LastNameDoctor");
+										const dni = document.getElementById("DniDoctor");
+										const espec = document.getElementById("EspcDoctor");
+										const imgDoctor = document.getElementById("ImgDoctor");
 
 										firstname.value = this.getElementsByTagName("input")[0].dataset.nombre;
 										lastname.value = this.getElementsByTagName("input")[0].dataset.apellidos;

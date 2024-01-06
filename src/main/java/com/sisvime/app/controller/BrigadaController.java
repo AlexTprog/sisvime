@@ -101,21 +101,42 @@ public class BrigadaController {
     }
 
     @PostMapping("/savebrigada")
-    public String guardar(@ModelAttribute Brigada brigada, RedirectAttributes attribute, BindingResult result) {
+    public String guardar(@ModelAttribute Brigada brigada,Model model ,RedirectAttributes attribute, BindingResult result) {
 
-        brigadaservice.guardar(brigada);
+        // Obtener todas las visitas
         var allvisits = visitaservice.listartodos();
-        for (var visita : allvisits) {
-            if (visita.getHora().equals(brigada.getHoraini()) &&
-                    visita.getIsFree() &&
-                    visita.getFecha().compareTo(brigada.getFecha()) == 0) {
-                visita.setIsFree(false);
-                visitaservice.guardar(visita);
+
+        // Realizar la validación directamente en el controlador
+        boolean existeBrigada = false;
+
+        for (var existingBrigada : brigadaservice.listartodos()) {
+            if (existingBrigada.getIdpac().equals(brigada.getIdpac()) && existingBrigada.getFecha().equals(brigada.getFecha())) {
+                existeBrigada = true;
                 break;
             }
         }
-        attribute.addFlashAttribute("success", "Brigada Guardado con exito");
-        return "redirect:/views/brigada/listbrigadamedica";
+
+        if (!existeBrigada) {
+
+            // Guardar la nueva brigada
+            brigadaservice.guardar(brigada);
+
+            for (var visita : allvisits) {
+                if (visita.getHora().equals(brigada.getHoraini()) &&
+                        visita.getIsFree() &&
+                        visita.getFecha().compareTo(brigada.getFecha()) == 0) {
+                    visita.setIsFree(false);
+                    visitaservice.guardar(visita);
+                    break;
+                }
+            }
+
+            return "redirect:/views/brigada/listbrigadamedica";
+        } else {
+
+            attribute.addFlashAttribute("mensaje", "El paciente ya tiene una visita para esa fecha");
+            return "redirect:/views/brigada/createbrigada";
+        }
     }
 
     @GetMapping(value = "/editbrigada/{id}")
@@ -132,6 +153,11 @@ public class BrigadaController {
 
         brigadaservice.eliminar(idbrigada);
         return "redirect:/views/brigada/brigmedlist";
+    }
+
+    @DeleteMapping("/deletebrigada/{id}")
+    public void delete(@PathVariable("id") int idbrigada){
+        brigadaservice.eliminar(idbrigada);
     }
 
 }

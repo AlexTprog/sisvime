@@ -17,6 +17,12 @@
     <link href="/css/utilidades.css" rel="stylesheet" />
     <link href="/css/personal.css" rel="stylesheet" />
 </head>
+<style>
+    .disabledC {
+        pointer-events: none;        
+        opacity: 0.5;        
+    }
+</style>
 
 <body class="nav-fixed">
 
@@ -45,9 +51,9 @@
                         </div>
                     </div>
                 </header>
-                <center>
-                    <h4>PROGRAMAR VISITA MÉDICA</h4>
-                </center>
+
+                <h4 class="text-center">PROGRAMAR VISITA MÉDICA</h4>
+
                 <!-- Main page content-->
                 <div class="container mt-4">
                     <hr class="mt-0 mb-4" />
@@ -86,6 +92,7 @@
                                             <div class="form-group col-md-6">
                                                 <label class="small mb-1" for="inputFirstName">Nombre</label>
                                                 <input readonly="readonly" class="form-control"
+                                                
                                                     id="inputFirstNamePaciente" type="text" placeholder="Nombre" />
                                             </div>
                                             <!-- Form Group (DNI)-->
@@ -164,7 +171,7 @@
                                                 <div class="form-group col-md-6">
                                                     <label class="small mb-1" for="inputFirstName">Seleccionar
                                                         Brigada</label>
-                                                    <select class="custom-select" th:field="*{tipobrigada}">
+                                                    <select class="custom-select disabledC" th:field="*{tipobrigada}">
                                                         <option th:value="Brigada1" th:text="'Brigada 1'"></option>
                                                         <option th:value="Brigada2" th:text="'Brigada 2'"></option>
                                                         <option th:value="Brigada3" th:text="'Brigada 3'"></option>
@@ -174,7 +181,7 @@
                                                 <!-- Form Group (DNI) ZONA -->
                                                 <div class="form-group col-md-6">
                                                     <label class="small mb-1" for="inputLastName">Zona Brigada</label>
-                                                    <select class="custom-select" th:field="*{zonabrigada}">
+                                                    <select class="custom-select disabledC" th:field="*{zonabrigada}">
                                                         <option th:value="Sur" th:text="'Zona Sur'"></option>
                                                         <option th:value="Norte" th:text="'Zona Norte'"></option>
                                                     </select>
@@ -182,7 +189,7 @@
                                                 <!-- Form Group (DNI) DISTRITO-->
                                                 <div class="form-group col-md-6">
                                                     <label class="small mb-1" for="inputLastName">Distrito</label>
-                                                    <select class="custom-select" th:field="*{obs}">
+                                                    <select class="custom-select disabledC" th:field="*{obs}">
                                                         <!--  -->
                                                         <option value="SAN ISIDRO">SAN ISIDRO</option>
                                                         <option value="MIRAFLORES">MIRAFLORES</option>
@@ -226,8 +233,11 @@
                                                 <div class="form-group col-md-6">
                                                     <label class="small mb-1" for="inputEspc">Observaciones</label>
                                                     <input type="text" class="form-control" th:field="*{observacion}"
-                                                           placeholder="Observaciones" />
+                                                        placeholder="Observaciones" />
                                                 </div>
+                                            </div>
+                                            <div>
+                                                <p th:text="${mensaje}"></p>
                                             </div>
                                             <input type="submit" value="Crear Visita" class="btn btn-primary" />
                                         </form>
@@ -254,40 +264,7 @@
         </div>
     </div>
 
-    <script>
-        window.setTimeout(function () {
-            $(".alert").fadeTo(1500, 0).slideDown(1000, function () {
-                $(this).remove();
-            });
-        }, 2000);
-
-        const submit = document.addEventListener("submit", (e) => {
-            let nsa = document.getElementById("myInput");
-            let placa = document.getElementById("inputPlaca");
-            let horaini = document.getElementById("horaini");
-            let zonabrigada = document.getElementById("zonabrigada");
-            let fecha = document.getElementById("fecha");
-            let obs = document.getElementById("obs");
-
-            if (nsa.value == "" || placa.value == "" || horaini.value == "" || zonabrigada.value == "" || fecha.value == "" || obs.value == "") {
-                e.preventDefault();
-                alert("Llenar Datos Faltantes");
-            }
-        })
-
-
-        document.addEventListener("DOMContentLoaded", function (event) {
-            auto_fecha(document.getElementById("fecha"));
-        });
-        function auto_fecha(input) {
-            input.addEventListener("change", function (e) {
-                var eventoChange = new Event("change");
-                document.getElementById("tipobrigada").dispatchEvent(eventoChange);
-            })
-        }
-
-    </script>
-
+    <script th:src="@{/js/Visita/Index.js}"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
@@ -299,7 +276,8 @@
     <script src="demo/date-range-picker-demo.js"></script>
     <script th:replace="/views/brigada/js/autocompleteBrigada-paciente :: javascript"></script>
     <script th:replace="/views/brigada/js/autocompleteDistrito :: javascript"></script>
-    <script th:replace="/views/brigada/js/autocomplete-HoraAtecion :: javascript"></script>
+    <!-- <script th:replace="/views/brigada/js/autocomplete-HoraAtecion :: javascript"></script> -->
+    <script th:src="@{/js/Visita/HoraAtencion.js}"></script>
 </body>
 
 </html>
