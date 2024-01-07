@@ -18,6 +18,14 @@ $(document).ready(function () {
         $('#modalM').hide();
     });
 
+    $('#btnCancelarAlta').click(function () {
+        $('#modalAlta').hide();
+    });
+
+    $("#closeModalAlta").click(function () {
+        $('#modalAlta').hide();
+    });
+
     $('#btnGuardarHospitalizacion').click(function () {
         var paciente = $('#pacienteHospitalizacion').val();
         var personal = $('#doctorHospitazacion').val();
@@ -67,6 +75,32 @@ $(document).ready(function () {
     });
 
 });
+
+function DarAlta(input) {
+    var fila = input.closest('tr');
+
+    var id = fila.querySelector('td:nth-child(1)').textContent;
+
+    $("#modalAlta").show()
+    $("#hdnId").text(id)
+
+
+}
+
+function ejecutarAlta() {
+    var id = $("#hdnId").text()
+    const opc = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    };
+
+    fetch("http://localhost:8083/views/hospitalizacion/DarAlta/" + id, opc);
+
+    window.location.href = "http://localhost:8083/views/hospitalizacion/IndicacionesMedicas"
+
+}
 
 const getCamas = $.ajax({
     method: "GET",
@@ -222,7 +256,7 @@ function autocompleteVisita(inp) {
                             /*make the matching letters bold:*/
                             b.innerHTML = "<strong>" + arr[i].nombre + ' ' + "</strong>";
                             /*insert a input field that will hold the current array item's value:*/
-                            b.innerHTML += "<input type='hidden' data-nombre='" + arr[i].id+ "' data-apellidos='" + arr[i].apellidopat + ' ' + arr[i].apellidomat + "' data-img='" + arr[i].foto + " '  data-dni='" + arr[i].dni + "' data-especialidad='" + arr[i].espec.nomespecialidad + "' value='" + arr[i].id + "'>";
+                            b.innerHTML += "<input type='hidden' data-nombre='" + arr[i].id + "' data-apellidos='" + arr[i].apellidopat + ' ' + arr[i].apellidomat + "' data-img='" + arr[i].foto + " '  data-dni='" + arr[i].dni + "' data-especialidad='" + arr[i].espec.nomespecialidad + "' value='" + arr[i].id + "'>";
                             /*execute a function when someone clicks on the item value (DIV element):*/
                             b.addEventListener("click", function (e) {
                                 /*insert the value for the autocomplete text field:*/

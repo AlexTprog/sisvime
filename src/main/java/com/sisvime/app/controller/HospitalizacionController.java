@@ -11,6 +11,8 @@ import com.sisvime.app.models.Service.Imp.HospitalizacionService;
 import com.sisvime.app.models.entity.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -129,6 +131,21 @@ public class HospitalizacionController {
         model.addAttribute("hospitalizaciones", hospitalizacionesFiltradas);
 
         return "/views/hospitalizacion/IndicacionesMedicas";
+    }
+
+    @PostMapping("/DarAlta/{id}")
+    @ResponseBody
+    public ResponseEntity<String> DarDeAlta(@PathVariable(value = "id") int idPac) {
+        try {
+            var hospitalizacion = hospitalizacionService.getById(idPac);
+            hospitalizacion.setFechaAlta(new Date());
+
+            hospitalizacionService.create(hospitalizacion);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 
 

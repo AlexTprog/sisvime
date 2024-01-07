@@ -37,26 +37,23 @@ public class HospitalizacionService {
         for (Hospitalizacion hospitalizacion : getAll()) {
             boolean cumpleCriterios = true;
 
-            // Filtrar por nombre del paciente (si se proporciona)
             if (nombrePaciente != null && !nombrePaciente.isEmpty()) {
-                String nombreCompletoPaciente = hospitalizacion.GetNombreCompletoPaciente(); // Define este método en tu entidad Paciente
+                String nombreCompletoPaciente = hospitalizacion.GetNombreCompletoPaciente();
                 if (!nombreCompletoPaciente.toLowerCase().contains(nombrePaciente.toLowerCase())) {
                     cumpleCriterios = false;
                 }
             }
 
-            // Filtrar por nombre del médico (si se proporciona)
             if (nombreMedico != null && !nombreMedico.isEmpty()) {
-                String nombreCompletoMedico = hospitalizacion.GetNombreCompletoDoctor(); // Define este método en tu entidad Personal
+                String nombreCompletoMedico = hospitalizacion.GetNombreCompletoDoctor();
                 if (!nombreCompletoMedico.toLowerCase().contains(nombreMedico.toLowerCase())) {
                     cumpleCriterios = false;
                 }
             }
 
-            // Filtrar por fecha de admisión (si se proporciona)
             if (fechaAdmision != null && !fechaAdmision.isEmpty()) {
                 Date fechaAdmisionHospitalizacion = hospitalizacion.getFechaAdmision();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Ajusta el formato según tus necesidades
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String fechaAdmisionStr = sdf.format(fechaAdmisionHospitalizacion);
                 if (!fechaAdmisionStr.equals(fechaAdmision)) {
                     cumpleCriterios = false;

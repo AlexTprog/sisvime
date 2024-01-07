@@ -96,6 +96,7 @@
                                             <th>Habitación/Cama</th>
                                             <th>Médico tratante</th>
                                             <th>Fecha de Admisión</th>
+                                            <th>Fecha de Alta</th>
                                             <th>Accion</th>
                                         </tr>
                                     </thead>
@@ -109,6 +110,7 @@
                                             <th>Habitación/Cama</th>
                                             <th>Médico tratante</th>
                                             <th>Fecha de Admisión</th>
+                                            <th>Fecha de Alta</th>
                                             <th>Accion</th>
                                         </tr>
                                     </tfoot>
@@ -129,11 +131,17 @@
                                             <td
                                                 th:text="${#dates.format(hospitalizacion.FechaAdmision, 'dd-MM-yyyy HH:mm')}">
                                             </td>
+                                            <td
+                                                th:text="${#dates.format(hospitalizacion.FechaAlta, 'dd-MM-yyyy HH:mm')}">
+                                            </td>
                                             <td>
                                                 <a class="btn btn-light btn-xs"
                                                     th:href="@{/views/ModuloMedico/modulo/}+${hospitalizacion.id}"><i
                                                         class="fas fa-briefcase-medical"></i></a>
+                                                <a th:if="${hospitalizacion.FechaAlta == null}"
+                                                    class="btn btn-light btn-xs" onclick="DarAlta(this)"><i class="fa-solid fa-house-medical-flag"></i></a>
                                             </td>
+
                                         </tr>
                                         </tr>
                                     </tbody>
@@ -207,6 +215,33 @@
                     </div>
                 </div>
             </div>
+
+            <div id="modalAlta" class="modal" tabindex="-1" role="dialog" style="display: none;">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-rigth">Alta paciente</h5>
+                            <button id="closeModalAlta" type="button" class="close" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="d-none">
+                            <p id="hdnId"></p>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-center strong">Esta seguro de dar de alta al paciente?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="btnCancelarAlta" type="button" class="btn btn-secondary"
+                                data-dismiss="modal">Cancelar
+                            </button>
+                            <button onclick="ejecutarAlta()" type="button" class="btn btn-primary">Dar Alta
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- AQUI SE ENCUENTRA EL FOOTER-AUTOMATIZADO-->
 
             <footer th:insert="fragments/footer :: pie-pagina" class="footer mt-auto footer-light"></footer>

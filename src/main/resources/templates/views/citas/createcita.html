@@ -122,13 +122,6 @@
             </div>
           </div>
           <div class="container mt-4 inputCita paciente">
-            <!-- Form fecha (Fecha) -->
-            <div class="card">
-              <div class="card-header">Selecione Fecha de Consulta</div>
-              <input class="form-control" type="date" id="data" required th:field="*{fecha}" />
-            </div>
-          </div>
-          <div class="container mt-4 inputCita paciente">
             <div class="card">
               <div class="card-header">
                 Selecione una especialidad medica referente a una consulta.
@@ -137,13 +130,22 @@
               <div class="invalid-feedback">Especialidad es obligatoria.</div>
             </div>
           </div>
-
           <div class="container mt-4 inputCita paciente">
             <div class="card">
               <div class="card-header">Indique Medico deseado</div>
               <select id="personal" class="custom-select" size="5" required th:field="*{med}"></select>
             </div>
           </div>
+          <div class="container mt-4 inputCita paciente">
+            <!-- Form fecha (Fecha) -->
+            <div class="card">
+              <div class="card-header">Selecione Fecha de Consulta</div>
+              <input class="form-control" type="date" id="data" required th:field="*{fecha}" />
+            </div>
+          </div>
+
+
+
 
 
 

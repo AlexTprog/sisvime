@@ -111,7 +111,7 @@
                                                             <label class="small mb-1"
                                                                 for="inputFirstName">Nombre</label>
                                                             <input class="form-control" id="FirstNameDoctor"
-                                                            th:field="*{idper.nombre}"
+                                                                th:field="*{idper.nombre}"
                                                                 placeholder="Ingrese su Nombre" readonly="readonly"
                                                                 type="text" />
                                                         </div>
@@ -444,41 +444,41 @@
                                                 <div class="card-body">
 
                                                     <div class="form-row">
+                                                        <!-- Form Group (DNI)-->
+                                                        <div class="form-group col-md-6">
+                                                            <label class="small mb-1" for="inputPlaca">Placa</label>
+                                                            <input autocomplete="ÑÖcompletes" class="form-control"
+                                                                id="inputPlaca" th:field="*{idveh.id}"
+                                                                placeholder="Placa Vehiculo" type="text" />
+                                                        </div>
                                                         <!-- Form Group (NSA)-->
                                                         <div class="form-group col-md-6">
-                                                            <label class="small mb-1" for="inputPlaca">Codigo
+                                                            <label class="small mb-1" for="inputCodigo">Codigo
                                                                 Vehicular</label>
                                                             <div class="autocomplete" style="width: 100%">
-                                                                <input autocomplete="ÑÖcompletes" class="form-control"
-                                                                    id="inputPlaca" name="myCountry"
-                                                                    placeholder="Ingrese Codigo" required
+                                                                <input class="form-control"
+                                                                    id="inputCodigo" name="myCountry"
+                                                                    placeholder="Ingrese Codigo" readonly="readonly"
                                                                     th:field="*{idveh}" type="text" />
                                                             </div>
                                                         </div>
-                                                        <!-- Form Group (DNI)-->
-                                                        <div class="form-group col-md-6">
-                                                            <label class="small mb-1" for="placa">Placa</label>
-                                                            <input class="form-control" id="placa"
-                                                            th:field="*{idveh.id}"
-                                                                placeholder="Placa Vehiculo" readonly="readonly"
-                                                                type="text" />
-                                                        </div>
+
+
 
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="form-group col-md-6">
                                                             <label class="small mb-1" for="marca">Marca</label>
                                                             <input class="form-control" id="marca"
-                                                                th:field="*{idveh.marca}"
-                                                                placeholder="Marca Vehiculo" readonly="readonly"
-                                                                type="text" />
+                                                                th:field="*{idveh.marca}" placeholder="Marca Vehiculo"
+                                                                readonly="readonly" type="text" />
                                                         </div>
                                                         <!-- Form Group (NSA)-->
                                                         <div class="form-group col-md-6">
                                                             <label class="small mb-1" for="modelo">Modelo</label>
                                                             <input class="form-control" id="modelo" placeholder="Modelo"
-                                                            th:field="*{idveh.modelo}"
-                                                                readonly="readonly" type="text" />
+                                                                th:field="*{idveh.modelo}" readonly="readonly"
+                                                                type="text" />
                                                         </div>
                                                     </div>
 
@@ -487,16 +487,15 @@
                                                         <div class="form-group col-md-6">
                                                             <label class="small mb-1" for="color">Color</label>
                                                             <input class="form-control" id="color"
-                                                            th:field="*{idveh.color}"
-                                                                placeholder="Color Vehiculo" readonly="readonly"
-                                                                type="text" />
+                                                                th:field="*{idveh.color}" placeholder="Color Vehiculo"
+                                                                readonly="readonly" type="text" />
                                                         </div>
                                                         <!-- Form Group (DNI)-->
                                                         <div class="form-group col-md-6">
                                                             <label class="small mb-1"
                                                                 for="combustible">Combustible</label>
                                                             <input class="form-control" id="combustible"
-                                                            th:field="*{idveh.combustible}"
+                                                                th:field="*{idveh.combustible}"
                                                                 placeholder="Marca Vehiculo" readonly="readonly"
                                                                 type="text" />
                                                         </div>
@@ -680,7 +679,8 @@
     <script th:replace="/views/visitamed/js/autocompleteVisita-enfermera :: javascript"></script>
     <script th:replace="/views/visitamed/js/autocompleteVisita-tecnica :: javascript"></script>
     <script th:replace="/views/visitamed/js/autocomplete-chofer :: javascript"></script>
-    <script th:replace="/views/visitamed/js/autocomplete-vehiculo :: javascript"></script>
+    <!-- <script th:replace="/views/visitamed/js/autocomplete-vehiculo :: javascript"></script> -->
+    <script th:src="@{/js/Brigada/autocomplete-vehiculo.js}"></script>
     <script th:src="@{/js/Brigada/autoselect-brigada.js}"></script>
 </body>
 

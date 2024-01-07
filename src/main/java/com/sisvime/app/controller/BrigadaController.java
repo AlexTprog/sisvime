@@ -3,10 +3,7 @@ package com.sisvime.app.controller;
 import com.sisvime.app.models.Service.IBrigadaService;
 import com.sisvime.app.models.Service.IPacienteService;
 import com.sisvime.app.models.Service.IVisitaService;
-import com.sisvime.app.models.entity.Brigada;
-import com.sisvime.app.models.entity.DistritoParentesco;
-import com.sisvime.app.models.entity.Paciente;
-import com.sisvime.app.models.entity.TitularParentesco;
+import com.sisvime.app.models.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -148,6 +145,11 @@ public class BrigadaController {
         return "/views/brigada/brigadamedicaform";
     }
 
+    @GetMapping(value = "/getVisita/{id}", produces = { "application/json" })
+    public @ResponseBody Brigada Get(@PathVariable(value = "id") int idbrigada) {
+        return  brigadaservice.buscarporId(idbrigada);
+    }
+
     @GetMapping("/deletebrigada/{id}")
     public String eliminar(@PathVariable("id") int idbrigada) {
 
@@ -156,8 +158,22 @@ public class BrigadaController {
     }
 
     @DeleteMapping("/deletebrigada/{id}")
-    public void delete(@PathVariable("id") int idbrigada){
+    public void delete(@PathVariable("id") int idbrigada) {
+        var visita = brigadaservice.buscarporId(idbrigada);
+        var listBrigadas = visitaservice.listartodos();
+
+        for (Visita brigada : listBrigadas) {
+            if (esBrigadaIgual(brigada, visita)) {
+                brigada.setIsFree(true);
+                break;
+            }
+        }
         brigadaservice.eliminar(idbrigada);
     }
 
+    private boolean esBrigadaIgual(Visita brigada1, Brigada brigada2) {
+        return brigada1.getFecha().equals(brigada2.getFecha()) &&
+                brigada1.getHora().equals(brigada2.getHoraini()) &&
+                brigada1.getObs().equals(brigada2.getTipobrigada());
+    }
 }
