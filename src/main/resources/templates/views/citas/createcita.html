@@ -144,17 +144,12 @@
             </div>
           </div>
 
-
-
-
-
-
           <div class="container mt-4 inputCita paciente">
             <!-- Form Hora (Hora) -->
             <div class="card">
               <div class="card-header">Hora de Cita</div>
               <select class="custom-select" th:field="*{idhora}">
-                <option th:each="hora :${horas}" th:value="${hora.id}" th:text="${hora.hora}" />
+                <option th:each="hora :${horas}" th:value="${hora.id}" th:text="${hora.hora}">
               </select>
             </div>
             <br />
@@ -182,9 +177,10 @@
     crossorigin="anonymous"></script>
   <script th:src="@{/js/scripts.js}"></script>
   <script th:src="@{/js/jquery-ui.min.js}"></script>
-  <script th:replace="/views/citas/js/autocompletePaciente :: javascript"></script>
-  <script th:replace="/views/citas/js/listarEspecialidades :: javascript"></script>
-  <script th:replace="/views/citas/js/horariosPersonal :: javascript"></script>
+  <script th:src="@{/js/Cita/ListarEspecialidad.js}"></script>
+  <script th:src="@{/js/Cita/HorarioPersonal.js}"></script>
+  <script th:src="@{/js/Cita/AutocompletePaciente.js}"></script>
+  <script th:src="@{/js/Cita/Index.js}"></script>
 </body>
 
 </html>

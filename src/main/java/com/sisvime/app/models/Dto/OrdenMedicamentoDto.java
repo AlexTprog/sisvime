@@ -11,4 +11,5 @@ public class OrdenMedicamentoDto {
     public String ViaAdmision;
     public String Administrado;
     public Date FechaInicio;
+    public Date FechaFin;
 }

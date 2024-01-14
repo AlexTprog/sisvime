@@ -20,9 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 //BRIGADA
 @Controller
@@ -51,7 +49,9 @@ public class VisitaController {
 
     @GetMapping(value = "/visitalista", produces = {"application/json"})
     public @ResponseBody List<Visita> listarVisitas() {
-        return visitaservice.listartodos();
+        var brigadas =visitaservice.listartodos();
+        Collections.sort(brigadas, Comparator.comparing(Visita::getFecha));
+        return brigadas;
     }
 
     @GetMapping(value = "/numerovisita", produces = {"application/json"})

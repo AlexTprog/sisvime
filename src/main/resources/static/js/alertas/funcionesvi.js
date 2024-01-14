@@ -26,7 +26,7 @@ function deletevisita(id) {
 				
 				});
 			} else {
-				swal("¡Tu archivo no a sido Eliminado!");
+				swal("¡Tu brigada no ha sido Eliminada!");
 			}
 		});
 }

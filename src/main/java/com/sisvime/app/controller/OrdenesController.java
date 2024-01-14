@@ -78,6 +78,7 @@ public class OrdenesController {
                 med.ViaAdmision = medicamentoOrden.ViaAdmision;
                 med.Administrado = medicamentoOrden.Administrado;
                 med.FechaInicio = medicamentoOrden.FechaInicio;
+                med.FechaFin = medicamentoOrden.FechaFin;
                 med.Orden = response;
                 ordenMedicamentoService.create(med);
             }
@@ -141,6 +142,7 @@ public class OrdenesController {
                 dto.Administrado = medicamento.Administrado;
                 dto.TipoCantidad = medicamento.TipoCantidad;
                 dto.FechaInicio = medicamento.FechaInicio;
+                dto.FechaFin = medicamento.FechaFin;
                 response.medicamentos.add(dto);
             }
         }

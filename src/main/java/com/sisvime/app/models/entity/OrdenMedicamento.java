@@ -23,4 +23,5 @@ public class OrdenMedicamento implements Serializable {
     public String ViaAdmision;
     public String Frecuencia;
     public Date FechaInicio;
+    public Date FechaFin;
 }

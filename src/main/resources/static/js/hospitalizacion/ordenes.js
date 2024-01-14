@@ -85,8 +85,11 @@ function cargarOrden() {
 
             if (orden.medicamentos.length != undefined) {
                 orden.medicamentos.forEach(element => {
-                    var fecha = new Date(element.FechaInicio) || new Date();
-                    var fechaFormateada = fecha ? fecha.toISOString().slice(0, 16).replace('T', ' ') : '';
+                    var fechaInicio = new Date(element.FechaInicio) || new Date();
+                    var fechaFin = new Date(element.FechaFin) || new Date();
+
+                    var fechaInicioFormateada = fechaInicio ? fechaInicio.toISOString().slice(0, 16).replace('T', ' ') : '';
+                    var fechaFinFormateada = fechaFin ? fechaFin.toISOString().slice(0, 16).replace('T', ' ') : '';
 
                     var newRow = $("<tr>")
                         .append($("<td>").text(element.Medicamento))
@@ -95,7 +98,8 @@ function cargarOrden() {
                         .append($("<td>").text(element.Frecuencia))
                         .append($("<td>").text(element.ViaAdmision))
                         .append($("<td>").text(element.Administrado))
-                        .append($("<td>").text(fechaFormateada))
+                        .append($("<td>").text(fechaInicioFormateada))
+                        .append($("<td>").text(fechaFinFormateada))
                         .append($("<td>")
                             .append($("<button>").addClass("btn btn-primary editar").html('<i class="fas fa-edit"></i>'))
                             .append($("<button>").addClass("btn btn-danger eliminar").html('<i class="fas fa-trash-alt"></i>'))
@@ -175,7 +179,8 @@ function guardarOrden() {
             Frecuencia: fila.find("td:eq(3)").text(),
             ViaAdmision: fila.find("td:eq(4)").text(),
             Administrado: fila.find("td:eq(5)").text(),
-            FechaInicio: new Date(fila.find("td:eq(6)").text())
+            FechaInicio: new Date(fila.find("td:eq(6)").text()),
+            FechaFin: new Date(fila.find("td:eq(7)").text())
         };
 
         listaMedicamentos.push(objeto);
@@ -292,6 +297,7 @@ function addAgregarMedicamentos() {
         .append($("<td>").text(inputViaAdmision.val()))
         .append($("<td>").text("NO"))
         .append($("<td>").text(fechaFormateada))
+        .append($("<td>").text(fechaFormateada))
         .append($("<td>")
             .append($("<button>").addClass("btn btn-primary editar").html('<i class="fas fa-edit"></i>'))
             .append($("<button>").addClass("btn btn-danger eliminar").html('<i class="fas fa-trash-alt"></i>'))
@@ -309,6 +315,7 @@ function editarMedicamentos() {
     cells.each(function (index) {
         var text = $(this).text();
         var randomId = "id_" + Math.floor(Math.random() * 1000);
+        var fechaActual = new Date().toISOString().slice(0, 16);
         switch (index) {
             case 0:
                 break;
@@ -356,7 +363,13 @@ function editarMedicamentos() {
                 $("#" + randomId).val(text);
                 break;
             case 6:
-                var selectHtml = "<input type='datetime-local' id='" + randomId + "' class='form-control' value='" + text + "'>";
+                var selectHtml = "<input type='datetime-local' id='" + randomId + "' class='form-control' value='" + text + "'";
+                selectHtml += " min='" + fechaActual + "'>";
+                $(this).html(selectHtml);
+                break;
+            case 7:
+                var selectHtml = "<input type='datetime-local' id='" + randomId + "' class='form-control' value='" + text + "'";
+                selectHtml += " min='" + fechaActual + "'>";
                 $(this).html(selectHtml);
                 break;
             default:
@@ -374,10 +387,16 @@ function guardarEditarMed() {
 
     // Deshabilitar la edición de las celdas y obtener los nuevos valores
     cells.each(function (index) {
-        if (index >= 1 && index <= 6) {
+        if (index >= 1 && index <= 7) {
             var input = $(this).find("input, select");
-            var text = input.val();
-            $(this).html(text);
+            var text = input.val();            
+            if (index == 6 || index == 7) {
+                text = text.replace('T', ' ');
+                $(this).html(text)
+                
+            }else{
+                $(this).html(text);
+            }
         }
     });
 
@@ -570,8 +589,7 @@ function autocompleteMed(inp) {
     the text field element and an array of possible autocompleted values:*/
     var currentFocus;
     /*execute a function when someone writes in the text field:*/
-    inp.addEventListener("input", function (e) {
-
+    inp.addEventListener("input", function (e) {       
         var a, b, i, val = this.value;
 
         if (val.length == 0) {
@@ -618,8 +636,7 @@ function autocompleteMed(inp) {
                     }
                 })
 
-        }
-
+        }        
     });
     /*execute a function presses a key on the keyboard:*/
     inp.addEventListener("keydown", function (e) {
