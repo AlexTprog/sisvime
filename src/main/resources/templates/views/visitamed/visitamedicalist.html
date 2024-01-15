@@ -129,11 +129,9 @@
                                     <td th:text="${visita.time}"></td>
                                     <td>
                                         <a class="btn btn-light btn-xs"
-                                           th:href="@{/views/visitamed/editvisita/}+${visita.id}"><i
-                                                class="far fa-edit"></i></a>
+                                           th:href="@{/views/visitamed/editvisita/}+${visita.id}">Editar</a>
                                         <a class="btn btn-light btn-xs"
-                                           th:onclick="deletevisita([[${visita.id}]])"><i
-                                                class="far fa-trash-alt"></i></a>
+                                           th:onclick="deletevisita([[${visita.id}]])">Eliminar</a>
                                     </td>
                                 </tr>
 
