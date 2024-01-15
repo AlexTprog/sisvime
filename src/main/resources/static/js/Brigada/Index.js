@@ -19,9 +19,6 @@ function submitForm(event) {
     const form = event.target; // Obtener el formulario que se envió
     const formData = new FormData(form); // Obtener los datos del formulario
 
-    // for (var entry of formData.entries()) {
-    //     console.log(entry[0], entry[1]);
-    // }
 
     formData.delete("idper.dni")
     formData.delete("idper.nombre")
@@ -56,7 +53,6 @@ function submitForm(event) {
                 if (!response.ok) {
                     throw new Error('Error en la solicitud');
                 }
-                console.log('La visita fue eliminada exitosamente.');
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -76,12 +72,32 @@ function submitForm(event) {
                     .then(response => response.text())
                     .then(data => {
 
-                        // mostrarMensaje(data);
                         swal({
-                            title: data,
+                            title: msg,
+                            text: "¿Desea crear más brigadas médicas?",
                             icon: "info",
-                            buttons: false,
-                        });
+                            buttons: {
+                                aceptar: {
+                                    text: "Aceptar",
+                                    value: true,
+                                    visible: true,
+                                    className: "btn-success",
+                                },
+                                cancelar: {
+                                    text: "Cancelar",
+                                    value: false,
+                                    visible: true,
+                                    className: "btn-danger",
+                                },
+                            },
+                        })
+                            .then((value) => {
+                                if (value) {
+                                    swal.close();                                    
+                                } else {
+                                    window.location.href = ShowBrigadas
+                                }
+                            });
 
                         if (istEdit) {
                             window.location.href = ShowBrigadas
@@ -94,7 +110,6 @@ function submitForm(event) {
                             icon: "error",
                             buttons: false,
                         });
-                        //mostrarMensaje("Ocurrió un error");
                         console.error('Error:', error);
                     });
             } else {
@@ -112,7 +127,6 @@ function submitForm(event) {
                 icon: "error",
                 buttons: false,
             });
-            console.error('Error de red:', error);
         });
 }
 
@@ -220,7 +234,6 @@ async function validarHorario(data) {
         return [true, ""];
 
     } catch (error) {
-        console.error("Error de red:", error);
         return [false, "Ocurrió un error inesperado"];
     }
 }
