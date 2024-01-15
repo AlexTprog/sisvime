@@ -29,7 +29,7 @@ const FotoTecnica = $("#imgTecnica")
 
 // Chofer
 const NsaChofer = $("#inputChofer")
-const DniChofer = $("#inputdniTecnica")
+const DniChofer = $("#choferDni")
 const FisrtnameChofer = $("#choferNombre")
 const LastNameChofer = $("#choferApellido")
 const EspcChofer = $("#choferEspecialidad")
@@ -172,7 +172,7 @@ function cargarBrigadaYaExistente(brigada) {
 
                         //Vehiculo
                         PlacaVehiculo.val(brig.idveh.placa)
-                        CodigoVehiculo.val(brig.idveh.codigo)
+                        CodigoVehiculo.val(brig.idveh.id)
                         MarcaVehiculo.val(brig.idveh.marca)
                         ModeloVehiculo.val(brig.idveh.modelo)
                         ColorVehiculo.val(brig.idveh.color)
