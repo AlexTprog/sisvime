@@ -59,11 +59,118 @@
 
                 <form enctype="multipart/form-data" method="post" onsubmit="submitForm(event)"
                     th:action="@{/views/visitamed/savevisitaDto}" th:object="${visita}">
+
                     <div class="container mt-4">
                         <hr class="mt-0 mb-4" />
                         <div class="row">
                             <div class="col-xl-8">
-                                <!-- Account details card-->
+
+                                <!-- FORM BRIGADA -->
+
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        Brigada Médica
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-row">
+                                            <!-- Form Group (DNI) BRIGADA-->
+                                            <div class="form-group col-md-6">
+                                                <label class="small mb-1" for="brigada">Brigada </label>
+                                                <select id="brigada" for="brigada" class="custom-select"
+                                                    th:field="*{obs}">
+                                                    <option th:text="'Brigada 1'" th:value="Brigada1"></option>
+                                                    <option th:text="'Brigada 2'" th:value="Brigada2"></option>
+                                                    <!-- <option th:text="'Brigada 3'" th:value="Brigada3"></option>
+                                                                                    <option th:text="'Brigada 4'" th:value="Brigada4"></option> -->
+                                                </select>
+                                            </div>
+                                            <!-- Form Group DISTRITOS -->
+                                            <div class="form-group col-md-6">
+                                                <label class="small mb-1" for="distritos">Distrito</label>
+                                                <select id="distrito" class="custom-select" for="distritos"
+                                                    th:field="*{dist}">
+                                                    <!--  -->
+                                                    <option value="SAN ISIDRO">SAN ISIDRO</option>
+                                                    <option value="MIRAFLORES">MIRAFLORES</option>
+                                                    <option value="SURQUILLO">SURQUILLO</option>
+                                                    <option value="LOS OLIVOS">LOS OLIVOS</option>
+                                                    <option value="S.J LURIGANCHO">S.J LURIGANCHO</option>
+                                                    <option value="S.M.P">S.M.P</option>
+                                                    <option value="SAN MIGUEL">SAN MIGUEL</option>
+                                                    <option value="CALLAO">CALLAO</option>
+                                                    <option value="MAGDALENA">MAGDALENA</option>
+                                                    <option value="BREÑA">BREÑA</option>
+                                                    <option value="JESUS MARIA">JESUS MARIA</option>
+                                                    <option value="LIMA">LIMA</option>
+                                                    <option value="LINCE">LINCE</option>
+                                                    <option value="PUEBLO LIBRE">PUEBLO LIBRE</option>
+                                                    <option value="LA VICTORIA">LA VICTORIA</option>
+                                                    <option value="SAN BORJA">SAN BORJA</option>
+                                                    <!--  -->
+                                                </select>
+                                            </div>
+                                            <!-- Form Group FECHA -->
+
+
+                                            <div class="form-group col-md-6">
+                                                <label class="small mb-1" for="inputDate">Fechas Brigada</label>
+                                                <input class="form-control" id="inputDate" name="fecha"
+                                                    placeholder="Seleccione fechas" required th:field="*{fecha}"
+                                                    type="text" />
+                                            </div>
+
+                                            <!-- Form Group (NSA) HORA-->
+                                            <div class="form-group col-md-6">
+                                                <label class="small mb-1" for="inputHora">Hora </label>
+                                                <select class="form-control" id="inputHora" name="inputLastName"
+                                                    required th:field="*{hora}">
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="17:00">17:00</option>
+                                                </select>
+                                                <!-- <input type="time" class="form-control" id="inputLastName" placeholder="Observacion"
+                                                                              th:field="*{hora}" required /> -->
+                                            </div>
+
+
+                                            <!-- Form Group (DNI) TURNO ATENCION -->
+                                            <div class="form-group col-md-6">
+                                                <label class="small mb-1" for="turno" id="turno">Turno
+                                                    Atención</label>
+                                                <select class="custom-select" for="turno" id="time" th:field="*{time}">
+                                                    <option th:text="'Turno Mañana'" th:value="Mañana"></option>
+                                                    <option th:text="'Turno Tarde'" th:value="Tarde"></option>
+                                                </select>
+                                            </div>
+                                            <!-- Form Group (DNI) ZONA -->
+                                            <div class="form-group col-md-6">
+                                                <label class="small mb-1" for="zona">Zona</label>
+                                                <select class="custom-select" id="zona" th:field="*{zona}">
+                                                    <option th:text="'Zona Sur'" th:value="Sur"></option>
+                                                    <option th:text="'Zona Norte'" th:value="Norte"></option>
+                                                </select>
+                                            </div>
+                                            <!-- Form Group (DNI) DESCRIPCION -->
+                                            <div class="form-group col-md-12">
+                                                <label class="small mb-1" for="BrigadaDesc">Descripción</label>
+                                                <input class="form-control" id="BrigadaDesc" placeholder="Descripcion"
+                                                    th:field="*{desc}" type="text" />
+                                            </div>
+                                        </div>
+                                        <input class="btn btn-primary" type="submit" value="Crear Brigada" />
+                                    </div>
+
+
+                                </div>
+
+                                <!-- DETALLES-->
 
                                 <div class="accordion" id="accordionExample">
                                     <!-- DOCTOR -->
@@ -538,113 +645,10 @@
                                     <!-- END VEHICULO -->
                                 </div>
 
-                                <!-- FORM BRIGADA -->
-
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        Brigada Médica
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="form-row">
-                                            <!-- Form Group (DNI) BRIGADA-->
-                                            <div class="form-group col-md-6">
-                                                <label class="small mb-1" for="brigada">Brigada </label>
-                                                <select id="brigada" for="brigada" class="custom-select"
-                                                    th:field="*{obs}">
-                                                    <option th:text="'Brigada 1'" th:value="Brigada1"></option>
-                                                    <option th:text="'Brigada 2'" th:value="Brigada2"></option>
-                                                    <!-- <option th:text="'Brigada 3'" th:value="Brigada3"></option>
-                                                    <option th:text="'Brigada 4'" th:value="Brigada4"></option> -->
-                                                </select>
-                                            </div>
-                                            <!-- Form Group DISTRITOS -->
-                                            <div class="form-group col-md-6">
-                                                <label class="small mb-1" for="distritos">Distrito</label>
-                                                <select id="distrito" class="custom-select" for="distritos"
-                                                    th:field="*{dist}">
-                                                    <!--  -->
-                                                    <option value="SAN ISIDRO">SAN ISIDRO</option>
-                                                    <option value="MIRAFLORES">MIRAFLORES</option>
-                                                    <option value="SURQUILLO">SURQUILLO</option>
-                                                    <option value="LOS OLIVOS">LOS OLIVOS</option>
-                                                    <option value="S.J LURIGANCHO">S.J LURIGANCHO</option>
-                                                    <option value="S.M.P">S.M.P</option>
-                                                    <option value="SAN MIGUEL">SAN MIGUEL</option>
-                                                    <option value="CALLAO">CALLAO</option>
-                                                    <option value="MAGDALENA">MAGDALENA</option>
-                                                    <option value="BREÑA">BREÑA</option>
-                                                    <option value="JESUS MARIA">JESUS MARIA</option>
-                                                    <option value="LIMA">LIMA</option>
-                                                    <option value="LINCE">LINCE</option>
-                                                    <option value="PUEBLO LIBRE">PUEBLO LIBRE</option>
-                                                    <option value="LA VICTORIA">LA VICTORIA</option>
-                                                    <option value="SAN BORJA">SAN BORJA</option>
-                                                    <!--  -->
-                                                </select>
-                                            </div>
-                                            <!-- Form Group FECHA -->
-
-
-                                            <div class="form-group col-md-6">
-                                                <label class="small mb-1" for="inputDate">Fechas Brigada</label>
-                                                <input class="form-control" id="inputDate" name="fecha"
-                                                    placeholder="Seleccione fechas" required th:field="*{fecha}"
-                                                    type="text" />
-                                            </div>
-
-                                            <!-- Form Group (NSA) HORA-->
-                                            <div class="form-group col-md-6">
-                                                <label class="small mb-1" for="inputHora">Hora </label>
-                                                <select class="form-control" id="inputHora" name="inputLastName"
-                                                    required th:field="*{hora}">
-                                                    <option value="08:00">08:00</option>
-                                                    <option value="09:00">09:00</option>
-                                                    <option value="10:00">10:00</option>
-                                                    <option value="11:00">11:00</option>
-                                                    <option value="12:00">12:00</option>
-                                                    <option value="13:00">13:00</option>
-                                                    <option value="14:00">14:00</option>
-                                                    <option value="15:00">15:00</option>
-                                                    <option value="16:00">16:00</option>
-                                                    <option value="17:00">17:00</option>
-                                                </select>
-                                                <!-- <input type="time" class="form-control" id="inputLastName" placeholder="Observacion"
-                                              th:field="*{hora}" required /> -->
-                                            </div>
-
-
-                                            <!-- Form Group (DNI) TURNO ATENCION -->
-                                            <div class="form-group col-md-6">
-                                                <label class="small mb-1" for="turno" id="turno">Turno
-                                                    Atención</label>
-                                                <select class="custom-select" for="turno" id="time" th:field="*{time}">
-                                                    <option th:text="'Turno Mañana'" th:value="Mañana"></option>
-                                                    <option th:text="'Turno Tarde'" th:value="Tarde"></option>
-                                                </select>
-                                            </div>
-                                            <!-- Form Group (DNI) ZONA -->
-                                            <div class="form-group col-md-6">
-                                                <label class="small mb-1" for="zona">Zona</label>
-                                                <select class="custom-select" id="zona" th:field="*{zona}">
-                                                    <option th:text="'Zona Sur'" th:value="Sur"></option>
-                                                    <option th:text="'Zona Norte'" th:value="Norte"></option>
-                                                </select>
-                                            </div>
-                                            <!-- Form Group (DNI) DESCRIPCION -->
-                                            <div class="form-group col-md-12">
-                                                <label class="small mb-1" for="BrigadaDesc">Descripción</label>
-                                                <input class="form-control" id="BrigadaDesc" placeholder="Descripcion"
-                                                    th:field="*{desc}" type="text" />
-                                            </div>
-                                        </div>
-                                        <input class="btn btn-primary" type="submit" value="Crear Brigada" />
-                                    </div>
-
-
-                                </div>
                             </div>
                         </div>
                     </div>
+
                 </form>
 
             </main>
