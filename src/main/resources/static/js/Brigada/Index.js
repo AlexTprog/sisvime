@@ -136,7 +136,7 @@ async function validarHorario(data) {
             throw new Error(`Error en la solicitud: ${response.statusText}`);
         }
 
-        const jsonData = await response.json();
+        const AllBrigadasList = await response.json();
 
         const horariosBase = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
 
@@ -149,23 +149,45 @@ async function validarHorario(data) {
         const obs = data.get('obs');
         const hora = data.get('hora');
 
-        const findIdPer = jsonData.filter(item => item.idper.id == idper && item.fecha == fecha);
-        const findIdEnf = jsonData.filter(item => item.idenf == idenf && item.fecha == fecha);
-        const findIdTec = jsonData.filter(item => item.idtec == idtec && item.fecha == fecha);
-        const findIdChf = jsonData.filter(item => item.idchf == idchf && item.fecha == fecha);
-        const findIdVeh = jsonData.filter(item => item.idveh.id == idveh && item.fecha == fecha);
-        
+        const AllIdPer = AllBrigadasList.filter(item => item.idper.id == idper);
+        const AllIdEnf = AllBrigadasList.filter(item => item.idenf == idenf);
+        const AllIdTec = AllBrigadasList.filter(item => item.idtec == idtec);
+        const AllIdChf = AllBrigadasList.filter(item => item.idchf == idchf);
+        const AllIdVeh = AllBrigadasList.filter(item => item.idveh.id == idveh);
+
+        const findIdPer = AllIdPer.filter(item => item.fecha == fecha);
+        const findIdEnf = AllIdEnf.filter(item => item.fecha == fecha);
+        const findIdTec = AllIdTec.filter(item => item.fecha == fecha);
+        const findIdChf = AllIdChf.filter(item => item.fecha == fecha);
+        const findIdVeh = AllIdVeh.filter(item => item.fecha == fecha);
+
         const removeHours = (horariosBase, findResult) => {
             return horariosBase.filter(e => !findResult.some(item => item.hora === e));
         };
-        
+
         const horarioIdPer = removeHours(horariosBase, findIdPer);
         const horarioIdEnf = removeHours(horariosBase, findIdEnf);
         const horarioIdTec = removeHours(horariosBase, findIdTec);
         const horarioIdChf = removeHours(horariosBase, findIdChf);
         const horarioIdVeh = removeHours(horariosBase, findIdVeh);
 
-        const brigadaDia = jsonData.find((e) => obs === e.obs && fecha === e.fecha);
+        //validar que no pertenezca a otra brigada
+        function checkBrigadeMembers(arr, obs) {
+            return arr.every(e => e.obs == obs);
+        }
+
+        let allInSameBrigade =
+            checkBrigadeMembers(AllIdPer, obs) &&
+            checkBrigadeMembers(AllIdEnf, obs) &&
+            checkBrigadeMembers(AllIdTec, obs) &&
+            checkBrigadeMembers(AllIdChf, obs) &&
+            checkBrigadeMembers(AllIdVeh, obs);
+
+        if (!allInSameBrigade) {
+            return [false, "Algunos integrantes pertenecen a otra brigada"];
+        }
+
+        const brigadaDia = AllBrigadasList.find((e) => obs === e.obs && fecha === e.fecha);
 
         if (brigadaDia !== null && brigadaDia !== undefined) {
             if (
