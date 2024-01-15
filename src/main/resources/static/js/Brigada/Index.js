@@ -76,29 +76,47 @@ function submitForm(event) {
                     .then(response => response.text())
                     .then(data => {
 
-                        mostrarMensaje(data);
+                        // mostrarMensaje(data);
+                        swal({
+                            title: data,
+                            icon: "info",
+                            buttons: false,
+                        });
+
                         if (istEdit) {
                             window.location.href = ShowBrigadas
                         }
                     })
                     .catch(error => {
-                        mostrarMensaje("Ocurrió un error");
+                        swal({
+                            title: error,
+                            text: error,
+                            icon: "error",
+                            buttons: false,
+                        });
+                        //mostrarMensaje("Ocurrió un error");
                         console.error('Error:', error);
                     });
             } else {
-                mostrarMensaje(msg);
+                swal({
+                    title: msg,
+                    icon: "info",
+                    buttons: false,
+                });
             }
         })
         .catch(error => {
-            mostrarMensaje("Ocurrió un error al validar horario");
+            swal({
+                title: "Ocurrió un error al validar horario",
+                text: error,
+                icon: "error",
+                buttons: false,
+            });
             console.error('Error de red:', error);
         });
 }
 
-function mostrarMensaje(data) {
-    $('#mensajeExito').text(data);
-    $('#modalM').show();
-}
+
 
 
 window.setTimeout(function () {
@@ -131,46 +149,50 @@ async function validarHorario(data) {
         const obs = data.get('obs');
         const hora = data.get('hora');
 
-        const findIdPer = jsonData.find(item => item.idper.id === idper && item.fecha === fecha);
-        const findIdEnf = jsonData.find(item => item.idenf === idenf && item.fecha === fecha);
-        const findIdTec = jsonData.find(item => item.idper.id === idtec && item.fecha === fecha);
-        const findIdChf = jsonData.find(item => item.idper.id === idchf && item.fecha === fecha);
-        const findIdVeh = jsonData.find(item => item.idper.id === idveh && item.fecha === fecha);
-
-        const horarioIdPer = horariosBase.filter(e => !findIdPer);
-        const horarioIdEnf = horariosBase.filter(e => !findIdEnf);
-        const horarioIdTec = horariosBase.filter(e => !findIdTec);
-        const horarioIdChf = horariosBase.filter(e => !findIdChf);
-        const horarioIdVeh = horariosBase.filter(e => !findIdVeh);
+        const findIdPer = jsonData.filter(item => item.idper.id == idper && item.fecha == fecha);
+        const findIdEnf = jsonData.filter(item => item.idenf == idenf && item.fecha == fecha);
+        const findIdTec = jsonData.filter(item => item.idtec == idtec && item.fecha == fecha);
+        const findIdChf = jsonData.filter(item => item.idchf == idchf && item.fecha == fecha);
+        const findIdVeh = jsonData.filter(item => item.idveh.id == idveh && item.fecha == fecha);
+        
+        const removeHours = (horariosBase, findResult) => {
+            return horariosBase.filter(e => !findResult.some(item => item.hora === e));
+        };
+        
+        const horarioIdPer = removeHours(horariosBase, findIdPer);
+        const horarioIdEnf = removeHours(horariosBase, findIdEnf);
+        const horarioIdTec = removeHours(horariosBase, findIdTec);
+        const horarioIdChf = removeHours(horariosBase, findIdChf);
+        const horarioIdVeh = removeHours(horariosBase, findIdVeh);
 
         const brigadaDia = jsonData.find((e) => obs === e.obs && fecha === e.fecha);
 
         if (brigadaDia !== null && brigadaDia !== undefined) {
             if (
-                brigadaDia.idper.id === idper &&
-                brigadaDia.idenf === idenf &&
-                brigadaDia.idtec === idtec &&
-                brigadaDia.idchf === idchf &&
-                brigadaDia.idveh.id === idveh &&
-                brigadaDia.fecha === fecha &&
-                brigadaDia.hora === hora &&
-                brigadaDia.obs === obs
+                brigadaDia.idper.id == idper &&
+                brigadaDia.idenf == idenf &&
+                brigadaDia.idtec == idtec &&
+                brigadaDia.idchf == idchf &&
+                brigadaDia.idveh.id == idveh &&
+                brigadaDia.fecha == fecha &&
+                brigadaDia.obs == obs
             ) {
                 const horaEstaEnTodas = (
-                    horarioIdPer.some(e => e.hora === hora) &&
-                    horarioIdEnf.some(e => e.hora === hora) &&
-                    horarioIdTec.some(e => e.hora === hora) &&
-                    horarioIdChf.some(e => e.hora === hora) &&
-                    horarioIdVeh.some(e => e.hora === hora)
+                    horarioIdPer.some(e => e === hora) &&
+                    horarioIdEnf.some(e => e === hora) &&
+                    horarioIdTec.some(e => e === hora) &&
+                    horarioIdChf.some(e => e === hora) &&
+                    horarioIdVeh.some(e => e === hora)
                 );
 
                 if (horaEstaEnTodas) {
                     return [true, ""];
                 } else {
-                    return [true, "El horario no está disponible"];
+                    return [false, "El horario no está disponible"];
                 }
+            } else {
+                return [false, `No se pudo crear la ${obs}, ya fue creada con otros integrantes.`];
             }
-            return [false, `No se pudo crear la ${obs}, ya fue creada con otros integrantes.`];
         }
 
         return [true, ""];

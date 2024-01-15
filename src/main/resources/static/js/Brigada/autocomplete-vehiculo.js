@@ -55,11 +55,11 @@ function autocompleteVehiculo(inp) {
 
                                 imgVehiculo.src = '/imagen/vehiculo/' + this.getElementsByTagName("input")[0].dataset.foto;
 
-                                if (this.getElementsByTagName("input")[0].dataset.status == 0) {
-                                    disponible.value = 'No Disponible';
-                                } else {
-                                    disponible.value = 'Disponible';
-                                }
+                                // if (this.getElementsByTagName("input")[0].dataset.status == 0) {
+                                //     disponible.value = 'No Disponible';
+                                // } else {
+                                //     disponible.value = 'Disponible';
+                                // }
 
                                 /*close the list of autocompleted values,
                                 (or any other open lists of autocompleted values:*/
