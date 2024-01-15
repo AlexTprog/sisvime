@@ -131,7 +131,7 @@
                     if (hora.length == 1) { hora = "0" + hora }
 
                     horario.push({
-                        title: brigada[i].idpac.id + "-" + brigada[i].idpac.nombre + " " + brigada[i].idpac.apellido_pa + " - " + brigada[i].idpac.distrito + "-" + brigada[i].horaini,
+                        title: brigada[i].idpac.nombre + " " + brigada[i].idpac.apellido_pa + " - " + brigada[i].idpac.distrito + " - " + brigada[i].horaini,
                         start: brigada[i].fecha + "T" + hora,
                         url: "http://localhost:8083/views/brigada/verbri/+" + brigada[i].id, end: brigada[i].fecha + "T" + horafin
                     });
@@ -143,7 +143,7 @@
                     let hora = cita[i].idhora.hora.slice(0, -3)
                     if (hora.length == 1) { hora = "0" + hora }
                     horario.push({
-                        title: cita[i].pac.id + "-" + cita[i].pac.nombre + " " + cita[i].pac.apellido_pa + " - " + cita[i].pac.distrito + "-" + cita[i].idhora.hora,
+                        title: cita[i].pac.nombre + " " + cita[i].pac.apellido_pa + " - " + cita[i].pac.distrito + " - " + cita[i].idhora.hora,
                         start: cita[i].fecha + "T" + hora,
                         url: "http://localhost:8083/views/citas/vercita/" + cita[i].id,
                         end: cita[i].fecha + "T" + hora
