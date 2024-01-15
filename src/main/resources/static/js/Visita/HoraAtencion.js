@@ -1,21 +1,12 @@
-function compararPorHora(a, b) {
-    // Convierte las horas de formato "HH:mm" a minutos para facilitar la comparación
-    var horaA = parseInt(a.hora.split(":")[0]) * 60 + parseInt(a.hora.split(":")[1]);
-    var horaB = parseInt(b.hora.split(":")[0]) * 60 + parseInt(b.hora.split(":")[1]);
-
-    return horaA - horaB;
-}
-
 document.addEventListener("DOMContentLoaded", function (event) {
-    autocomplete_hora_atencion(document.getElementById("tipobrigada"));
+    var input = document.getElementById("tipobrigada");
+    var input_hora = document.getElementById("horaini");
+    var input_fecha = document.getElementById("fecha");
+    var distrito = document.getElementById("obs");
 
     async function autocomplete_hora_atencion(input) {
-        var input_hora = document.getElementById("horaini");
-        var input_fecha = document.getElementById("fecha");
-        var distrito = $("#obs").val()
-
         async function handleChange() {
-            var val = this.value;
+            var val = input.value;
 
             try {
                 const response = await fetch("http://localhost:8083/views/visitamed/getallvisitas");
@@ -27,10 +18,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 brigadas.sort(compararPorHora);
 
                 for (let i = 0; i < brigadas.length; i++) {
-                    if (brigadas[i].obs == val &&
+                    if (
+                        brigadas[i].obs == val &&
                         brigadas[i].fecha == input_fecha.value &&
-                        brigadas[i].dist == distrito &&
-                        brigadas[i].isFree) {
+                        brigadas[i].dist == distrito.value &&
+                        brigadas[i].isFree
+                    ) {
                         let opcion = brigadas[i].hora;
                         let optionElement = document.createElement('option');
                         optionElement.textContent = opcion;
@@ -42,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
                 await editVisita(input_hora, input_fecha);
 
-                if (input_hora.length == 0) {
+                if (input_hora.options.length === 0) {
                     let optionDefault = document.createElement('option');
                     optionDefault.textContent = "No Hay horarios disponibles";
                     optionDefault.value = "";
@@ -55,8 +48,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
 
         input.addEventListener("change", handleChange);
-        handleChange.call(input);  // Llama a la función onchange una vez
+        handleChange();  // Llama a la función onchange una vez
     }
+
+    autocomplete_hora_atencion(input);
 });
 
 async function editVisita(input_hora, input_fecha) {
@@ -71,7 +66,7 @@ async function editVisita(input_hora, input_fecha) {
             const response = await fetch("http://localhost:8083/views/brigada/getVisita/" + idVisita);
             const data = await response.json();
 
-            if (data.horaini != undefined && data.fecha == input_fecha.value) {
+            if (data.horaini !== undefined && data.fecha == input_fecha.value) {
                 let opcion = data.horaini;
                 let optionElement = document.createElement('option');
                 optionElement.textContent = opcion;
@@ -83,4 +78,12 @@ async function editVisita(input_hora, input_fecha) {
             console.error("Error en la llamada a la API para obtener la visita:", error);
         }
     }
+}
+
+function compararPorHora(a, b) {
+    // Convierte las horas de formato "HH:mm" a minutos para facilitar la comparación
+    var horaA = parseInt(a.hora.split(":")[0]) * 60 + parseInt(a.hora.split(":")[1]);
+    var horaB = parseInt(b.hora.split(":")[0]) * 60 + parseInt(b.hora.split(":")[1]);
+
+    return horaA - horaB;
 }
