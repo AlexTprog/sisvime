@@ -125,10 +125,9 @@
             for (i = 0; i < visita.length; i++) {
                 horario.push(
                 {
-                    title: visita[i].idper.nombre + " " + visita[i].idper.apellidopat + "  " + visita[i].idper.id + " ",
+                    title: visita[i].obs + " - " + visita[i].dist,
                     start: visita[i].fecha + "T" + visita[i].hora,
-                    url: "http://localhost:8083/views/visitamed/vervist/+" + visita[i].id,
-                    //end: visita[i].fecha + "T" + visita[i].hora,
+                    url: "http://localhost:8083/views/visitamed/vervist/+" + visita[i].id,                    
                 }
                 );
             }
