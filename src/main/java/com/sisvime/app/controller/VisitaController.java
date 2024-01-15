@@ -201,7 +201,7 @@ public class VisitaController {
     public String editar(@PathVariable(value = "id") int idvisita, Model model) {
         Visita visita = visitaservice.buscarporId(idvisita);
 
-        model.addAttribute("Titulo", "Formulario:Editar Visita Medica");
+        model.addAttribute("Titulo", "Reprogramar Brigada Medica");
         model.addAttribute("visita", visita);
         return "/views/visitamed/visitamedform";
     }

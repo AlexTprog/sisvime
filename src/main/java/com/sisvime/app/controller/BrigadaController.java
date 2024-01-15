@@ -103,7 +103,6 @@ public class BrigadaController {
         // Obtener todas las visitas
         var allvisits = visitaservice.listartodos();
 
-        // Realizar la validación directamente en el controlador
         boolean existeBrigada = false;
 
         for (var existingBrigada : brigadaservice.listartodos()) {
@@ -114,8 +113,6 @@ public class BrigadaController {
         }
 
         if (!existeBrigada) {
-
-            // Guardar la nueva brigada
             brigadaservice.guardar(brigada);
 
             for (var visita : allvisits) {
@@ -140,7 +137,7 @@ public class BrigadaController {
     public String editar(@PathVariable(value = "id") int idbrigada, Model model) {
         Brigada brigada = brigadaservice.buscarporId(idbrigada);
 
-        model.addAttribute("titulo", "Formulario:Editar Brigada Medica");
+        model.addAttribute("titulo", "Reporgramar Visita Medica");
         model.addAttribute("brigada", brigada);
         return "/views/brigada/brigadamedicaform";
     }
